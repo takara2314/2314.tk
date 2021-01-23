@@ -3,8 +3,9 @@ package main
 import (
 	"net/http"
 
+	"takara2314/shorturl"
+
 	"github.com/gin-gonic/gin"
-	"github.com/takara2314/2314.tk/shorturl"
 )
 
 // [GET] /
