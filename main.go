@@ -10,6 +10,7 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("./dist/*.html")
 	router.StaticFile("/bundle.js", "./dist/bundle.js")
+	router.StaticFile("/css/styles.css", "./dist/css/styles.css")
 
 	router.GET("/", rootGET)
 	router.GET("/hello", helloGET)

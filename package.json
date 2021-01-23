@@ -18,16 +18,19 @@
   "homepage": "https://github.com/takara2314/2314.tk#readme",
   "dependencies": {
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "tailwindcss": "^2.0.2"
   },
   "devDependencies": {
     "@types/gulp": "^4.0.8",
     "@types/react-dom": "^17.0.0",
     "@types/webpack": "^4.41.26",
     "@types/webpack-dev-server": "^3.11.1",
+    "autoprefixer": "^10.2.3",
     "gulp": "^4.0.2",
     "gulp-notify": "^3.2.0",
     "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^9.0.0",
     "gulp-pug": "^4.0.1",
     "ts-loader": "^8.0.14",
     "ts-node": "^9.1.1",
