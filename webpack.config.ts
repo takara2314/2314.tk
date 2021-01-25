@@ -1,9 +1,11 @@
 import path from 'path';
 import { Configuration } from 'webpack';
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const config: Configuration = {
-    context: path.join(__dirname, 'assets/tsx'),
-    entry: './index.tsx',
+    context: path.join(__dirname, 'assets'),
+    entry: './ts/index.tsx',
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js',
@@ -14,9 +16,18 @@ const config: Configuration = {
             {
                 test: /\.tsx?$/,
                 use: 'ts-loader'
+            },
+            {
+                test: /\.html$/,
+                loader: 'html-loader'
             }
         ]
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: "./html/index.html"
+        })
+    ],
     mode: 'development',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx']

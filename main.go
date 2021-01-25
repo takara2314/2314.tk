@@ -12,7 +12,7 @@ func main() {
 	router.StaticFile("/bundle.js", "./dist/bundle.js")
 	router.StaticFile("/css/styles.css", "./dist/css/styles.css")
 
-	router.GET("/", rootGET)
+	router.GET("/", indexGET)
 	router.GET("/hello", helloGET)
 
 	router.Run(":" + os.Getenv("PORT"))

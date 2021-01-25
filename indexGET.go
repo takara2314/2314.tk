@@ -9,6 +9,6 @@ import (
 )
 
 // [GET] /
-func rootGET(c *gin.Context) {
+func indexGET(c *gin.Context) {
 	c.String(http.StatusOK, "こんにちは、世界！"+shorturl.Hey())
 }
