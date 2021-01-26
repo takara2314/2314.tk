@@ -2,14 +2,14 @@ import path from 'path';
 import { Configuration } from 'webpack';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config: Configuration = {
     context: path.join(__dirname, 'assets'),
     entry: './ts/index.tsx',
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'bundle.js',
-        publicPath: '/assets'
+        filename: 'bundle.js'
     },
     module: {
         rules: [
@@ -20,12 +20,24 @@ const config: Configuration = {
             {
                 test: /\.html$/,
                 loader: 'html-loader'
+            },
+            {
+                test: /\.css?$/,
+                exclude: /node_modules/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader'
+                ]
             }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: "./html/index.html"
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'styles.css'
         })
     ],
     mode: 'development',
