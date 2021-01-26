@@ -1,15 +1,9 @@
-import '../css/styles.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Hello from './components/Hello';
-import Tail from './components/Tail';
+import Root from './views/Root';
+import '../css/styles.css';
 
 ReactDOM.render(
-    <Hello message="こんにちは、世界！" />,
-    document.getElementById('hello')
-);
-
-ReactDOM.render(
-    <Tail message="グリーン！" />,
-    document.getElementById('tail')
+    <Root message="たからーんだよ！" />,
+    document.getElementById('root')
 );
