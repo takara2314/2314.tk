@@ -8,6 +8,10 @@ class Navi extends React.Component<NaviProps, NaviState> {
     super(props);
   }
 
+  menuClick(e: React.MouseEvent) {
+    e.preventDefault()
+  }
+
   render() {
     const takaranImg: string = '../public/takaran.png';
 
@@ -48,7 +52,7 @@ class Navi extends React.Component<NaviProps, NaviState> {
           <ul>
             {menu.map((item) =>
               <li className="pt-2 pb-2">
-                <a href={item[1]} onClick={(e) => e.preventDefault()}>{item[0]}</a>
+                <a href={item[1]} onClick={this.menuClick}>{item[0]}</a>
               </li>
             )}
           </ul>
