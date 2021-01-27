@@ -1,5 +1,6 @@
 import React from 'react';
 import Navi from '../components/Navi';
+import World from '../components/World';
 
 interface RootProps {
   message: string;
@@ -13,12 +14,10 @@ class Root extends React.Component<RootProps, RootState> {
 
   render() {
     return (
-      <>
-        <h1>こんにちは</h1>
-        <p className="text-green-500">{this.props.message}</p>
-        <p>このページは、ReactとGinとTailwind CSSで作られています！</p>
-        <Navi twitterID="takara2314" />
-      </>
+      <div className="flex">
+        <Navi />
+        <World />
+      </div>
     );
   }
 }
