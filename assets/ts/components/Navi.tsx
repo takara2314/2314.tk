@@ -13,7 +13,7 @@ class Navi extends React.Component<NaviProps, NaviState> {
 
     const menu: string[][] = [
       [ '僕について', 'about' ],
-      [ 'できること', 'skill' ],
+      [ 'できること', 'skills' ],
       [ '作ったもの', 'works' ],
       [ '好きなもの', 'favorites' ],
       [ 'ラボ', 'lab' ],
@@ -48,7 +48,7 @@ class Navi extends React.Component<NaviProps, NaviState> {
           <ul>
             {menu.map((item) =>
               <li className="pt-2 pb-2">
-                <a href={item[1]}>{item[0]}</a>
+                <a href={item[1]} onClick={(e) => e.preventDefault()}>{item[0]}</a>
               </li>
             )}
           </ul>

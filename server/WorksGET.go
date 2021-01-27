@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	"net/http"
@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// [GET] /root
-func helloGET(c *gin.Context) {
+// WorksGET <- [GET] /works
+func WorksGET(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", nil)
 }
