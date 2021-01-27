@@ -7,3 +7,5 @@ ReactDOM.render(
     <Root message="たからーんだよ！" />,
     document.getElementById('root')
 );
+
+console.log('テストだよ！');
