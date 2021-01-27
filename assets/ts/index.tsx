@@ -4,6 +4,6 @@ import Root from './views/Root';
 import '../css/styles.css';
 
 ReactDOM.render(
-    <Root message="たからーんだよ！" />,
+    <Root />,
     document.getElementById('root')
 );
