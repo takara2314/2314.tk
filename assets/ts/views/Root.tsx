@@ -21,7 +21,7 @@ class Root extends React.Component<RootProps, RootState> {
         [ 'ラボ', 'lab' ],
         [ 'お問い合わせ', 'contact' ]
       ],
-      place: location.pathname.slice(1) !== '' ? location.pathname.slice(1) : this.state.menu[0][1]
+      place: location.pathname.slice(1) !== '' ? location.pathname.slice(1) : 'about'
     }
   }
 
