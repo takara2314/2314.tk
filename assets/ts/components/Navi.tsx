@@ -41,8 +41,9 @@ class Navi extends React.Component<NaviProps, NaviState> {
             @takara2314
           </div>
         </section>
-        <section className="mt-8 bg-red-200 font-bold">
-          <ul>
+        <section className="mt-8 bg-red-200 font-bold relative">
+          <div className={this.menuFocus()}></div>
+          <ul className="bg-blue-800 relative">
             {this.props.menu.map((item: string[], index: number) =>
               <li className="pt-2 pb-2" key={index}>
                 <a href={item[1]} onClick={(e: React.MouseEvent) => this.menuClick(e, item)}>
@@ -82,6 +83,19 @@ class Navi extends React.Component<NaviProps, NaviState> {
     e.preventDefault()
     history.pushState(null, item[0], `/${item[1]}`);
     this.props.placeChange(item[1]);
+  }
+
+  menuFocus(): string {
+    let className: string = '';
+    let baseClass: string = 'pt-2 pb-2 w-96 h-12 rounded-r-full bg-black bg-opacity-25 absolute -right-7/24';
+
+    this.props.menu.map((item: string[], index: number) => {
+      if (this.props.place === item[1]) {
+        className = `${baseClass} top-${12 * index}`;
+      }
+    });
+
+    return className;
   }
 }
 
