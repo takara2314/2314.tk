@@ -13,7 +13,8 @@ func main() {
 	router.LoadHTMLGlob("./dist/*.html")
 	router.StaticFile("/bundle.js", "./dist/bundle.js")
 	router.StaticFile("/styles.css", "./dist/styles.css")
-	router.Static("../public", "./public/")
+	router.Static("/fonts", "./dist/fonts/")
+	router.Static("/public", "./public/")
 
 	router.GET("/", server.AboutGET)
 	router.GET("/about", server.AboutGET)

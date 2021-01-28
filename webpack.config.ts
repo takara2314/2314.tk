@@ -9,7 +9,8 @@ const config: Configuration = {
     entry: './ts/index.tsx',
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: ''
     },
     module: {
         rules: [
@@ -29,6 +30,13 @@ const config: Configuration = {
                     'css-loader',
                     'postcss-loader'
                 ]
+            },
+            {
+                test: /\.ttf?$/,
+                loader: 'file-loader',
+                options: {
+                    name: 'fonts/[name].[ext]'
+                }
             }
         ]
     },

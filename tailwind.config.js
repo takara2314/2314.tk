@@ -9,6 +9,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        'sans': ['Inter', 'M PLUS', 'Meiryo', 'sans-serif']
+      },
       spacing: {
         '1/12': '8.333333%',
         '2/12': '16.666667%',

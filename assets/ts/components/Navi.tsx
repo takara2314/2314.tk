@@ -31,7 +31,7 @@ class Navi extends React.Component<NaviProps, NaviState> {
             <img src={this.takaranImg} alt="タカラーン" className="w-48" />
           </div>
         </section>
-        <section className="mt-2 w-52 bg-red-100 text-left">
+        <section className="mt-2 w-48 bg-red-100 text-left">
           <div className="h-12 bg-green-200 text-4xl font-bold">
             <h1>
               タカラーン
