@@ -45,7 +45,9 @@ class Navi extends React.Component<NaviProps, NaviState> {
           <ul>
             {this.props.menu.map((item: string[], index: number) =>
               <li className="pt-2 pb-2" key={index}>
-                <a href={item[1]} onClick={(e: React.MouseEvent) => this.menuClick(e, item)}>{item[0]}</a>
+                <a href={item[1]} onClick={(e: React.MouseEvent) => this.menuClick(e, item)}>
+                  <span className={this.props.place === item[1] ? 'text-blue-500' : ''}>{item[0]}</span>
+                </a>
               </li>
             )}
           </ul>

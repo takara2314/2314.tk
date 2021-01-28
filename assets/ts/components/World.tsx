@@ -10,8 +10,8 @@ class World extends React.Component<WorldProps, WorldState> {
 
   render() {
     return (
-      <div className="flex flex-col w-3/4 h-screen bg-black">
-          Hello World
+      <div className="flex flex-col w-3/4 h-screen bg-black text-white">
+          2314.tk 1.0.0 (Debug mode)
       </div>
     );
   }
