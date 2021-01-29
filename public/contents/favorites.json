@@ -1,0 +1,15 @@
+{
+  "title": "好きなもの",
+  "type": "website",
+  "language": "ja",
+  "url": "https://2314.tk/favorites",
+  "image": "https://2314.tk/public/takaran.png",
+  "twitter-card": "summary",
+  "twitter-username": "takara2314",
+  "description": "食べ物部門は、ハンバーガーと寿司と牛丼です。",
+  "contents": [
+    "食べ物部門は、ハンバーガーと寿司と牛丼です。",
+    "ゲーム部門は、MinecraftとFall GuysとCities: Skylinesです。",
+    "趣味は、プログラミングとゲームと音楽鑑賞です。"
+  ]
+}

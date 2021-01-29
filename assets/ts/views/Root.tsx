@@ -29,7 +29,7 @@ class Root extends React.Component<RootProps, RootState> {
     return (
       <div className="flex">
         <Navi menu={this.state.menu} place={this.state.place} placeChange={(place: string) => this.placeChange(place)} />
-        <World />
+        <World place={this.state.place} placeChange={(place: string) => this.placeChange(place)} />
       </div>
     );
   }
