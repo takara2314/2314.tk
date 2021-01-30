@@ -18,7 +18,7 @@ class Navi extends React.Component<NaviProps, NaviState> {
     this.links = [
       [ 'Twitter', 'https://twitter.com/takara2314', '../public/Twitter.svg', 'mr-1 ml-2 w-11' ],
       [ 'Facebook', 'https://www.facebook.com/HamaguchiTakara/', '../public/Facebook.svg', 'mr-2 ml-2 w-7' ],
-      [ 'GitHub', 'https://github.com/takara2314', '../public/Github.svg', 'mr-2 ml-2 w-7' ],
+      [ 'GitHub', 'https://github.com/takara2314', '../public/GitHub.svg', 'mr-2 ml-2 w-7' ],
       [ 'Discord', '!拡張的な宝箱#9220', '../public/Discord.svg', 'mr-2 ml-2 mt-1 w-9' ]
     ];
   }
