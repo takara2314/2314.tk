@@ -1,8 +1,10 @@
 import React from 'react';
 
 interface WorldProps {
-  place:       string;
-  placeChange: (place: string) => void;
+  place:            string;
+  placeChange:      (place: string) => void;
+  isLoadedContents: boolean;
+  contents:         string[];
 }
 interface WorldState {
   isLoadedContent: boolean;
@@ -19,25 +21,6 @@ class World extends React.Component<WorldProps, WorldState> {
     };
   }
 
-  componentDidMount() {
-    fetch(`http://localhost:2314/public/contents/${this.props.place}.json`)
-    .then(res => res.json())
-    .then(
-      (result) => {
-        this.setState({
-          isLoadedContent: true,
-          contents:        result.contents
-        })
-      },
-      (error) => {
-        this.setState({
-          isLoadedContent: true,
-          contents:        [`エラーが発生しました。${error}`]
-        })
-      }
-    )
-  }
-
   render() {
     return (
       <div className="flex flex-col w-3/4 h-screen bg-black text-white">
@@ -50,7 +33,7 @@ class World extends React.Component<WorldProps, WorldState> {
             以下は仮に置いているテキストです
           </div>
           <div className="text-xl">
-            {!this.state.isLoadedContent ? 'Loading...' : this.state.contents.map(
+            {!this.props.isLoadedContents ? 'Loading...' : this.props.contents.map(
               (sentence: string, index: number) =>
                 <p key={index}>
                   {sentence}
@@ -60,25 +43,6 @@ class World extends React.Component<WorldProps, WorldState> {
         </section>
       </div>
     );
-  }
-
-  componentDidUpdate() {
-    fetch(`http://localhost:2314/public/contents/${this.props.place}.json`)
-    .then(res => res.json())
-    .then(
-      (result) => {
-        this.setState({
-          isLoadedContent: true,
-          contents:        result.contents
-        })
-      },
-      (error) => {
-        this.setState({
-          isLoadedContent: true,
-          contents:        [`エラーが発生しました。${error}`]
-        })
-      }
-    )
   }
 }
 

@@ -46,7 +46,7 @@ class Navi extends React.Component<NaviProps, NaviState> {
           <ul className="bg-blue-800 relative">
             {this.props.menu.map((item: string[], index: number) =>
               <li className="pt-2 pb-2" key={index}>
-                <a href={item[1]} onClick={(e: React.MouseEvent) => this.menuClick(e, item)}>
+                <a href={item[1]} className="focus:outline-none" onClick={(e: React.MouseEvent) => this.menuClick(e, item)}>
                   <span className={this.props.place === item[1] ? 'text-blue-500' : ''}>{item[0]}</span>
                 </a>
               </li>
@@ -91,6 +91,7 @@ class Navi extends React.Component<NaviProps, NaviState> {
 
     this.props.menu.map((item: string[], index: number) => {
       if (this.props.place === item[1]) {
+        // top-0 | top-12 | top-24 | top-36 | top-48 | top-60
         className = `${baseClass} top-${12 * index}`;
       }
     });

@@ -9,6 +9,7 @@
   "description": "プログラミング言語は、GoとPythonとTypeScriptができます。",
   "contents": [
     "プログラミング言語は、GoとPythonとTypeScriptができます。",
-    "フレームワークは、Gin(Go)とFlask(Python)とExpress(JS/TS)とReact(JS/TS)ができます。"
+    "フレームワークは、Gin(Go)とFlask(Python)とExpress(JS/TS)とReact(JS/TS)ができます。",
+    "その他の種類の言語は、HTMLとCSSとPugとSCSSができます。"
   ]
 }
