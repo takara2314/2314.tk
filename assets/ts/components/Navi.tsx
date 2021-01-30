@@ -16,10 +16,10 @@ class Navi extends React.Component<NaviProps, NaviState> {
 
     this.takaranImg = '../public/takaran.png';
     this.links = [
-      [ 'Twitter', 'https://twitter.com/takara2314', '../public/Twitter.png' ],
-      [ 'Facebook', 'https://www.facebook.com/HamaguchiTakara/', '../public/Facebook.png' ],
-      [ 'GitHub', 'https://github.com/takara2314', '../public/Github.png' ],
-      [ 'Discord', '!拡張的な宝箱#9220', '../public/Discord.png' ]
+      [ 'Twitter', 'https://twitter.com/takara2314', '../public/Twitter.svg', 'mr-1 ml-2 w-11' ],
+      [ 'Facebook', 'https://www.facebook.com/HamaguchiTakara/', '../public/Facebook.svg', 'mr-2 ml-2 w-7' ],
+      [ 'GitHub', 'https://github.com/takara2314', '../public/Github.svg', 'mr-2 ml-2 w-7' ],
+      [ 'Discord', '!拡張的な宝箱#9220', '../public/Discord.svg', 'mr-2 ml-2 mt-1 w-9' ]
     ];
   }
 
@@ -53,20 +53,18 @@ class Navi extends React.Component<NaviProps, NaviState> {
             )}
           </ul>
         </section>
-        <section className="mt-8 bg-red-300">
+        <section className="mt-8 bg-white">
           <div>
-            <ul className="flex flex-row">
+            <ul className="flex flex-row justify-center items-center">
               {this.links.map((item: string[], index: number) =>
-                <li key={index}>
-                  <a href={item[1]}>
-                    <img src={item[2]} alt={item[0]} className="w-12" />
+                <li className={item[3]} key={index}>
+                  <a href={item[1]} className="focus:outline-none">
+                    <img src={item[2]} alt={item[0]} className="select-none" />
                   </a>
                 </li>
               )}
             </ul>
           </div>
-        </section>
-        <section className="bg-red-300">
           <div>
             <small onClick={() => console.log('(debug) now place: ' + this.props.place)}>
               <span className="text-lg text-gray-700">
