@@ -25,12 +25,13 @@ class World extends React.Component<WorldProps, WorldState> {
     return (
       <div className="flex flex-col w-3/4 h-screen bg-black text-white">
         <section className="mb-8">
-          <p>2314.tk 1.0.0 (Debug mode)</p>
+          <p>2314.tk 1.0.0 (Debug mode) - Work In Progress</p>
           <p>now place: {this.props.place}</p>
         </section>
         <section>
           <div className="text-red-500">
-            以下は仮に置いているテキストです
+            <p>現在制作中です。</p>
+            <p>以下は仮に置いているテキストです！</p>
           </div>
           <div className="text-xl">
             {!this.props.isLoadedContents ? 'Loading...' : this.props.contents.map(

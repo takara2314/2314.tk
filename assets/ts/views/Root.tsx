@@ -51,7 +51,7 @@ class Root extends React.Component<RootProps, RootState> {
   }
 
   getContents(place: string) {
-    fetch(`http://localhost:2314/public/contents/${place}.json`)
+    fetch(`https://2314.tk/public/contents/${place}.json`)
     .then(res => res.json())
     .then(
       (result) => {
