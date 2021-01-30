@@ -25,35 +25,37 @@ class Navi extends React.Component<NaviProps, NaviState> {
 
   render() {
     return (
-      <nav className="flex flex-col w-1/4 h-screen items-center bg-blue-200 rounded-r-3xl text-2xl text-center">
-        <section className="mt-12 bg-red-100">
-          <div className="h-48 bg-green-100">
-            <img src={this.takaranImg} alt="タカラーン" className="w-48" />
+      <nav className="flex flex-col w-1/4 h-screen items-center rounded-r-3xl text-2xl text-center relative">
+        <section className="mt-12">
+          <div className="h-48">
+            <a href={this.props.menu[0][1]} className="focus:outline-none" onClick={(e: React.MouseEvent) => this.menuClick(e, this.props.menu[0])}>
+              <img src={this.takaranImg} alt="タカラーン" className="w-48" />
+            </a>
           </div>
         </section>
-        <section className="mt-2 w-48 bg-red-100 text-left">
-          <div className="h-12 bg-green-200 text-4xl font-bold">
+        <section className="mt-2 w-48 text-left">
+          <div className="h-12 text-4xl font-bold">
             <h1>
               タカラーン
             </h1>
           </div>
-          <div className="-mt-2 h-10 bg-green-300 text-xl text-gray-700">
+          <div className="-mt-2 h-10 text-xl text-gray-700">
             @takara2314
           </div>
         </section>
-        <section className="mt-8 bg-red-200 font-bold relative">
+        <section className="mt-8 font-bold relative">
           <div className={this.menuFocus()}></div>
-          <ul className="bg-blue-800 relative">
+          <ul className="relative">
             {this.props.menu.map((item: string[], index: number) =>
               <li className="pt-2 pb-2" key={index}>
                 <a href={item[1]} className="focus:outline-none" onClick={(e: React.MouseEvent) => this.menuClick(e, item)}>
-                  <span className={this.props.place === item[1] ? 'text-blue-500' : ''}>{item[0]}</span>
+                  <span className={this.props.place === item[1] ? 'text-blue-600' : ''}>{item[0]}</span>
                 </a>
               </li>
             )}
           </ul>
         </section>
-        <section className="mt-8 bg-white">
+        <section className="mt-8 pt-3 border-t-2 border-gray-300 absolute bottom-10">
           <div>
             <ul className="flex flex-row justify-center items-center">
               {this.links.map((item: string[], index: number) =>
