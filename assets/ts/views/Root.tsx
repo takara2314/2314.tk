@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navi from '../components/Navi';
-import World from '../components/World';
+import Monitor from '../components/Monitor';
 
 function Root() {
   const [menu] = useState<string[][]>([
@@ -48,7 +48,7 @@ function Root() {
   return (
     <div className="flex">
       <Navi menu={menu} place={place} placeChange={(place: string) => placeChange(place)} />
-      <World place={place} placeChange={(place: string) => placeChange(place)} isLoadedContents={isLoadedContents} contents={contents} />
+      <Monitor place={place} placeChange={(place: string) => placeChange(place)} isLoadedContents={isLoadedContents} contents={contents} />
     </div>
   );
 }

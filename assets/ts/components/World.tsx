@@ -1,34 +1,22 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import * as THREE from 'three';
+import { useFrame } from 'react-three-fiber';
 
-type WorldProps = {
-  place:            string;
-  placeChange:      (place: string) => void;
-  isLoadedContents: boolean;
-  contents:         string[];
-}
-
-function World(props: WorldProps) {
+function World() {
+  const ref = useRef({} as THREE.Mesh);
+  useFrame(() => (ref.current.rotation.z += 0.01));
   return (
-    <div className="flex flex-col w-3/4 h-screen bg-black text-white">
-      <section className="mb-8">
-        <p>2314.tk 1.0.0 (Debug mode) - Work In Progress</p>
-        <p>now place: {props.place}</p>
-      </section>
-      <section>
-        <div className="text-red-500">
-          <p>現在制作中です。</p>
-          <p>以下は仮に置いているテキストです！</p>
-        </div>
-        <div className="text-xl">
-          {!props.isLoadedContents ? 'Loading...' : props.contents.map(
-            (sentence: string, index: number) =>
-              <p key={index}>
-                {sentence}
-              </p>
-          )}
-        </div>
-      </section>
-    </div>
+    <>
+      <mesh
+        ref={ref}
+        onClick={e => console.log('click')}
+        onPointerOver={e => console.log('hover')}
+        onPointerOut={e => console.log('unhover')}
+      >
+        <boxBufferGeometry attach="geometry" args={[0.5, 20, 1]} />
+        <meshBasicMaterial attach="material" color="rgb(0, 255, 0)" />
+      </mesh>
+    </>
   );
 }
 
