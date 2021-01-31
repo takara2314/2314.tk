@@ -19,7 +19,8 @@
   "homepage": "https://github.com/takara2314/2314.tk#readme",
   "dependencies": {
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "three": "^0.125.2"
   },
   "devDependencies": {
     "@types/react-dom": "^17.0.0",
