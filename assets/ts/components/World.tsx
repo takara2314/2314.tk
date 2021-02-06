@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-function World() {
+const World: React.FC = () => {
   const ref1 = useRef({} as THREE.Mesh);
   const ref2 = useRef({} as THREE.Mesh);
   const ground = useRef({} as THREE.Mesh);

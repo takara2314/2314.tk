@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navi from '../components/Navi';
 import Monitor from '../components/Monitor';
 
-function Root() {
+const Root: React.FC = () => {
   const [menu] = useState<string[][]>([
     [ '僕について', 'about' ],
     [ 'できること', 'skills' ],

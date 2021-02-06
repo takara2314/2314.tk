@@ -9,7 +9,7 @@ type MonitorProps = {
   contents:         string[];
 }
 
-function Monitor(props: MonitorProps) {
+const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
   const [viewWidth, setViewWidth] = useState<number>(0);
   const [viewHeight, setViewHeight] = useState<number>(0);
 

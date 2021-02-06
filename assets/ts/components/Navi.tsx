@@ -6,7 +6,7 @@ type NaviProps = {
   placeChange: (place: string) => void;
 }
 
-function Navi(props: NaviProps) {
+const Navi: React.FC<NaviProps> = (props: NaviProps) => {
   const [takaranImg] = useState<string>('../public/takaran.png');
 
   const [links] = useState<string[][]>([
