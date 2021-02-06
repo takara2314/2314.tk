@@ -34,6 +34,7 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
       <section className="absolute top-0">
         <Canvas
           style={{width: viewWidth, height: viewHeight}}
+          camera={{ position: [0, 5, 0] }}
         >
           <World />
         </Canvas>
