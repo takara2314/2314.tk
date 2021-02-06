@@ -14,7 +14,6 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
   const [viewHeight, setViewHeight] = useState<number>(0);
 
   const monitorObject: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-  const camera = useRef({} as THREE.PerspectiveCamera);
 
   useEffect(() => {
     window.addEventListener('load', () => {
