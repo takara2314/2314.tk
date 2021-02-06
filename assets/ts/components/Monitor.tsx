@@ -34,14 +34,17 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
       <section className="absolute top-0">
         <Canvas
           style={{width: viewWidth, height: viewHeight}}
-          camera={{ position: [0, 5, 0] }}
+          camera={{ position: [0, 4, 0] }}
+          onCreated={({ gl, camera }) => {
+            gl.setClearColor('rgb(102, 217, 255)')
+          }}
         >
           <World />
         </Canvas>
       </section>
       <section className="mb-8 absolute bottom-10">
         <p>2314.tk 1.0.0 (Debug mode) - Work In Progress</p>
-        <p>now place: {props.place}</p>
+        <p>now place: {props.place} / Press <b>F3</b> to change to advanced debug mode.</p>
         <div className="text-red-500">
           <p>現在制作中です。</p>
           <p>以下は仮に置いているテキストです！</p>

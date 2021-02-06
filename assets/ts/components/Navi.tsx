@@ -37,7 +37,7 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
   }
 
   return (
-    <nav className="flex flex-col w-1/4 h-screen items-center rounded-r-3xl text-2xl text-center relative">
+    <nav className="flex flex-col w-1/4 h-screen items-center text-2xl text-center relative">
       <section className="mt-12">
         <div className="h-48">
           <a href={props.menu[0][1]} className="focus:outline-none" onClick={(e: React.MouseEvent) => menuClick(e, props.menu[0])}>

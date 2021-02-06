@@ -58,15 +58,17 @@ const World: React.FC = () => {
       <pointLight position={[10, 10, 10]} />
       {(() => {
         const blocks = Array();
-        for (let x: number = 0; x < 20; x++) {
+        for (let x: number = -10; x <= 10; x++) {
           for (let y: number = 0; y < 2; y++) {
-            for (let z: number = 0; z < 20; z++) {
+            for (let z: number = -10; z <= 10; z++) {
               blocks.push(
                 <mesh
                   position={[x, y, z]}
                 >
                   <boxBufferGeometry args={[1, 1, 1]} />
-                  <meshStandardMaterial color={"rgb(0, 255, 127)"} />
+                  <meshStandardMaterial color={
+                    Math.random() >= 0.5 ? "rgb(0, 255, 127)" : "rgb(0, 191, 95)"
+                  } />
                 </mesh>
               );
             }
