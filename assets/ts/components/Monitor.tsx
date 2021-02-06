@@ -13,7 +13,8 @@ function Monitor(props: MonitorProps) {
   const [viewWidth, setViewWidth] = useState<number>(0);
   const [viewHeight, setViewHeight] = useState<number>(0);
 
-  let monitorObject: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const monitorObject: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const camera = useRef({} as THREE.PerspectiveCamera);
 
   useEffect(() => {
     window.addEventListener('load', () => {
@@ -32,7 +33,9 @@ function Monitor(props: MonitorProps) {
   return (
     <div className="flex flex-col w-3/4 h-screen bg-black text-white relative" ref={monitorObject}>
       <section className="absolute top-0">
-        <Canvas style={{width: viewWidth, height: viewHeight}}>
+        <Canvas
+          style={{width: viewWidth, height: viewHeight}}
+        >
           <World />
         </Canvas>
       </section>
