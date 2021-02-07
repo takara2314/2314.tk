@@ -68,7 +68,7 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
   }
 
   return (
-    <div className="flex flex-col w-3/4 h-screen bg-black text-white relative" ref={monitorObject}>
+    <div className="flex flex-col w-3/4 h-screen bg-black relative" ref={monitorObject}>
       <section className="absolute top-0">
         <Canvas
           style={{width: viewWidth, height: viewHeight}}
@@ -97,7 +97,7 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
       </section>
 
       <section className={
-        isDebugMode ? "absolute top-0 text-xl select-none visible" : "text-xl absolute top-0 select-none invisible"
+        isDebugMode ? "text-white text-xl absolute top-0 select-none visible" : "text-white text-xl absolute top-0 select-none invisible"
       }>
         <p>
           <span className="bg-black-opacity-25">2314.tk 1.0.0 (Debug mode) - Work In Progress</span>
@@ -115,7 +115,7 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
         </p>
       </section>
 
-      <section className="mb-8 absolute bottom-10">
+      <section className="bg-white w-11/12 h-60 m-auto p-4 border-3 rounded-tl-2xl rounded-br-2xl shadow-2xl absolute bottom-5 right-0 left-0">
         <p>Press <b>F2</b> to change to advanced debug mode.</p>
         <div className="text-red-500">
           <p>現在制作中です。</p>
