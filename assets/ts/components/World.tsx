@@ -20,6 +20,15 @@ type WorldProps = {
   changePosX: (x: number) => void;
   changePosY: (y: number) => void;
   changePosZ: (z: number) => void;
+
+  isHover:   boolean;
+  hoverPosX: number;
+  hoverPosY: number;
+  hoverPosZ: number;
+  changeIsHover:   (flag: boolean) => void;
+  changeHoverPosX: (x: number) => void;
+  changeHoverPosY: (y: number) => void;
+  changeHoverPosZ: (z: number) => void;
 }
 
 const World: React.FC<WorldProps> = (props: WorldProps) => {
@@ -40,6 +49,16 @@ const World: React.FC<WorldProps> = (props: WorldProps) => {
           blocksTemp.push(
             <mesh
               position={[x, y, z]}
+              onClick={() => console.log(`${x} / ${y} / ${z}`)}
+              onPointerOver={() => {
+                props.changeIsHover(true);
+                props.changeHoverPosX(x);
+                props.changeHoverPosY(y);
+                props.changeHoverPosZ(z);
+              }}
+              onPointerOut={() => {
+                props.changeIsHover(false);
+              }}
             >
               <boxBufferGeometry args={[1, 1, 1]} />
               <meshStandardMaterial color={
@@ -69,7 +88,32 @@ const World: React.FC<WorldProps> = (props: WorldProps) => {
 
     window.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key == 'f') {
+        controlsRef.current?.target.set(100, 0, 0);
         camera.position.x = 100;
+      }
+      if (e.key == 'w') {
+        controlsRef.current?.target.setX(controlsRef.current?.target.x+0.001);
+        camera.position.x += 0.001;
+      }
+      if (e.key == 's') {
+        controlsRef.current?.target.setX(controlsRef.current?.target.x-0.001);
+        camera.position.x -= 0.001;
+      }
+      if (e.key == 'a') {
+        controlsRef.current?.target.setZ(controlsRef.current?.target.z-0.001);
+        camera.position.z -= 0.001;
+      }
+      if (e.key == 'd') {
+        controlsRef.current?.target.setZ(controlsRef.current?.target.z+0.001);
+        camera.position.z += 0.001;
+      }
+      if (e.key == ' ') {
+        controlsRef.current?.target.setY(controlsRef.current?.target.y+0.001);
+        camera.position.y += 0.001;
+      }
+      if (e.key == 'Shift') {
+        controlsRef.current?.target.setY(controlsRef.current?.target.y-0.001);
+        camera.position.y -= 0.001;
       }
     });
   });

@@ -17,6 +17,10 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
   const [posX, setPosX] = useState<number>(0);
   const [posY, setPosY] = useState<number>(0);
   const [posZ, setPosZ] = useState<number>(0);
+  const [isHover, setIsHover] = useState<boolean>(false);
+  const [hoverPosX, setHoverPosX] = useState<number>(0);
+  const [hoverPosY, setHoverPosY] = useState<number>(0);
+  const [hoverPosZ, setHoverPosZ] = useState<number>(0);
 
   const monitorObject: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
@@ -50,6 +54,18 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
   const changePosZ = (z: number) => {
     setPosZ(z);
   }
+  const changeIsHover = (flag: boolean) => {
+    setIsHover(flag);
+  }
+  const changeHoverPosX = (x: number) => {
+    setHoverPosX(x);
+  }
+  const changeHoverPosY = (y: number) => {
+    setHoverPosY(y);
+  }
+  const changeHoverPosZ = (z: number) => {
+    setHoverPosZ(z);
+  }
 
   return (
     <div className="flex flex-col w-3/4 h-screen bg-black text-white relative" ref={monitorObject}>
@@ -61,7 +77,22 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
             gl.setClearColor('rgb(102, 217, 255)')
           }}
         >
-          <World posX={posX} posY={posY} posZ={posZ} changePosX={changePosX} changePosY={changePosY} changePosZ={changePosZ} />
+          <World
+            posX={posX}
+            posY={posY}
+            posZ={posZ}
+            changePosX={changePosX}
+            changePosY={changePosY}
+            changePosZ={changePosZ}
+            isHover={isHover}
+            hoverPosX={hoverPosX}
+            hoverPosY={hoverPosY}
+            hoverPosZ={hoverPosZ}
+            changeIsHover={changeIsHover}
+            changeHoverPosX={changeHoverPosX}
+            changeHoverPosY={changeHoverPosY}
+            changeHoverPosZ={changeHoverPosZ}
+          />
         </Canvas>
       </section>
 
@@ -76,6 +107,11 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
         </p>
         <p>
           <span className="bg-black-opacity-25">XYZ: {posX} / {posY} / {posZ}</span>
+        </p>
+        <p>
+          <span className="bg-black-opacity-25">
+            {isHover ? `HoverAt: ${hoverPosX} / ${hoverPosY} / ${hoverPosZ}` : 'HoverAt:'}
+          </span>
         </p>
       </section>
 
