@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { extend, ReactThreeFiber, useFrame, useThree } from 'react-three-fiber';
@@ -13,16 +13,47 @@ declare global {
   }
 }
 
-const World: React.FC = () => {
+type WorldProps = {
+  posX: number;
+  posY: number;
+  posZ: number;
+  changePosX: (x: number) => void;
+  changePosY: (y: number) => void;
+  changePosZ: (z: number) => void;
+}
+
+const World: React.FC<WorldProps> = (props: WorldProps) => {
+  const [blocks, setBlocks] = useState<any[]>(Array());
+
   const controlsRef = useRef<OrbitControls>();
   const { camera, gl } = useThree();
-  console.log(camera);
 
   // const ground = useRef<THREE.Mesh>({} as THREE.Mesh);
   const old_ground = useRef<THREE.Mesh>({} as THREE.Mesh);
   const boxRef = useRef<THREE.Mesh>({} as THREE.Mesh);
 
-  useFrame(() => {
+  useEffect(() => {
+    let blocksTemp: any[] = Array();
+    for (let x: number = -10; x <= 10; x++) {
+      for (let y: number = 0; y < 2; y++) {
+        for (let z: number = -10; z <= 10; z++) {
+          blocksTemp.push(
+            <mesh
+              position={[x, y, z]}
+            >
+              <boxBufferGeometry args={[1, 1, 1]} />
+              <meshStandardMaterial color={
+                Math.random() >= 0.5 ? "rgb(0, 255, 127)" : "rgb(0, 191, 95)"
+              } />
+            </mesh>
+          );
+        }
+      }
+    }
+    setBlocks(blocksTemp);
+   }, []);
+
+  useFrame(({camera}) => {
     controlsRef.current?.update();
 
     boxRef.current.rotation.x += 0.01;
@@ -32,9 +63,15 @@ const World: React.FC = () => {
     old_ground.current.position.x -= 0.0075;
     old_ground.current.position.z -= 0.0075;
 
-    for (let i: number = 0; i < 10; i++) {
-      console.log('test');
-    }
+    props.changePosX(camera.position.x);
+    props.changePosY(camera.position.y);
+    props.changePosZ(camera.position.z);
+
+    window.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key == 'f') {
+        camera.position.x = 100;
+      }
+    });
   });
 
   return (
@@ -56,26 +93,7 @@ const World: React.FC = () => {
       />
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
-      {(() => {
-        const blocks = Array();
-        for (let x: number = -10; x <= 10; x++) {
-          for (let y: number = 0; y < 2; y++) {
-            for (let z: number = -10; z <= 10; z++) {
-              blocks.push(
-                <mesh
-                  position={[x, y, z]}
-                >
-                  <boxBufferGeometry args={[1, 1, 1]} />
-                  <meshStandardMaterial color={
-                    Math.random() >= 0.5 ? "rgb(0, 255, 127)" : "rgb(0, 191, 95)"
-                  } />
-                </mesh>
-              );
-            }
-          }
-        }
-        return blocks;
-      })()}
+      {blocks}
       {/* <mesh
         position={[1, 1, 1]}
       >

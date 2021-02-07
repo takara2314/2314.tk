@@ -9,6 +9,11 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      colors: {
+        'black-opacity-75': 'rgba(0, 0, 0, 0.75)',
+        'black-opacity-50': 'rgba(0, 0, 0, 0.5)',
+        'black-opacity-25': 'rgba(0, 0, 0, 0.25)'
+      },
       fontFamily: {
         'sans': ['Inter', 'M PLUS', 'Meiryo', 'sans-serif']
       },
