@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import About from './areas/About';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { extend, ReactThreeFiber, useFrame, useThree } from 'react-three-fiber';
@@ -32,45 +33,12 @@ type WorldProps = {
 }
 
 const World: React.FC<WorldProps> = (props: WorldProps) => {
-  const [blocks, setBlocks] = useState<any[]>(Array());
-
   const controlsRef = useRef<OrbitControls>();
   const { camera, gl } = useThree();
 
   // const ground = useRef<THREE.Mesh>({} as THREE.Mesh);
   const old_ground = useRef<THREE.Mesh>({} as THREE.Mesh);
   const boxRef = useRef<THREE.Mesh>({} as THREE.Mesh);
-
-  useEffect(() => {
-    let blocksTemp: any[] = Array();
-    for (let x: number = -10; x <= 10; x++) {
-      for (let y: number = 0; y < 2; y++) {
-        for (let z: number = -10; z <= 10; z++) {
-          blocksTemp.push(
-            <mesh
-              position={[x, y, z]}
-              onClick={() => console.log(`${x} / ${y} / ${z}`)}
-              onPointerOver={() => {
-                props.changeIsHover(true);
-                props.changeHoverPosX(x);
-                props.changeHoverPosY(y);
-                props.changeHoverPosZ(z);
-              }}
-              onPointerOut={() => {
-                props.changeIsHover(false);
-              }}
-            >
-              <boxBufferGeometry args={[1, 1, 1]} />
-              <meshStandardMaterial color={
-                Math.random() >= 0.5 ? "rgb(0, 255, 127)" : "rgb(0, 191, 95)"
-              } />
-            </mesh>
-          );
-        }
-      }
-    }
-    setBlocks(blocksTemp);
-   }, []);
 
   useFrame(({camera}) => {
     controlsRef.current?.update();
@@ -137,7 +105,7 @@ const World: React.FC<WorldProps> = (props: WorldProps) => {
       />
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
-      {blocks}
+      <About {...props} />
       {/* <mesh
         position={[1, 1, 1]}
       >
