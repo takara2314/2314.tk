@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import World from './World';
-import { Canvas, useFrame } from 'react-three-fiber';
+import { Canvas } from 'react-three-fiber';
 
 type MonitorProps = {
   place:            string;
@@ -73,7 +73,7 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
         <Canvas
           style={{width: viewWidth, height: viewHeight}}
           camera={{ position: [0, 4, 0] }}
-          onCreated={({ gl, camera }) => {
+          onCreated={({ gl }) => {
             gl.setClearColor('rgb(102, 217, 255)')
           }}
         >

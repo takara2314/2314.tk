@@ -1,26 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import WorldProps from '../../models/WorldProps';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { useFrame } from 'react-three-fiber';
 
-type BaseProps = {
-  posX: number;
-  posY: number;
-  posZ: number;
-  changePosX: (x: number) => void;
-  changePosY: (y: number) => void;
-  changePosZ: (z: number) => void;
-
-  isHover:   boolean;
-  hoverPosX: number;
-  hoverPosY: number;
-  hoverPosZ: number;
-  changeIsHover:   (flag: boolean) => void;
-  changeHoverPosX: (x: number) => void;
-  changeHoverPosY: (y: number) => void;
-  changeHoverPosZ: (z: number) => void;
-}
-
-const Base: React.FC<BaseProps> = (props: BaseProps) => {
+const Base: React.FC<WorldProps> = (props: WorldProps) => {
   const [blocks, setBlocks] = useState<any[]>(Array());
   const [loadState, setLoadState] = useState<string>('Loading');
 
