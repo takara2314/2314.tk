@@ -44,6 +44,74 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
     <>
       <Base {...props} />
       {blocks}
+      <mesh
+        position={[0, 30.4, 0]}
+        onPointerOver={() => {
+          props.changeIsHover(true);
+          props.changeHoverPosX(0);
+          props.changeHoverPosY(30.5);
+          props.changeHoverPosZ(0);
+        }}
+        onPointerOut={() => {
+          props.changeIsHover(false);
+        }}
+        onClick={() => console.log('0 / 30.5 / 0')}
+        scale={new THREE.Vector3(0.65, 0.65, 0.65)}
+      >
+        <boxBufferGeometry args={[8, 12, 4]} />
+        <meshStandardMaterial color={'rgb(0, 0, 255)'} />
+      </mesh>
+      <mesh
+        position={[0, 36.9, 0]}
+        onPointerOver={() => {
+          props.changeIsHover(true);
+          props.changeHoverPosX(0);
+          props.changeHoverPosY(37);
+          props.changeHoverPosZ(0);
+        }}
+        onPointerOut={() => {
+          props.changeIsHover(false);
+        }}
+        onClick={() => console.log('0 / 37 / 0')}
+        scale={new THREE.Vector3(0.65, 0.65, 0.65)}
+      >
+        <boxBufferGeometry args={[8, 8, 8]} />
+        <meshStandardMaterial color={'rgb(0, 100, 230)'} />
+      </mesh>
+      <mesh
+        position={[-3.9, 30.4, 0]}
+        onPointerOver={() => {
+          props.changeIsHover(true);
+          props.changeHoverPosX(0);
+          props.changeHoverPosY(30.5);
+          props.changeHoverPosZ(0);
+        }}
+        onPointerOut={() => {
+          props.changeIsHover(false);
+        }}
+        onClick={() => console.log('0 / 30.5 / 0')}
+        scale={new THREE.Vector3(0.65, 0.65, 0.65)}
+      >
+        <boxBufferGeometry args={[4, 12, 4]} />
+        <meshStandardMaterial color={'rgb(130, 0, 235)'} />
+      </mesh>
+      <mesh
+        position={[3.9, 30.4, 0]}
+        onPointerOver={() => {
+          props.changeIsHover(true);
+          props.changeHoverPosX(0);
+          props.changeHoverPosY(30.5);
+          props.changeHoverPosZ(0);
+        }}
+        onPointerOut={() => {
+          props.changeIsHover(false);
+        }}
+        onClick={() => console.log('0 / 30.5 / 0')}
+        scale={new THREE.Vector3(0.65, 0.65, 0.65)}
+      >
+        <boxBufferGeometry args={[4, 12, 4]} />
+        <meshStandardMaterial color={'rgb(110, 0, 215)'} />
+      </mesh>
     </>
   );
 }
