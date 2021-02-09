@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-
-type NaviProps = {
-  menu:        string[][];
-  place:       string;
-  placeChange: (place: string) => void;
-}
+import NaviProps from '../models/NaviProps';
 
 const Navi: React.FC<NaviProps> = (props: NaviProps) => {
   const [takaranImg] = useState<string>('../public/takaran.png');

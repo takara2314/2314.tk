@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import WorldProps from '../../models/WorldProps';
+import loadBlocksByJSON from '../../services/loadBlocksByJSON';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { useFrame } from 'react-three-fiber';
 
@@ -14,14 +15,16 @@ const Base: React.FC<WorldProps> = (props: WorldProps) => {
     .then(res => res.json())
     .then(
       (result) => {
-        setBlocksByJSON(result);
+        setBlocks(
+          loadBlocksByJSON(props, result)
+        );
         setLoadState('OK');
       },
       (error) => {
         setLoadState('Error');
       }
     )
-  }, []);
+  }, [props.place]);
 
   useFrame(({camera}) => {
     controlsRef.current?.update();
@@ -30,50 +33,6 @@ const Base: React.FC<WorldProps> = (props: WorldProps) => {
     props.changePosY(camera.position.y);
     props.changePosZ(camera.position.z);
   });
-
-  const chooseBlock = (floorBlock: string): string => {
-    if (floorBlock == 'stone') {
-      return Math.random() >= 0.5 ? "rgb(150, 150, 150)" : "rgb(140, 140, 140))";
-    }
-    return Math.random() >= 0.5 ? "rgb(0, 255, 127)" : "rgb(0, 191, 95)";
-  }
-
-  const setBlocksByJSON = (json: any) => {
-    let blocksTemp: any[] = Array();
-
-    for (let y in json.area) {
-      console.log(y);
-      for (let x in json.area[y].hit) {
-        for (let z in json.area[y].hit[x]) {
-          if (json.area[y].hit[x][z]) {
-            console.log(`${x} / ${y} / ${z}`);
-            blocksTemp.push(
-              <mesh
-                position={[Number(x), Number(y), Number(z)]}
-                onPointerOver={() => {
-                  props.changeIsHover(true);
-                  props.changeHoverPosX(Number(x));
-                  props.changeHoverPosY(Number(y));
-                  props.changeHoverPosZ(Number(z));
-                }}
-                onPointerOut={() => {
-                  props.changeIsHover(false);
-                }}
-                onClick={() => console.log(`${x} / ${y} / ${z}`)}
-              >
-                <boxBufferGeometry args={[1, 1, 1]} />
-                <meshStandardMaterial color={
-                  chooseBlock(json.area[y].block)
-                } />
-              </mesh>
-            );
-          }
-        }
-      }
-    }
-
-    setBlocks(blocksTemp);
-  };
 
   return (
     <>

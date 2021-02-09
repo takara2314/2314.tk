@@ -1,13 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import World from './World';
+import MonitorProps from '../models/MonitorProps';
 import { Canvas } from 'react-three-fiber';
-
-type MonitorProps = {
-  place:            string;
-  placeChange:      (place: string) => void;
-  isLoadedContents: boolean;
-  contents:         string[];
-}
 
 const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
   const [viewWidth, setViewWidth] = useState<number>(0);
@@ -72,12 +66,14 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
       <section className="absolute top-0">
         <Canvas
           style={{width: viewWidth, height: viewHeight}}
-          camera={{ position: [0, 4, 0] }}
+          camera={{ position: [0, 25, 0] }}
           onCreated={({ gl }) => {
             gl.setClearColor('rgb(102, 217, 255)')
           }}
         >
           <World
+            place={props.place}
+            placeChange={props.placeChange}
             posX={posX}
             posY={posY}
             posZ={posZ}

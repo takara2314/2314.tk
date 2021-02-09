@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import About from './areas/About';
+import Skills from './areas/Skills';
+import Works from './areas/Works';
+import Favorites from './areas/Favorites';
+import Lab from './areas/Lab';
 import WorldProps from '../models/WorldProps';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -85,10 +89,13 @@ const World: React.FC<WorldProps> = (props: WorldProps) => {
         maxDistance={Infinity}
         minPolarAngle={0}
         maxPolarAngle={Math.PI}
+        target={
+          new THREE.Vector3(0, 25, 0)
+        }
       />
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
-      <About {...props} />
+      <LoadPlace {...props} />
       {/* <mesh
         position={[1, 1, 1]}
       >
@@ -118,6 +125,22 @@ const World: React.FC<WorldProps> = (props: WorldProps) => {
       </mesh>
     </>
   );
+}
+
+const LoadPlace: React.FC<WorldProps> = (props: WorldProps) => {
+  switch (props.place) {
+    case 'about':
+      return <About {...props} />
+    case 'skills':
+      return <Skills {...props} />
+    case 'works':
+      return <Works {...props} />
+    case 'favorites':
+      return <Favorites {...props} />
+    case 'lab':
+      return <Lab {...props} />
+  }
+  return <About {...props} />
 }
 
 export default World;
