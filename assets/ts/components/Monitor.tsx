@@ -66,7 +66,7 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
       <section className="absolute top-0">
         <Canvas
           style={{width: viewWidth, height: viewHeight}}
-          camera={{ position: [0, 25, 0] }}
+          camera={{ position: [0, 30, 0] }}
           onCreated={({ gl }) => {
             gl.setClearColor('rgb(102, 217, 255)')
           }}

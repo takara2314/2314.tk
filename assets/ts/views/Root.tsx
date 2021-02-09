@@ -22,13 +22,23 @@ const Root: React.FC = () => {
 
   useEffect(() => {
     console.log("now place: " + place);
+    setTitle(place);
     getContents(place);
-  }, [])
+  }, []);
 
   const placeChange = (place: string) => {
     setPlace(place);
+    setTitle(place);
     getContents(place);
-  }
+  };
+
+  const setTitle = (place: string) => {
+    menu.map((item: string[], index: number) => {
+      if (place === item[1]) {
+        document.title = `${item[0]} - タカラーン`
+      }
+    });
+  };
 
   const getContents = (place: string) => {
     fetch(`http://localhost:2314/public/contents/${place}.json`)
@@ -43,7 +53,7 @@ const Root: React.FC = () => {
         setContents([`エラーが発生しました。${error}`]);
       }
     );
-  }
+  };
 
   return (
     <div className="flex">

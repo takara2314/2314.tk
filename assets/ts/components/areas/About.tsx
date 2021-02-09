@@ -12,32 +12,39 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
 
   const controlsRef = useRef<OrbitControls>();
 
-  // useEffect(() => {
-  //   fetch('http://localhost:2314/public/areas/about.json')
-  //   .then(res => res.json())
-  //   .then(
-  //     (result) => {
-  //       setBlocks(
-  //         loadBlocksByJSON(props, result)
-  //       );
-  //       setLoadState('OK');
-  //     },
-  //     (error) => {
-  //       setLoadState('Error');
-  //     }
-  //   )
-  // }, [props.place]);
+  useEffect(() => {
+    fetch('http://localhost:2314/public/areas/about.json')
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setBlocks(
+          loadBlocksByJSON(
+            props,
+            result,
+            [0, 25, 0]
+          )
+        );
+        setLoadState('OK');
+      },
+      (error) => {
+        setLoadState('Error');
+      }
+    )
+  }, [props.place]);
 
-  // useFrame(({camera}) => {
-  //   controlsRef.current?.update();
+  useFrame(({camera}) => {
+    controlsRef.current?.update();
 
-  //   props.changePosX(camera.position.x);
-  //   props.changePosY(camera.position.y);
-  //   props.changePosZ(camera.position.z);
-  // });
+    props.changePosX(camera.position.x);
+    props.changePosY(camera.position.y);
+    props.changePosZ(camera.position.z);
+  });
 
   return (
-    <Base {...props} />
+    <>
+      <Base {...props} />
+      {blocks}
+    </>
   );
 }
 

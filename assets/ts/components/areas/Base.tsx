@@ -16,7 +16,11 @@ const Base: React.FC<WorldProps> = (props: WorldProps) => {
     .then(
       (result) => {
         setBlocks(
-          loadBlocksByJSON(props, result)
+          loadBlocksByJSON(
+            props,
+            result,
+            [0, 0, 0]
+          )
         );
         setLoadState('OK');
       },

@@ -1,16 +1,16 @@
 import React from 'react';
 import WorldProps from '../models/WorldProps';
 
-const loadBlocksByJSON = (props: WorldProps, json: any): any[] => {
+const loadBlocksByJSON = (props: WorldProps, json: any, intercepts: number[]): any[] => {
   let blocksTemp: any[] = Array();
 
   for (let y in json.area) {
     for (let x in json.area[y].hit) {
       for (let z in json.area[y].hit[x]) {
         if (json.area[y].hit[x][z]) {
-          const factX: number = Number(x) - Math.floor(json.area[y].hit.length/2);
-          const factY: number = Number(y);
-          const factZ: number = Number(z) - Math.floor(json.area[y].hit[x].length/2);
+          const factX: number = Number(x) - Math.floor(json.area[y].hit.length/2) + intercepts[0];
+          const factY: number = Number(y) + intercepts[1];
+          const factZ: number = Number(z) - Math.floor(json.area[y].hit[x].length/2) + intercepts[2];
 
           blocksTemp.push(
             <mesh
