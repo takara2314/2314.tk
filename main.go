@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"takara2314/server"
+	serverApi "takara2314/server/api"
 )
 
 func main() {
@@ -23,6 +24,9 @@ func main() {
 	router.GET("/favorites", server.FavoritesGET)
 	router.GET("/lab", server.LabGET)
 	router.GET("/contact", server.ContactGET)
+
+	api := router.Group("/api")
+	api.GET("/memo/:name", serverApi.MemoGET)
 
 	router.Run(":" + os.Getenv("PORT"))
 }
