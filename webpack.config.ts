@@ -3,6 +3,7 @@ import { Configuration } from 'webpack';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const config: Configuration = {
     context: path.join(__dirname, 'assets'),
@@ -46,7 +47,8 @@ const config: Configuration = {
         }),
         new MiniCssExtractPlugin({
             filename: 'styles.css'
-        })
+        }),
+        new BundleAnalyzerPlugin()
     ],
     mode: 'production',
     resolve: {

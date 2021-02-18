@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import About from './areas/About';
 import Skills from './areas/Skills';
 import Works from './areas/Works';
 import Favorites from './areas/Favorites';
 import Lab from './areas/Lab';
 import WorldProps from '../models/WorldProps';
-import * as THREE from 'three';
+import { Mesh, Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { extend, ReactThreeFiber, useFrame, useThree } from 'react-three-fiber';
 
@@ -23,9 +23,8 @@ const World: React.FC<WorldProps> = (props: WorldProps) => {
   const controlsRef = useRef<OrbitControls>();
   const { camera, gl } = useThree();
 
-  // const ground = useRef<THREE.Mesh>({} as THREE.Mesh);
-  const old_ground = useRef<THREE.Mesh>({} as THREE.Mesh);
-  const boxRef = useRef<THREE.Mesh>({} as THREE.Mesh);
+  const old_ground = useRef<Mesh>({} as THREE.Mesh);
+  const boxRef = useRef<Mesh>({} as THREE.Mesh);
 
   useFrame(({camera}) => {
     controlsRef.current?.update();
@@ -90,7 +89,7 @@ const World: React.FC<WorldProps> = (props: WorldProps) => {
         minPolarAngle={0}
         maxPolarAngle={Math.PI}
         target={
-          new THREE.Vector3(0, 25, 0)
+          new Vector3(0, 25, 0)
         }
       />
       <ambientLight />

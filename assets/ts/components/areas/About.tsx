@@ -4,7 +4,7 @@ import WorldProps from '../../models/WorldProps';
 import StrawberrysProps from '../../models/StrawberrysProps';
 import TextureSet from '../../models/TextureSet';
 import loadBlocksByJSON from '../../services/loadBlocksByJSON';
-import { TextureLoader, NearestFilter, Vector3, Texture } from 'three';
+import { TextureLoader, NearestFilter, Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { useFrame } from 'react-three-fiber';
 
