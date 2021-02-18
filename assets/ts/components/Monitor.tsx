@@ -138,14 +138,10 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
         </p>
       </section>
 
-      <section className="bg-white w-11/12 h-60 m-auto p-4 border-3 rounded-tl-2xl rounded-br-2xl shadow-2xl absolute bottom-5 right-0 left-0">
-        <p>Press <b>F2</b> to change to advanced debug mode.</p>
-        <div className="text-red-500">
-          <p>現在制作中です。</p>
-          <p>以下は仮に置いているテキストです！</p>
-        </div>
-        <div dangerouslySetInnerHTML={{__html: memo}} />
-      </section>
+      <section
+        className="bg-white text-lg w-11/12 h-60 m-auto p-6 border-3 rounded-tl-2xl rounded-br-2xl shadow-2xl absolute bottom-5 right-0 left-0"
+        dangerouslySetInnerHTML={{__html: memo}}
+      />
     </div>
   );
 };
