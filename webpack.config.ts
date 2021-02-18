@@ -48,7 +48,7 @@ const config: Configuration = {
             filename: 'styles.css'
         })
     ],
-    mode: 'development',
+    mode: 'production',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx']
     },

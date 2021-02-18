@@ -1,9 +1,10 @@
 module.exports = {
   purge: {
-    enabled: false,
+    enabled: true,
     content: [
       './assets/ts/**/*.{ts,tsx}',
-      './assets/html/index.html'
+      './assets/html/index.html',
+      './memos/**/*.html'
     ]
   },
   darkMode: false, // or 'media' or 'class'
