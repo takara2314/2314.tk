@@ -55,33 +55,33 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
   const setViewSize = () => {
     setViewWidth(monitorObject.current?.clientWidth!);
     setViewHeight(monitorObject.current?.clientHeight!);
-  }
+  };
 
   const changeMemoName = (name: string) => {
     setMemoName(name);
-  }
+  };
 
   const changePosX = (x: number) => {
     setPosX(x);
-  }
+  };
   const changePosY = (y: number) => {
     setPosY(y);
-  }
+  };
   const changePosZ = (z: number) => {
     setPosZ(z);
-  }
+  };
   const changeIsHover = (flag: boolean) => {
     setIsHover(flag);
-  }
+  };
   const changeHoverPosX = (x: number) => {
     setHoverPosX(x);
-  }
+  };
   const changeHoverPosY = (y: number) => {
     setHoverPosY(y);
-  }
+  };
   const changeHoverPosZ = (z: number) => {
     setHoverPosZ(z);
-  }
+  };
 
   return (
     <div className="flex flex-col w-3/4 h-screen bg-black relative" ref={monitorObject}>
@@ -148,6 +148,6 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
       </section>
     </div>
   );
-}
+};
 
 export default Monitor;

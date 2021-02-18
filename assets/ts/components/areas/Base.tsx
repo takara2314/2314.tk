@@ -45,6 +45,6 @@ const Base: React.FC<WorldProps> = (props: WorldProps) => {
       {blocks}
     </>
   );
-}
+};
 
 export default Base;

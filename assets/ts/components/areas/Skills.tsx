@@ -10,6 +10,6 @@ const Skills: React.FC<WorldProps> = (props: WorldProps) => {
   return (
     <Base {...props} />
   );
-}
+};
 
 export default Skills;

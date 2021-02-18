@@ -7,17 +7,6 @@ const loadMemo = (memoName: string): Promise<Response> => {
       'Authorization': 'Bearer wktk!TKrN:2314'
     }
   });
-  // .then(res => res.text())
-  // .then(
-  //   (result: string) => {
-  //     console.log(result);
-  //     returnResult = result;
-  //   },
-  //   (error: Error) => {
-  //     returnResult = 'エラー';
-  //     returnError = error;
-  //   }
-  // );
 }
 
 export default loadMemo;

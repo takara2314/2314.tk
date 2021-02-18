@@ -15,7 +15,7 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
     e.preventDefault()
     history.pushState(null, item[0], `/${item[1]}`);
     props.changePlace(item[1]);
-  }
+  };
 
   const menuFocus = (): string => {
     let className: string = '';
@@ -29,7 +29,7 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
     });
 
     return className;
-  }
+  };
 
   return (
     <nav className="flex flex-col w-1/4 h-screen items-center text-2xl text-center relative">
@@ -84,6 +84,6 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
       </section>
     </nav>
   );
-}
+};
 
 export default Navi;
