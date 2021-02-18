@@ -23,6 +23,20 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
   const monitorObject: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    loadMemo(memoName)
+    .then(res => res.text())
+    .then(
+      (result: string) => {
+        console.log(result);
+        setMemo(result);
+      },
+      (error: Error) => {
+        setMemo(error.toString());
+      }
+    );
+  }, [memoName]);
+
+  useEffect(() => {
     window.addEventListener('load', () => {
       setViewSize();
     });
@@ -45,18 +59,6 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
 
   const changeMemoName = (name: string) => {
     setMemoName(name);
-
-    loadMemo(name)
-    .then(res => res.text())
-    .then(
-      (result: string) => {
-        console.log(result);
-        setMemo(result);
-      },
-      (error: Error) => {
-        setMemo(error.toString());
-      }
-    );
   }
 
   const changePosX = (x: number) => {

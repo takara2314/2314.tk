@@ -73,7 +73,10 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
         onPointerOut={() => {
           props.changeIsHover(false);
         }}
-        onClick={() => console.log('0 / 36.9 / 0')}
+        onClick={() => {
+          console.log('0 / 36.9 / 0');
+          props.changeMemoName('birthday');
+        }}
         scale={new Vector3(0.65, 0.65, 0.65)}
       >
         <boxBufferGeometry attach="geometry" args={[8, 8, 8]} />
