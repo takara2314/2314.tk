@@ -1,6 +1,9 @@
 type WorldProps = {
   place:       string;
-  placeChange: (name: string) => void;
+  changePlace: (name: string) => void;
+
+  memoName:       string;
+  changeMemoName: (name: string) => void;
 
   posX:       number;
   posY:       number;

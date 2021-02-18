@@ -1,6 +1,6 @@
 type MonitorProps = {
   place:            string;
-  placeChange:      (name: string) => void;
+  changePlace:      (name: string) => void;
   isLoadedContents: boolean;
   contents:         string[];
 }

@@ -11,6 +11,7 @@ const Base: React.FC<WorldProps> = (props: WorldProps) => {
   const controlsRef = useRef<OrbitControls>();
 
   useEffect(() => {
+    props.changeMemoName('intro');
     fetch('http://localhost:2314/public/areas/base.json')
     .then(res => res.json())
     .then(

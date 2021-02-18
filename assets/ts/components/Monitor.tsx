@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import World from './World';
 import MonitorProps from '../models/MonitorProps';
+import loadMemo from '../services/loadMemo';
 import { Canvas } from 'react-three-fiber';
 
 const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
   const [viewWidth, setViewWidth] = useState<number>(0);
   const [viewHeight, setViewHeight] = useState<number>(0);
   const [isDebugMode, setIsDebugMode] = useState<boolean>(false);
+
+  const [memo, setMemo] = useState<string>('Loading...');
+  const [memoName, setMemoName] = useState<string>('');
 
   const [posX, setPosX] = useState<number>(0);
   const [posY, setPosY] = useState<number>(0);
@@ -37,6 +41,22 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
   const setViewSize = () => {
     setViewWidth(monitorObject.current?.clientWidth!);
     setViewHeight(monitorObject.current?.clientHeight!);
+  }
+
+  const changeMemoName = (name: string) => {
+    setMemoName(name);
+
+    loadMemo(name)
+    .then(res => res.text())
+    .then(
+      (result: string) => {
+        console.log(result);
+        setMemo(result);
+      },
+      (error: Error) => {
+        setMemo(error.toString());
+      }
+    );
   }
 
   const changePosX = (x: number) => {
@@ -73,7 +93,9 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
         >
           <World
             place={props.place}
-            placeChange={props.placeChange}
+            changePlace={props.changePlace}
+            memoName={memoName}
+            changeMemoName={changeMemoName}
             posX={posX}
             posY={posY}
             posZ={posZ}
@@ -99,7 +121,10 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
           <span className="bg-black-opacity-25">2314.tk 1.0.0 (Debug mode) - Work In Progress</span>
         </p>
         <p>
-          <span className="bg-black-opacity-25">now place: {props.place}</span>
+          <span className="bg-black-opacity-25">place: {props.place}</span>
+        </p>
+        <p>
+          <span className="bg-black-opacity-25">memo: {memoName}</span>
         </p>
         <p>
           <span className="bg-black-opacity-25">XYZ: {posX} / {posY} / {posZ}</span>
@@ -117,14 +142,7 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
           <p>現在制作中です。</p>
           <p>以下は仮に置いているテキストです！</p>
         </div>
-        <div className="text-xl">
-          {!props.isLoadedContents ? 'Loading...' : props.contents.map(
-            (sentence: string, index: number) =>
-              <p key={index}>
-                {sentence}
-              </p>
-          )}
-        </div>
+        <div dangerouslySetInnerHTML={{__html: memo}} />
       </section>
     </div>
   );

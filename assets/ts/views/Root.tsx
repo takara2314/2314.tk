@@ -26,7 +26,7 @@ const Root: React.FC = () => {
     getContents(place);
   }, []);
 
-  const placeChange = (place: string) => {
+  const changePlace = (place: string) => {
     setPlace(place);
     setTitle(place);
     getContents(place);
@@ -57,8 +57,8 @@ const Root: React.FC = () => {
 
   return (
     <div className="flex">
-      <Navi menu={menu} place={place} placeChange={(place: string) => placeChange(place)} />
-      <Monitor place={place} placeChange={(place: string) => placeChange(place)} isLoadedContents={isLoadedContents} contents={contents} />
+      <Navi menu={menu} place={place} changePlace={(place: string) => changePlace(place)} />
+      <Monitor place={place} changePlace={(place: string) => changePlace(place)} isLoadedContents={isLoadedContents} contents={contents} />
     </div>
   );
 }

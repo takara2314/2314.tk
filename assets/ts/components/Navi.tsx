@@ -14,7 +14,7 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
   const menuClick = (e: React.MouseEvent, item: string[]) => {
     e.preventDefault()
     history.pushState(null, item[0], `/${item[1]}`);
-    props.placeChange(item[1]);
+    props.changePlace(item[1]);
   }
 
   const menuFocus = (): string => {
