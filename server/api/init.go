@@ -30,6 +30,6 @@ func init() {
 		extention := "." + devidedByDot[len(devidedByDot)-1]
 
 		// マップに格納
-		memos[strings.TrimRight(file.Name(), extention)] = string(data)
+		memos[strings.TrimSuffix(file.Name(), extention)] = string(data)
 	}
 }

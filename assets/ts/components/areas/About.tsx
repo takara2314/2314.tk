@@ -63,6 +63,7 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
     <>
       <Base {...props} />
       {blocks}
+
       <group
         onPointerDown={(e: PointerEvent<Element>) => {
           props.changeMemoName('intro');
@@ -145,6 +146,7 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
           <meshStandardMaterial map={textures.right_hand.front} attachArray="material" />
         </mesh>
       </group>
+
       <group
         onPointerDown={(e: PointerEvent<Element>) => {
           props.changeMemoName('birthday');
@@ -172,10 +174,17 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
           amount={8}
         />
       </group>
+
       <group
         onPointerDown={(e: PointerEvent<Element>) => {
           props.changeMemoName('pc');
           e.stopPropagation();
+        }}
+        onPointerOver={() => {
+          props.changeIsHover(true);
+          props.changeHoverPosX(-4.5);
+          props.changeHoverPosY(27);
+          props.changeHoverPosZ(-4.5);
         }}
         position={[2.8, 0.6, 0.5]}
         rotation={[-0.1, 0, 0.1]}
@@ -192,6 +201,20 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
         >
           <boxBufferGeometry args={[5, 0.25, 4]} />
           <meshStandardMaterial color="rgb(30, 30, 30)" />
+        </mesh>
+      </group>
+
+      <group
+        onPointerDown={(e: PointerEvent<Element>) => {
+          props.changeMemoName('minecraft');
+          e.stopPropagation();
+        }}
+        position={[8, 26.5, -0.5]}
+        rotation={[0, Math.PI * -15/180, Math.PI * 15/180]}
+      >
+        <mesh>
+          <boxBufferGeometry args={[3.5, 3.5, 3.5]} />
+          <meshStandardMaterial color={"green"} />
         </mesh>
       </group>
     </>
