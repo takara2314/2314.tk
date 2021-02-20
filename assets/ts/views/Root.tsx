@@ -17,19 +17,14 @@ const Root: React.FC = () => {
     : menu[0][1]
   );
 
-  const [isLoadedContents, setIsLoadedContents] = useState<boolean>(false);
-  const [contents, setContents] = useState<string[]>([]);
-
   useEffect(() => {
     console.log("now place: " + place);
     setTitle(place);
-    getContents(place);
   }, []);
 
   const changePlace = (place: string) => {
     setPlace(place);
     setTitle(place);
-    getContents(place);
   };
 
   const setTitle = (place: string) => {
@@ -40,25 +35,10 @@ const Root: React.FC = () => {
     });
   };
 
-  const getContents = (place: string) => {
-    fetch(`http://localhost:2314/public/contents/${place}.json`)
-    .then(res => res.json())
-    .then(
-      (result) => {
-        setIsLoadedContents(true);
-        setContents(result.contents);
-      },
-      (error) => {
-        setIsLoadedContents(true);
-        setContents([`エラーが発生しました。${error}`]);
-      }
-    );
-  };
-
   return (
     <div className="flex">
       <Navi menu={menu} place={place} changePlace={(place: string) => changePlace(place)} />
-      <Monitor place={place} changePlace={(place: string) => changePlace(place)} isLoadedContents={isLoadedContents} contents={contents} />
+      <Monitor place={place} changePlace={(place: string) => changePlace(place)} />
     </div>
   );
 }
