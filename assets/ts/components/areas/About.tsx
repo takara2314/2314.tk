@@ -22,7 +22,7 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
     angles.map((angle: string) => {
       textures[part][angle] = useMemo(() =>
         new TextureLoader().load(
-          `https://2314.tk/public/textures/takara2314/${part}/${angle}.png`,
+          `http://localhost:2314/public/textures/takara2314/${part}/${angle}.png`,
           (tex) => {
             tex.magFilter = NearestFilter;
           }
@@ -32,7 +32,7 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
   });
 
   useEffect(() => {
-    fetch('https://2314.tk/public/areas/about.json')
+    fetch('http://localhost:2314/public/areas/about.json')
     .then(res => res.json())
     .then(
       (result) => {
@@ -64,7 +64,10 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
       <Base {...props} />
       {blocks}
       <group
-        onClick={() => props.changeMemoName('intro')}
+        onPointerDown={(e: React.PointerEvent<Element>) => {
+          props.changeMemoName('intro');
+          e.stopPropagation();
+        }}
         onPointerOut={() => {
           props.changeIsHover(false);
         }}
@@ -143,7 +146,10 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
         </mesh>
       </group>
       <group
-        onClick={() => props.changeMemoName('birthday')}
+        onPointerDown={(e: React.PointerEvent<Element>) => {
+          props.changeMemoName('birthday');
+          e.stopPropagation();
+        }}
         rotation={[-0.1, 0, 0]}
       >
         <mesh
@@ -166,6 +172,28 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
           amount={8}
         />
       </group>
+      <group
+        onPointerDown={(e: React.PointerEvent<Element>) => {
+          props.changeMemoName('pc');
+          e.stopPropagation();
+        }}
+        position={[2.8, 0.6, 0.5]}
+        rotation={[-0.1, 0, 0.1]}
+      >
+        <mesh
+          position={[-4.5, 27, -4.5]}
+        >
+          <boxBufferGeometry args={[5, 0.25, 4]} />
+          <meshStandardMaterial color="rgb(30, 30, 30)" />
+        </mesh>
+        <mesh
+          position={[-4.5, 28.9, -2]}
+          rotation={[Math.PI * 3/5, 0, 0]}
+        >
+          <boxBufferGeometry args={[5, 0.25, 4]} />
+          <meshStandardMaterial color="rgb(30, 30, 30)" />
+        </mesh>
+      </group>
     </>
   );
 };
@@ -183,6 +211,7 @@ const Strawberrys: React.FC<WorldProps & StrawberrysProps> = (props: WorldProps 
 
       return (
         <mesh
+          key={i}
           position={[posX, basePosY, posZ]}
           onPointerOver={() => {
             props.changeIsHover(true);

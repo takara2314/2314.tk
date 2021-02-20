@@ -14,6 +14,7 @@ const loadBlocksByJSON = (props: WorldProps, json: any, intercepts: number[]): a
 
           blocksTemp.push(
             <mesh
+              key={Number(x)*10000 + Number(y)*100 + Number(z)}
               position={[factX, factY, factZ]}
               onPointerOver={() => {
                 props.changeIsHover(true);
@@ -24,7 +25,6 @@ const loadBlocksByJSON = (props: WorldProps, json: any, intercepts: number[]): a
               onPointerOut={() => {
                 props.changeIsHover(false);
               }}
-              onClick={() => console.log(`${factX} / ${factY} / ${factZ}`)}
             >
               <boxBufferGeometry args={[1, 1, 1]} />
               <meshStandardMaterial color={

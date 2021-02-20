@@ -50,7 +50,7 @@ const config: Configuration = {
         }),
         new BundleAnalyzerPlugin()
     ],
-    mode: 'production',
+    mode: 'development',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx']
     },
