@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { PointerEvent, useEffect, useRef, useState, useMemo } from 'react';
 import Base from './Base';
 import WorldProps from '../../models/WorldProps';
 import StrawberrysProps from '../../models/StrawberrysProps';
@@ -64,7 +64,7 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
       <Base {...props} />
       {blocks}
       <group
-        onPointerDown={(e: React.PointerEvent<Element>) => {
+        onPointerDown={(e: PointerEvent<Element>) => {
           props.changeMemoName('intro');
           e.stopPropagation();
         }}
@@ -146,7 +146,7 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
         </mesh>
       </group>
       <group
-        onPointerDown={(e: React.PointerEvent<Element>) => {
+        onPointerDown={(e: PointerEvent<Element>) => {
           props.changeMemoName('birthday');
           e.stopPropagation();
         }}
@@ -173,7 +173,7 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
         />
       </group>
       <group
-        onPointerDown={(e: React.PointerEvent<Element>) => {
+        onPointerDown={(e: PointerEvent<Element>) => {
           props.changeMemoName('pc');
           e.stopPropagation();
         }}
