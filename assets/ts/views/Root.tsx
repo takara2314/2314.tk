@@ -18,7 +18,6 @@ const Root: React.FC = () => {
   );
 
   useEffect(() => {
-    console.log("now place: " + place);
     setTitle(place);
   }, []);
 

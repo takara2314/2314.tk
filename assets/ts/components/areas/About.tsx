@@ -4,11 +4,9 @@ import WorldProps from '../../models/WorldProps';
 import StrawberrysProps from '../../models/StrawberrysProps';
 import TextureSet from '../../models/TextureSet';
 import loadBlocksByJSON from '../../services/loadBlocksByJSON';
-import loadImage from '../../services/loadImage';
-import { Texture, TextureLoader, NearestFilter, Vector3 } from 'three';
+import { TextureLoader, NearestFilter, Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { useFrame } from 'react-three-fiber';
-import trimImage from '../../services/trimImage';
 
 const About: React.FC<WorldProps> = (props: WorldProps) => {
   const [blocks, setBlocks] = useState<any[]>(Array());
@@ -19,97 +17,19 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
   const parts = ['head', 'body', 'right_hand', 'left_hand'];
   const angles = ['front', 'right', 'back', 'left', 'top', 'bottom'];
   const textures: TextureSet = {};
-
-  // 書きかけコード
-  // プロパティを先に定義しておく
-  parts.map((part: string) => {
-    textures[part] = {};
-    angles.map((angle: string) => {
-      textures[part][angle] = new Texture();
-    });
-  });
-
-  // ここで画像をロードし、パーツ事に画像の一部分をbase64として取得したかった
-  const images: string[] = Array();
-  useMemo(() => {
-    loadImage('http://localhost:2314/public/textures/takara2314.png')
-    .then(result => {
-      for (let i = 0; i < 24; i++) {
-        trimImage(result[0] as Blob, 33, 23, 39, 29)
-        .then(result => {
-          images.push(result);
-        });
-      }
-    });
-  }, []);
-
-  // base64に変換したやつをここで適応したかった
-  let counter = 0;
   parts.map((part: string) => {
     textures[part] = {};
     angles.map((angle: string) => {
       textures[part][angle] = useMemo(() =>
         new TextureLoader().load(
-          images[counter],
+          `http://localhost:2314/public/textures/takara2314/${part}/${angle}.png`,
           (tex) => {
             tex.magFilter = NearestFilter;
           }
         ), []
       );
-      counter++;
     })
   });
-
-  // loadImage('http://localhost:2314/public/textures/takara2314.png')
-  // .then(result => {
-  //   parts.map((part: string) => {
-  //     angles.map((angle: string) => {
-  //       trimImage(result[0] as Blob, 0, 0, 512, 512)
-  //       .then(result => {
-  //         textures[part][angle] =
-  //           new TextureLoader().load(
-  //             result,
-  //             (tex) => {
-  //               tex.magFilter = NearestFilter;
-  //             }
-  //           )
-  //       });
-  //     });
-  //   });
-  // });
-  // loadImage('http://localhost:2314/public/textures/takara2314.png')
-  // .then(result => {
-  //   parts.map((part: string) => {
-  //     textures[part] = {};
-  //     angles.map((angle: string) => {
-  //       trimImage(result[0] as Blob, 0, 0, 512, 512)
-  //       .then(result => {
-  //         textures[part][angle] = useMemo(() =>
-  //           new TextureLoader().load(
-  //             result,
-  //             (tex) => {
-  //               tex.magFilter = NearestFilter;
-  //             }
-  //           ), []
-  //         )
-  //       })
-  //     })
-  //   })
-  // })
-
-  // parts.map((part: string) => {
-  //   textures[part] = {};
-  //   angles.map((angle: string) => {
-  //     textures[part][angle] = useMemo(() => {
-  //       return new TextureLoader().load(
-  //         `http://localhost:2314/public/textures/takara2314/${part}/${angle}.png`,
-  //         (tex) => {
-  //           tex.magFilter = NearestFilter;
-  //         }
-  //       )
-  //     }, []);
-  //   })
-  // });
 
   useEffect(() => {
     fetch('http://localhost:2314/public/areas/about.json')
@@ -288,13 +208,6 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
         onPointerDown={(e: PointerEvent<Element>) => {
           props.changeMemoName('minecraft');
           e.stopPropagation();
-          // loadImage('http://localhost:2314/public/takaran.png')
-          // .then(result => {
-          //   trimImage(result[0] as Blob, 0, 0, 512, 512)
-          //   .then(result => {
-          //     console.log(result);
-          //   })
-          // });
         }}
         position={[8, 26.5, -0.5]}
         rotation={[0, Math.PI * -15/180, Math.PI * 15/180]}

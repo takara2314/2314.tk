@@ -27,7 +27,6 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
     .then(res => res.text())
     .then(
       (result: string) => {
-        console.log(result);
         setMemo(result);
       },
       (error: Error) => {
