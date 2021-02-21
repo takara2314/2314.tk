@@ -24,7 +24,7 @@ const Root: React.FC = () => {
   const changePlace = (place: string) => {
     setPlace(place);
     setTitle(place);
-  };
+  }
 
   const setTitle = (place: string) => {
     menu.map((item: string[], index: number) => {
@@ -32,7 +32,7 @@ const Root: React.FC = () => {
         document.title = `${item[0]} - タカラーン`
       }
     });
-  };
+  }
 
   return (
     <div className="flex">

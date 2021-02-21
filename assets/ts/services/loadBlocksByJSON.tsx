@@ -38,7 +38,7 @@ const loadBlocksByJSON = (props: WorldProps, json: any, intercepts: number[]): a
   }
 
   return blocksTemp;
-};
+}
 
 const chooseBlock = (props: WorldProps, floorBlock: string): string => {
   if (props.place == 'lab') {

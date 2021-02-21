@@ -219,7 +219,7 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
       </group>
     </>
   );
-};
+}
 
 const Strawberrys: React.FC<WorldProps & StrawberrysProps> = (props: WorldProps & StrawberrysProps) => {
   const plots: any[] = Array(props.amount);
@@ -255,6 +255,6 @@ const Strawberrys: React.FC<WorldProps & StrawberrysProps> = (props: WorldProps 
       {plots}
     </>
   );
-};
+}
 
 export default About;

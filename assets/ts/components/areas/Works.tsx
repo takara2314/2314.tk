@@ -10,6 +10,6 @@ const Works: React.FC<WorldProps> = (props: WorldProps) => {
   return (
     <Base {...props} />
   );
-};
+}
 
 export default Works;

@@ -54,7 +54,7 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
   const setViewSize = () => {
     setViewWidth(monitorObject.current?.clientWidth!);
     setViewHeight(monitorObject.current?.clientHeight!);
-  };
+  }
 
   return (
     <div className="flex flex-col w-full sm:w-full md:w-full lg:w-3/4 xl:w-3/4 h-screen bg-black relative" ref={monitorObject}>
@@ -117,6 +117,6 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
       />
     </div>
   );
-};
+}
 
 export default Monitor;

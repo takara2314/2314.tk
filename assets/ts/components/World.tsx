@@ -17,7 +17,7 @@ declare global {
       orbitControls: ReactThreeFiber.Node<OrbitControls, typeof OrbitControls>
     }
   }
-};
+}
 
 const World: React.FC<WorldProps> = (props: WorldProps) => {
   const controlsRef = useRef<OrbitControls>();
@@ -118,7 +118,7 @@ const World: React.FC<WorldProps> = (props: WorldProps) => {
       </mesh>
     </>
   );
-};
+}
 
 const LoadPlace: React.FC<WorldProps> = (props: WorldProps) => {
   switch (props.place) {
@@ -134,6 +134,6 @@ const LoadPlace: React.FC<WorldProps> = (props: WorldProps) => {
       return <Lab {...props} />
   }
   return <About {...props} />
-};
+}
 
 export default World;
