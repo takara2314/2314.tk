@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import About from './areas/About';
 import Skills from './areas/Skills';
 import Works from './areas/Works';
@@ -25,6 +25,13 @@ const World: React.FC<WorldProps> = (props: WorldProps) => {
 
   const old_ground = useRef<Mesh>({} as THREE.Mesh);
   const boxRef = useRef<Mesh>({} as THREE.Mesh);
+
+  // カメラの初期位置
+  useEffect(() => {
+    camera.position.x = 0;
+    camera.position.y = 35;
+    camera.position.z = -30;
+  }, []);
 
   useFrame(({camera}) => {
     controlsRef.current?.update();
@@ -95,19 +102,6 @@ const World: React.FC<WorldProps> = (props: WorldProps) => {
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <LoadPlace {...props} />
-      {/* <mesh
-        position={[1, 1, 1]}
-      >
-        <boxBufferGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial color={"rgb(50, 255, 127)"} />
-      </mesh> */}
-      {/* <mesh
-        ref={ground}
-        position={[0, 0, 0]}
-      >
-        <boxBufferGeometry args={[10, 10, 30]} />
-        <meshStandardMaterial color={"rgb(0, 255, 127)"} />
-      </mesh> */}
       <mesh
         ref={boxRef}
         position={[0, 0, 0]}
