@@ -56,32 +56,6 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
     setViewHeight(monitorObject.current?.clientHeight!);
   };
 
-  const changeMemoName = (name: string) => {
-    setMemoName(name);
-  };
-
-  const changePosX = (x: number) => {
-    setPosX(x);
-  };
-  const changePosY = (y: number) => {
-    setPosY(y);
-  };
-  const changePosZ = (z: number) => {
-    setPosZ(z);
-  };
-  const changeIsHover = (flag: boolean) => {
-    setIsHover(flag);
-  };
-  const changeHoverPosX = (x: number) => {
-    setHoverPosX(x);
-  };
-  const changeHoverPosY = (y: number) => {
-    setHoverPosY(y);
-  };
-  const changeHoverPosZ = (z: number) => {
-    setHoverPosZ(z);
-  };
-
   return (
     <div className="flex flex-col w-full sm:w-full md:w-full lg:w-3/4 xl:w-3/4 h-screen bg-black relative" ref={monitorObject}>
       <section className="absolute top-0">
@@ -96,21 +70,21 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
             place={props.place}
             changePlace={props.changePlace}
             memoName={memoName}
-            changeMemoName={changeMemoName}
+            changeMemoName={setMemoName}
             posX={posX}
             posY={posY}
             posZ={posZ}
-            changePosX={changePosX}
-            changePosY={changePosY}
-            changePosZ={changePosZ}
+            changePosX={setPosX}
+            changePosY={setPosY}
+            changePosZ={setPosZ}
             isHover={isHover}
             hoverPosX={hoverPosX}
             hoverPosY={hoverPosY}
             hoverPosZ={hoverPosZ}
-            changeIsHover={changeIsHover}
-            changeHoverPosX={changeHoverPosX}
-            changeHoverPosY={changeHoverPosY}
-            changeHoverPosZ={changeHoverPosZ}
+            changeIsHover={setIsHover}
+            changeHoverPosX={setHoverPosX}
+            changeHoverPosY={setHoverPosY}
+            changeHoverPosZ={setHoverPosZ}
           />
         </Canvas>
       </section>
