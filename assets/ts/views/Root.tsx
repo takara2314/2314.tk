@@ -17,6 +17,8 @@ const Root: React.FC = () => {
     : menu[0][1]
   );
 
+  const [isMenuShowMobile, changeIsMenuShowMobile] = useState<boolean>(false);
+
   useEffect(() => {
     setTitle(place);
   }, []);
@@ -34,11 +36,52 @@ const Root: React.FC = () => {
     });
   }
 
+  const hideMenuClass = () => {
+    let className: string = '';
+    const baseClass: string = 'w-full h-full bg-black opacity-50 absolute top-0';
+
+    if (isMenuShowMobile) {
+      className = `${baseClass} visible sm:visible md:visible lg:invisible xl:invisible`;
+    } else {
+      className = `${baseClass} invisible`;
+    }
+
+    return className;
+  }
+
   return (
-    <div className="flex">
-      <Navi menu={menu} place={place} changePlace={(place: string) => changePlace(place)} />
-      <Monitor place={place} changePlace={(place: string) => changePlace(place)} />
-    </div>
+    <>
+      <div className="flex">
+        <Navi
+          menu={menu}
+          place={place}
+          changePlace={changePlace}
+          isMenuShowMobile={isMenuShowMobile}
+          changeIsMenuShowMobile={changeIsMenuShowMobile}
+        />
+        <Monitor
+          place={place}
+          changePlace={changePlace}
+        />
+      </div>
+
+      <div
+        className={hideMenuClass()}
+        onClick={() => changeIsMenuShowMobile(false)}
+      />
+
+      <div
+        className={
+          "w-16 h-16 bg-gray-200 rounded-lg pt-3 pb-3 shadow-2xl flex flex-col items-center justify-around " +
+          "absolute top-3 left-3 visible sm:visible md:visible lg:invisible xl:invisible"
+        }
+        onClick={() => changeIsMenuShowMobile(true)}
+      >
+        <div className="w-10 h-1 bg-green-700 rounded-full" />
+        <div className="w-10 h-1 bg-green-800 rounded-full" />
+        <div className="w-10 h-1 bg-green-900 rounded-full" />
+      </div>
+    </>
   );
 }
 

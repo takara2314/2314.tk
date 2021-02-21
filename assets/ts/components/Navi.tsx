@@ -14,6 +14,21 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
 
   const [isDiscordShow, setIsDiscordShow] = useState<boolean>(false);
 
+  const menuClass = (): string => {
+    let className: string = '';
+    const baseClass: string =
+      'flex flex-col w-3/4 sm:w-3/4 md:w-3/4 lg:w-1/4 xl:w-1/4 h-screen bg-white items-center text-2xl text-center z-10 ' +
+      'absolute sm:absolute md:absolute lg:relative xl:relative';
+
+    if (props.isMenuShowMobile) {
+      className = `${baseClass} left-0`;
+    } else {
+      className = `${baseClass} -left-3/4 sm:-left-3/4 md:-left-3/4 lg:left-0 xl:left-0`;
+    }
+
+    return className;
+  }
+
   const menuClick = (e: React.MouseEvent, item: string[]) => {
     e.preventDefault()
     history.pushState(null, item[0], `/${item[1]}`);
@@ -22,7 +37,9 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
 
   const menuFocus = (): string => {
     let className: string = '';
-    const baseClass: string = 'pt-2 pb-2 w-96 h-12 rounded-r-full bg-black bg-opacity-25 absolute -right-7/24';
+    const baseClass: string =
+      'pt-2 pb-2 w-128 sm:w-128 md:w-128 lg:w-96 xl:w-96 h-12 rounded-r-full bg-black bg-opacity-25 ' +
+      'absolute -right-3/12';
 
     props.menu.map((item: string[], index: number) => {
       if (props.place === item[1]) {
@@ -34,7 +51,7 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
     return className;
   }
 
-  const showDiscord = (): string => {
+  const discordClass = (): string => {
     let className: string = '';
     const baseClass: string = 'text-base pt-1 pr-2 pl-2 w-44 h-9 rounded-lg bg-gray-100 border-2 border-gray-300 absolute -top-3 left-10';
 
@@ -48,7 +65,7 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
   }
 
   return (
-    <nav className="flex flex-col w-0 sm:w-0 md:w-0 lg:w-1/4 xl:w-1/4 h-screen items-center text-2xl text-center relative">
+    <nav className={menuClass()}>
       <section className="mt-12">
         <div className="h-48">
           <a href={props.menu[0][1]} className="focus:outline-none" onClick={(e: React.MouseEvent) => menuClick(e, props.menu[0])}>
@@ -84,7 +101,7 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
             <SocialLinks links={links} changeIsDiscordShow={setIsDiscordShow} />
           </ul>
           <section
-            className={showDiscord()}
+            className={discordClass()}
             onMouseOver={() => setIsDiscordShow(true)}
             onMouseOut={() => setIsDiscordShow(false)}
           >
