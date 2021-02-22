@@ -19,8 +19,17 @@ const Root: React.FC = () => {
 
   const [isMenuShowMobile, changeIsMenuShowMobile] = useState<boolean>(false);
 
+  const [clientHeight, setClientHeight] = useState<number>(0);
+
   useEffect(() => {
     setTitle(place);
+
+    window.addEventListener('load', () => {
+      setClientHeight(document.body.clientHeight);
+    });
+    window.addEventListener('resize', () => {
+      setClientHeight(document.body.clientHeight);
+    });
   }, []);
 
   const changePlace = (place: string) => {
@@ -49,6 +58,24 @@ const Root: React.FC = () => {
     return className;
   }
 
+  const landscapeClass = (): string => {
+    let className: string = '';
+
+    const baseClass: string =
+      'w-screen h-screen '
+      + 'bg-yellow-500 text-white '
+      + 'flex flex-row justify-center items-center '
+      + 'absolute top-0 z-50';
+
+    if (clientHeight >= 500 || clientHeight === 0) {
+      className = `${baseClass} invisible`;
+    } else {
+      className = `${baseClass} visible`;
+    }
+
+    return className
+  }
+
   return (
     <>
       <main className="flex w-screen h-screen overflow-hidden">
@@ -58,6 +85,7 @@ const Root: React.FC = () => {
           changePlace={changePlace}
           isMenuShowMobile={isMenuShowMobile}
           changeIsMenuShowMobile={changeIsMenuShowMobile}
+          clientHeight={clientHeight}
         />
         <Monitor
           place={place}
@@ -82,12 +110,7 @@ const Root: React.FC = () => {
         <div className="w-10 h-1 bg-green-900 rounded-full" />
       </div>
 
-      <div className={
-        "invisible sm:visible md:visible lg:invisible xl:invisible w-screen h-screen "
-        + "bg-yellow-500 text-white "
-        + "flex flex-row justify-center items-center "
-        + "absolute top-0"
-      }>
+      <div className={landscapeClass()}>
         <section className="p-8 pr-4">
           <img
             src="../public/sorry.webp"

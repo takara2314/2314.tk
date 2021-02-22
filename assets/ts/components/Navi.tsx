@@ -14,17 +14,6 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
 
   const [isDiscordShow, setIsDiscordShow] = useState<boolean>(false);
 
-  const [clientHeight, setClientHeight] = useState<number>(0);
-
-  useEffect(() => {
-    window.addEventListener('load', () => {
-      setClientHeight(document.body.clientHeight);
-    });
-    window.addEventListener('resize', () => {
-      setClientHeight(document.body.clientHeight);
-    });
-  }, []);
-
   const menuClass = (): string => {
     let className: string = '';
     const baseClass: string =
@@ -89,9 +78,9 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
       ]
     };
 
-    if (clientHeight >= 800 || clientHeight === 0) {
+    if (props.clientHeight >= 750 || props.clientHeight === 0) {
       className = classNames[part][0];
-    } else if (clientHeight >= 650) {
+    } else if (props.clientHeight >= 650) {
       className = classNames[part][1];
     } else {
       className = classNames[part][2];
