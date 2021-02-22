@@ -22,7 +22,7 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
     angles.map((angle: string) => {
       textures[part][angle] = useMemo(() =>
         new TextureLoader().load(
-          `http://localhost:2314/public/textures/takara2314/${part}/${angle}.png`,
+          `https://2314.tk/public/textures/takara2314/${part}/${angle}.png`,
           (tex) => {
             tex.magFilter = NearestFilter;
           }
@@ -32,7 +32,7 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
   });
 
   useEffect(() => {
-    fetch('http://localhost:2314/public/areas/about.json')
+    fetch('https://2314.tk/public/areas/about.json')
     .then(res => res.json())
     .then(
       (result) => {
