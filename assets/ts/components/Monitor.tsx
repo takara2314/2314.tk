@@ -112,7 +112,7 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
       </section>
 
       <section
-        className="bg-white text-lg w-11/12 h-64 sm:h-64 md:h-64 lg:h-60 xl:h-60 m-auto p-6 border-3 rounded-tl-2xl rounded-br-2xl shadow-2xl absolute bottom-5 right-0 left-0"
+        className="bg-white text-lg w-11/12 h-64 sm:h-64 md:h-40 lg:h-60 xl:h-60 m-auto p-6 border-3 rounded-tl-2xl rounded-br-2xl shadow-2xl absolute bottom-5 right-0 left-0"
         dangerouslySetInnerHTML={{__html: memo}}
       />
     </div>
