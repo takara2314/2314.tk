@@ -51,7 +51,7 @@ const Root: React.FC = () => {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex w-screen h-screen overflow-hidden">
         <Navi
           menu={menu}
           place={place}

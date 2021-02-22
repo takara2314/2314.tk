@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NaviProps from '../models/NaviProps';
 import SocialLinksProps from '../models/SocialLinksProps';
 
@@ -14,6 +14,17 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
 
   const [isDiscordShow, setIsDiscordShow] = useState<boolean>(false);
 
+  const [clientHeight, setClientHeight] = useState<number>(0);
+
+  useEffect(() => {
+    window.addEventListener('load', () => {
+      setClientHeight(document.body.clientHeight);
+    });
+    window.addEventListener('resize', () => {
+      setClientHeight(document.body.clientHeight);
+    });
+  }, []);
+
   const menuClass = (): string => {
     let className: string = '';
     const baseClass: string =
@@ -24,6 +35,66 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
       className = `${baseClass} left-0`;
     } else {
       className = `${baseClass} -left-3/4 sm:-left-3/4 md:-left-3/4 lg:left-0 xl:left-0`;
+    }
+
+    return className;
+  }
+
+  const heightQuery = (part:
+      'imageSection'
+    | 'takaraImage'
+    | 'nameSection'
+    | 'name'
+    | 'id'
+    | 'menuSection'
+    | 'socialSection'
+    ): string => {
+    let className: string = '';
+
+    const classNames: {[key: string]: string[]} = {
+      'imageSection': [
+        'mt-12',
+        'mt-8',
+        'mt-4'
+      ],
+      'takaraImage': [
+        'h-48',
+        'h-32',
+        'h-32'
+      ],
+      'nameSection': [
+        'mt-2 w-48 text-left',
+        'mt-2 w-48 pl-5 text-left',
+        'mt-2 w-48 pl-5 text-left'
+      ],
+      'name': [
+        'h-12 text-4xl font-bold',
+        'h-10 text-3xl font-bold',
+        'h-10 text-3xl font-bold'
+      ],
+      'id': [
+        '-mt-2 h-10 text-xl text-gray-700',
+        '-mt-2 h-10 text-lg text-gray-700',
+        '-mt-2 h-10 text-lg text-gray-700'
+      ],
+      'menuSection': [
+        'mt-8 font-bold relative',
+        'mt-4 font-bold relative',
+        'mt-2 font-bold relative'
+      ],
+      'socialSection': [
+        'mt-8 pt-3 border-t-2 border-gray-300 absolute bottom-10',
+        'mt-8 pt-2 border-t-2 border-gray-300 absolute bottom-4',
+        'mt-8 pt-2 border-t-2 border-gray-300 absolute bottom-4'
+      ]
+    };
+
+    if (clientHeight >= 800 || clientHeight === 0) {
+      className = classNames[part][0];
+    } else if (clientHeight >= 650) {
+      className = classNames[part][1];
+    } else {
+      className = classNames[part][2];
     }
 
     return className;
@@ -66,24 +137,24 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
 
   return (
     <nav className={menuClass()}>
-      <section className="mt-12">
-        <div className="h-48">
+      <section className={heightQuery('imageSection')}>
+        <div className={heightQuery('takaraImage')}>
           <a href={props.menu[0][1]} className="focus:outline-none" onClick={(e: React.MouseEvent) => menuClick(e, props.menu[0])}>
-            <img src={takaranImg} alt="タカラーン" className="w-48" />
+            <img src={takaranImg} alt="タカラーン" className={heightQuery('takaraImage')} />
           </a>
         </div>
       </section>
-      <section className="mt-2 w-48 text-left">
-        <div className="h-12 text-4xl font-bold">
+      <section className={heightQuery('nameSection')}>
+        <div className={heightQuery('name')}>
           <h1>
             タカラーン
           </h1>
         </div>
-        <div className="-mt-2 h-10 text-xl text-gray-700">
+        <div className={heightQuery('id')}>
           @takara2314
         </div>
       </section>
-      <section className="mt-8 font-bold relative">
+      <section className={heightQuery('menuSection')}>
         <div className={menuFocus()}></div>
         <ul className="relative">
           {props.menu.map((item: string[], index: number) =>
@@ -95,7 +166,7 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
           )}
         </ul>
       </section>
-      <section className="mt-8 pt-3 border-t-2 border-gray-300 absolute bottom-10">
+      <section className={heightQuery('socialSection')}>
         <div>
           <ul className="flex flex-row justify-center items-center">
             <SocialLinks links={links} changeIsDiscordShow={setIsDiscordShow} />
