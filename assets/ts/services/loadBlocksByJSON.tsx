@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PointerEvent } from 'react';
 import WorldProps from '../models/WorldProps';
 
 const loadBlocksByJSON = (props: WorldProps, json: any, intercepts: number[]): any[] => {
@@ -16,6 +16,9 @@ const loadBlocksByJSON = (props: WorldProps, json: any, intercepts: number[]): a
             <mesh
               key={Number(x)*10000 + Number(y)*100 + Number(z)}
               position={[factX, factY, factZ]}
+              onPointerDown={(e: PointerEvent<Element>) => {
+                e.stopPropagation();
+              }}
               onPointerOver={() => {
                 props.changeIsHover(true);
                 props.changeHoverPosX(factX);

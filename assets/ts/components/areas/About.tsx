@@ -211,10 +211,70 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
         }}
         position={[8, 26.5, -0.5]}
         rotation={[0, Math.PI * -15/180, Math.PI * 15/180]}
+        onPointerOver={() => {
+          props.changeIsHover(true);
+          props.changeHoverPosX(8);
+          props.changeHoverPosY(26.5);
+          props.changeHoverPosZ(-0.5);
+        }}
       >
         <mesh>
           <boxBufferGeometry args={[3.5, 3.5, 3.5]} />
           <meshStandardMaterial color={"green"} />
+        </mesh>
+      </group>
+
+      <group
+        onPointerDown={(e: PointerEvent<Element>) => {
+          props.changeMemoName('wishlist');
+          e.stopPropagation();
+        }}
+        position={[-6, 28, 6]}
+        rotation={[Math.PI * -20/180, Math.PI * -45/180, Math.PI * 5/180]}
+        onPointerOver={() => {
+          props.changeIsHover(true);
+          props.changeHoverPosX(8);
+          props.changeHoverPosY(26.5);
+          props.changeHoverPosZ(-0.5);
+        }}
+      >
+        <mesh>
+          <boxBufferGeometry args={[3.5, 4, 2]} />
+          <meshStandardMaterial color={"darkorange"} />
+        </mesh>
+        <mesh
+          position={[1, 2.8, 0.3]}
+          rotation={[Math.PI * -17.5/180, 0, 0]}
+        >
+          <boxBufferGeometry args={[0.4, 1.75, 0.4]} />
+          <meshStandardMaterial color={"darkorange"} />
+        </mesh>
+        <mesh
+          position={[-1, 2.8, 0.3]}
+          rotation={[Math.PI * -17.5/180, 0, 0]}
+        >
+          <boxBufferGeometry args={[0.4, 1.75, 0.4]} />
+          <meshStandardMaterial color={"darkorange"} />
+        </mesh>
+        <mesh
+          position={[1, 2.8, -0.3]}
+          rotation={[Math.PI * 17.5/180, 0, 0]}
+        >
+          <boxBufferGeometry args={[0.4, 1.75, 0.4]} />
+          <meshStandardMaterial color={"darkorange"} />
+        </mesh>
+        <mesh
+          position={[-1, 2.8, -0.3]}
+          rotation={[Math.PI * 17.5/180, 0, 0]}
+        >
+          <boxBufferGeometry args={[0.4, 1.75, 0.4]} />
+          <meshStandardMaterial color={"darkorange"} />
+        </mesh>
+        <mesh
+          position={[0, 3.6, 0]}
+        >
+          <boxBufferGeometry args={[2.4, 0.4, 0.4]} />
+          <meshStandardMaterial color={"darkorange"} />
         </mesh>
       </group>
     </>

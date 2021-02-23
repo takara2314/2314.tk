@@ -99,8 +99,57 @@ const World: React.FC<WorldProps> = (props: WorldProps) => {
           new Vector3(0, 25, 0)
         }
       />
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
+
+      <pointLight
+        color={"white"}
+        intensity={3}
+        position={[20, 40, -20]}
+        distance={40}
+      />
+      <pointLight
+        color={"white"}
+        intensity={3}
+        position={[20, 40, 20]}
+        distance={40}
+      />
+      <pointLight
+        color={"white"}
+        intensity={3}
+        position={[-20, 40, 20]}
+        distance={40}
+      />
+      <pointLight
+        color={"white"}
+        intensity={3}
+        position={[-20, 40, -20]}
+        distance={40}
+      />
+
+      <pointLight
+        color={"white"}
+        intensity={2}
+        position={[50, 5, -50]}
+        distance={30}
+      />
+      <pointLight
+        color={"white"}
+        intensity={2}
+        position={[50, 5, 50]}
+        distance={30}
+      />
+      <pointLight
+        color={"white"}
+        intensity={2}
+        position={[-50, 5, -50]}
+        distance={30}
+      />
+      <pointLight
+        color={"white"}
+        intensity={2}
+        position={[-50, 5, -50]}
+        distance={30}
+      />
+
       <LoadPlace {...props} />
       <mesh
         ref={boxRef}
