@@ -18,6 +18,9 @@ module.exports = {
       fontFamily: {
         'sans': ['Inter', 'M PLUS', 'Meiryo', 'sans-serif']
       },
+      fontSize: {
+        '2.5xl': '1.65rem'
+      },
       spacing: {
         '1/12': '8.333333%',
         '2/12': '16.666667%',
@@ -30,6 +33,8 @@ module.exports = {
         '9/12': '75%',
         '10/12': '83.333333%',
         '11/12': '91.666667%',
+        '13': '3.25rem',
+        '4.5': '1.125rem',
         '128': '32rem',
         '144': '36rem'
       }
