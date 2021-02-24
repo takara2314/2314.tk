@@ -1,5 +1,5 @@
 const loadMemo = (memoName: string): Promise<Response> => {
-  return fetch(`http://localhost:2314/api/memo/${memoName}`, {
+  return fetch(`./api/memo/${memoName}`, {
     method: 'GET',
     mode: 'cors',
     cache: 'no-cache',
