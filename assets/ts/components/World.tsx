@@ -5,7 +5,7 @@ import Works from './areas/Works';
 import Favorites from './areas/Favorites';
 import Lab from './areas/Lab';
 import WorldProps from '../models/WorldProps';
-import { Mesh, Vector3 } from 'three';
+import { Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { extend, ReactThreeFiber, useFrame, useThree } from 'react-three-fiber';
 
@@ -23,9 +23,6 @@ const World: React.FC<WorldProps> = (props: WorldProps) => {
   const controlsRef = useRef<OrbitControls>();
   const { camera, gl } = useThree();
 
-  const old_ground = useRef<Mesh>({} as THREE.Mesh);
-  const boxRef = useRef<Mesh>({} as THREE.Mesh);
-
   // カメラの初期位置
   useEffect(() => {
     camera.position.x = 0;
@@ -35,13 +32,6 @@ const World: React.FC<WorldProps> = (props: WorldProps) => {
 
   useFrame(({camera}) => {
     controlsRef.current?.update();
-
-    boxRef.current.rotation.x += 0.01;
-    boxRef.current.rotation.y += 0.01;
-    boxRef.current.rotation.z += 0.01;
-
-    old_ground.current.position.x -= 0.0075;
-    old_ground.current.position.z -= 0.0075;
 
     props.changePosX(camera.position.x);
     props.changePosY(camera.position.y);
@@ -151,20 +141,6 @@ const World: React.FC<WorldProps> = (props: WorldProps) => {
       />
 
       <LoadPlace {...props} />
-      <mesh
-        ref={boxRef}
-        position={[0, 0, 0]}
-      >
-        <boxBufferGeometry args={[2, 2, 2]} />
-        <meshStandardMaterial color="rgb(230, 30, 0)" />
-      </mesh>
-      <mesh
-        ref={old_ground}
-        position={[3, 3, 3]}
-      >
-        <boxBufferGeometry args={[2, 0.5, 2]} />
-        <meshStandardMaterial color={"rgb(0, 255, 127)"} />
-      </mesh>
     </>
   );
 }

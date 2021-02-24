@@ -1,12 +1,13 @@
-import React, { PointerEvent, useEffect, useRef, useState, useMemo } from 'react';
+import React, { PointerEvent, useEffect, useRef, useState, useMemo, Suspense } from 'react';
 import Base from './Base';
 import WorldProps from '../../models/WorldProps';
 import StrawberrysProps from '../../models/StrawberrysProps';
 import TextureSet from '../../models/TextureSet';
 import loadBlocksByJSON from '../../services/loadBlocksByJSON';
-import { TextureLoader, NearestFilter, Vector3 } from 'three';
+import { TextureLoader, Mesh, NearestFilter, Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { useFrame } from 'react-three-fiber';
+import { useGLTF } from "@react-three/drei";
 
 const About: React.FC<WorldProps> = (props: WorldProps) => {
   const [blocks, setBlocks] = useState<any[]>(Array());
@@ -22,7 +23,7 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
     angles.map((angle: string) => {
       textures[part][angle] = useMemo(() =>
         new TextureLoader().load(
-          `http://localhost:2314/public/textures/takara2314/${part}/${angle}.png`,
+          `../public/textures/takara2314/${part}/${angle}.png`,
           (tex) => {
             tex.magFilter = NearestFilter;
           }
@@ -32,7 +33,7 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
   });
 
   useEffect(() => {
-    fetch('http://localhost:2314/public/areas/about.json')
+    fetch('../public/areas/about.json')
     .then(res => res.json())
     .then(
       (result) => {
@@ -277,9 +278,38 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
           <meshStandardMaterial color={"darkorange"} />
         </mesh>
       </group>
+
+      <Dream {...props} />
     </>
   );
 }
+
+const Dream: React.FC<WorldProps> = (props: WorldProps) => {
+  const { nodes, materials } = useGLTF('../public/models/dream.glb');
+
+  return (
+    <Suspense fallback={null}>
+      <mesh
+        onPointerDown={(e: PointerEvent<Element>) => {
+          props.changeMemoName('dream');
+          e.stopPropagation();
+        }}
+        position={[1.5, 26.9, 6.5]}
+        rotation={[Math.PI * 85/180, 0, Math.PI * -45/180]}
+        onPointerOver={() => {
+          props.changeIsHover(true);
+          props.changeHoverPosX(1.5);
+          props.changeHoverPosY(26.9);
+          props.changeHoverPosZ(6.5);
+        }}
+        scale={new Vector3(5, 5, 5)}
+        geometry={(nodes.text as Mesh).geometry}
+        material={materials.text}
+      />
+    </Suspense>
+  );
+}
+useGLTF.preload('../public/models/dream.glb');
 
 const Strawberrys: React.FC<WorldProps & StrawberrysProps> = (props: WorldProps & StrawberrysProps) => {
   const plots: any[] = Array(props.amount);

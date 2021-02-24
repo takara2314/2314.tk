@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/takara2314/2314.tk#readme",
   "dependencies": {
+    "@react-three/drei": "^3.8.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-three-fiber": "^5.3.18",
