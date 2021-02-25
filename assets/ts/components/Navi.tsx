@@ -78,9 +78,9 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
       ]
     };
 
-    if (props.clientHeight >= 770 || props.clientHeight === 0) {
+    if (props.innerHeight >= 770 || props.innerHeight === 0) {
       className = classNames[part][0];
-    } else if (props.clientHeight >= 650) {
+    } else if (props.innerHeight >= 650) {
       className = classNames[part][1];
     } else {
       className = classNames[part][2];

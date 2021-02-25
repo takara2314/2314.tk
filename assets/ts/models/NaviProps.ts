@@ -4,7 +4,7 @@ type NaviProps = {
   changePlace:            (name: string) => void;
   isMenuShowMobile:       boolean;
   changeIsMenuShowMobile: (isShow: boolean) => void;
-  clientHeight:           number;
+  innerHeight:            number;
 }
 
 export default NaviProps;

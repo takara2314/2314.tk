@@ -53,7 +53,7 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
 
   const setViewSize = () => {
     setViewWidth(monitorObject.current?.clientWidth!);
-    setViewHeight(monitorObject.current?.clientHeight!);
+    setViewHeight(window.innerHeight);
   }
 
   return (

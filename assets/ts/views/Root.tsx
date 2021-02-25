@@ -19,16 +19,16 @@ const Root: React.FC = () => {
 
   const [isMenuShowMobile, changeIsMenuShowMobile] = useState<boolean>(false);
 
-  const [clientHeight, setClientHeight] = useState<number>(0);
+  const [innerHeight, setInnerHeight] = useState<number>(0);
 
   useEffect(() => {
     setTitle(place);
 
     window.addEventListener('load', () => {
-      setClientHeight(document.body.clientHeight);
+      setInnerHeight(window.innerHeight);
     });
     window.addEventListener('resize', () => {
-      setClientHeight(document.body.clientHeight);
+      setInnerHeight(window.innerHeight);
     });
   }, []);
 
@@ -67,7 +67,7 @@ const Root: React.FC = () => {
       + 'flex flex-row justify-center items-center '
       + 'absolute top-0 z-50';
 
-    if (clientHeight >= 500 || clientHeight === 0) {
+    if (innerHeight >= 500 || innerHeight === 0) {
       className = `${baseClass} invisible`;
     } else {
       className = `${baseClass} visible`;
@@ -85,7 +85,7 @@ const Root: React.FC = () => {
           changePlace={changePlace}
           isMenuShowMobile={isMenuShowMobile}
           changeIsMenuShowMobile={changeIsMenuShowMobile}
-          clientHeight={clientHeight}
+          innerHeight={innerHeight}
         />
         <Monitor
           place={place}

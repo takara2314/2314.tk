@@ -89,6 +89,25 @@ const Works: React.FC<WorldProps> = (props: WorldProps) => {
           <meshStandardMaterial color={"green"} />
         </mesh>
       </group>
+
+      <group
+        onPointerDown={(e: PointerEvent<Element>) => {
+          props.changeMemoName('html-geter');
+          e.stopPropagation();
+        }}
+        position={[0, 28, 0]}
+        onPointerOver={() => {
+          props.changeIsHover(true);
+          props.changeHoverPosX(0);
+          props.changeHoverPosY(28);
+          props.changeHoverPosZ(0);
+        }}
+      >
+        <mesh>
+          <boxBufferGeometry args={[3.5, 3.5, 3.5]} />
+          <meshStandardMaterial color={"green"} />
+        </mesh>
+      </group>
     </>
   );
 }
