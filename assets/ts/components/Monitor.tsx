@@ -57,8 +57,8 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
   }
 
   return (
-    <main className="flex flex-col w-full sm:w-full md:w-full lg:w-3/4 xl:w-3/4 h-screen bg-black relative" ref={monitorObject}>
-      <section className="absolute top-0">
+    <main className="flex flex-col w-full sm:w-full md:w-full lg:w-3/4 xl:w-3/4 h-full bg-black absolute right-0" ref={monitorObject}>
+      <section className="absolute top-0 w-full h-full overflow-hidden">
         <Canvas
           style={{width: viewWidth, height: viewHeight}}
           camera={{ position: [0, 30, 0] }}

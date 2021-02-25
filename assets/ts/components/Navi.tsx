@@ -16,9 +16,7 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
 
   const menuClass = (): string => {
     let className: string = '';
-    const baseClass: string =
-      'flex flex-col w-3/4 sm:w-3/4 md:w-3/4 lg:w-1/4 xl:w-1/4 bg-white items-center text-2xl text-center z-10 ' +
-      'absolute sm:absolute md:absolute lg:relative xl:relative';
+    const baseClass: string = 'flex flex-col w-3/4 sm:w-3/4 md:w-3/4 lg:w-1/4 xl:w-1/4 h-full bg-white items-center text-2xl text-center z-10 absolute';
 
     if (props.isMenuShowMobile) {
       className = `${baseClass} left-0`;

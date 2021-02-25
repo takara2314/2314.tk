@@ -62,7 +62,7 @@ const Root: React.FC = () => {
     let className: string = '';
 
     const baseClass: string =
-      'w-screen h-screen '
+      'w-full h-full '
       + 'bg-yellow-500 text-white '
       + 'flex flex-row justify-center items-center '
       + 'absolute top-0 z-50';
