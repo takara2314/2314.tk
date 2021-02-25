@@ -20,7 +20,7 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
   const [hoverPosY, setHoverPosY] = useState<number>(0);
   const [hoverPosZ, setHoverPosZ] = useState<number>(0);
 
-  const monitorObject: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const monitorObject: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
 
   useEffect(() => {
     loadMemo(memoName)
@@ -57,7 +57,7 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
   }
 
   return (
-    <div className="flex flex-col w-full sm:w-full md:w-full lg:w-3/4 xl:w-3/4 h-screen bg-black relative" ref={monitorObject}>
+    <main className="flex flex-col w-full sm:w-full md:w-full lg:w-3/4 xl:w-3/4 h-screen bg-black relative" ref={monitorObject}>
       <section className="absolute top-0">
         <Canvas
           style={{width: viewWidth, height: viewHeight}}
@@ -115,7 +115,7 @@ const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
         className="bg-white text-lg w-11/12 h-64 sm:h-64 md:h-64 lg:h-60 xl:h-60 m-auto p-6 border-3 rounded-tl-2xl rounded-br-2xl shadow-2xl absolute bottom-5 right-0 left-0"
         dangerouslySetInnerHTML={{__html: memo}}
       />
-    </div>
+    </main>
   );
 }
 

@@ -78,20 +78,18 @@ const Root: React.FC = () => {
 
   return (
     <>
-      <main className="flex w-screen h-screen overflow-hidden">
-        <Navi
-          menu={menu}
-          place={place}
-          changePlace={changePlace}
-          isMenuShowMobile={isMenuShowMobile}
-          changeIsMenuShowMobile={changeIsMenuShowMobile}
-          innerHeight={innerHeight}
-        />
-        <Monitor
-          place={place}
-          changePlace={changePlace}
-        />
-      </main>
+      <Navi
+        menu={menu}
+        place={place}
+        changePlace={changePlace}
+        isMenuShowMobile={isMenuShowMobile}
+        changeIsMenuShowMobile={changeIsMenuShowMobile}
+        innerHeight={innerHeight}
+      />
+      <Monitor
+        place={place}
+        changePlace={changePlace}
+      />
 
       <div
         className={hideMenuClass()}
