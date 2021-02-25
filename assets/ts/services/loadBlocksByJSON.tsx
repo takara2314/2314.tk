@@ -44,16 +44,47 @@ const loadBlocksByJSON = (props: WorldProps, json: any, intercepts: number[]): a
 }
 
 const chooseBlock = (props: WorldProps, floorBlock: string): string => {
-  if (props.place == 'lab') {
-    if (floorBlock == 'grass') {
-      return Math.random() >= 0.5 ? "rgb(255, 215, 0)" : "rgb(204, 173, 0)";
-    }
-  }
+  const grassColor: {[place: string]: string[]} = {
+    // 緑
+    'about': [
+      'rgb(0, 255, 127)',
+      'rgb(0, 191, 95)'
+    ],
+    // オレンジ
+    'skills': [
+      'rgb(255, 165, 0)',
+      'rgb(204, 133, 0)'
+    ],
+    // 青
+    'works': [
+      'rgb(0, 136, 204)',
+      'rgb(0, 116, 173)'
+    ],
+    // 黄
+    'favorites': [
+      'rgb(255, 215, 0)',
+      'rgb(204, 173, 0)'
+    ],
+    // 白
+    'lab': [
+      'rgb(230, 230, 230)',
+      'rgb(200, 200, 200)'
+    ],
+    'contact': [
+      'rgb(0, 255, 127)',
+      'rgb(0, 191, 95)'
+    ]
+  };
+
+  const stoneColor: string[] = [
+    'rgb(150, 150, 150)',
+    'rgb(140, 140, 140)'
+  ];
 
   if (floorBlock == 'grass') {
-    return Math.random() >= 0.5 ? "rgb(0, 255, 127)" : "rgb(0, 191, 95)";
+    return Math.random() >= 0.5 ? grassColor[props.place][0] : grassColor[props.place][1];
   }
-  return Math.random() >= 0.5 ? "rgb(150, 150, 150)" : "rgb(140, 140, 140))";
+  return Math.random() >= 0.5 ? stoneColor[0] : stoneColor[1];
 }
 
 export default loadBlocksByJSON;
