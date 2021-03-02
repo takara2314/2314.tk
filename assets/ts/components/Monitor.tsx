@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react';
 import World from './World';
 import MonitorProps from '../models/MonitorProps';
 import loadMemo from '../services/loadMemo';
@@ -44,11 +44,15 @@ const Monitor = (props: MonitorProps) => {
       setViewSize();
     });
 
-    window.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key == 'F2') {
-        setIsDebugMode(!isDebugMode);
-      }
-    });
+    window.addEventListener('keydown', debugMonitorSwitch);
+
+    return () => window.removeEventListener('keydown', debugMonitorSwitch);
+  }, [isDebugMode]);
+
+  const debugMonitorSwitch = useCallback((e: KeyboardEvent) => {
+    if (e.key == 'F2') {
+      setIsDebugMode(!isDebugMode);
+    }
   }, [isDebugMode]);
 
   const setViewSize = () => {
