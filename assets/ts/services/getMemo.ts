@@ -1,4 +1,4 @@
-const loadMemo = (memoName: string): Promise<Response> => {
+const getMemo = (memoName: string): Promise<Response> => {
   return fetch(`./api/memo/${memoName}`, {
     method: 'GET',
     mode: 'cors',
@@ -9,4 +9,4 @@ const loadMemo = (memoName: string): Promise<Response> => {
   });
 }
 
-export default loadMemo;
+export default getMemo;

@@ -26,6 +26,7 @@ func main() {
 	router.GET("/contact", server.ContactGET)
 
 	api := router.Group("/api")
+	api.GET("/client", serverApi.ClientGET)
 	api.GET("/memo", serverApi.MemoGET)
 	api.GET("/memo/:name", serverApi.MemoGET)
 

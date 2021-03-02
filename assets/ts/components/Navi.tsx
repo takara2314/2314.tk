@@ -167,7 +167,9 @@ const Navi = (props: NaviProps) => {
           </section>
         </div>
         <div>
-          <small onClick={() => console.log('(debug) now place: ' + props.place)}>
+          <small onClick={() => {
+            console.log('(debug) now place: ' + props.place)
+          }}>
             <span className="text-lg text-gray-700">
               &copy; 2021 Takara Hamaguchi
             </span>

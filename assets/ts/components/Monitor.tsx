@@ -1,7 +1,8 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import World from './World';
 import MonitorProps from '../models/MonitorProps';
-import loadMemo from '../services/loadMemo';
+import getClientData from '../services/getClientData';
+import getMemo from '../services/getMemo';
 import { Canvas } from 'react-three-fiber';
 
 const Monitor = (props: MonitorProps) => {
@@ -20,10 +21,26 @@ const Monitor = (props: MonitorProps) => {
   const [hoverPosY, setHoverPosY] = useState<number>(0);
   const [hoverPosZ, setHoverPosZ] = useState<number>(0);
 
+  const [clientBrowser, setClientBrowser] = useState<string>('Loading...');
+  const [clientDevice, setClientDevice] = useState<string>('Loading...');
+
   const monitorObject: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    loadMemo(memoName)
+    getClientData()
+    .then(res => res.json())
+    .then(
+      (result: any) => {
+        setClientBrowser(result.browser);
+        setClientDevice(result.device);
+      },
+      (error: Error) => {
+        setClientBrowser('Unknown');
+        setClientDevice('Unknown');
+      }
+    );
+
+    getMemo(memoName)
     .then(res => res.text())
     .then(
       (result: string) => {
@@ -33,7 +50,7 @@ const Monitor = (props: MonitorProps) => {
         setMemo(error.toString());
       }
     );
-  }, [memoName]);
+  }, [clientBrowser, clientDevice, memoName]);
 
   useEffect(() => {
     window.addEventListener('load', () => {
@@ -94,25 +111,32 @@ const Monitor = (props: MonitorProps) => {
       </section>
 
       <section className={
-        isDebugMode ? "text-white text-xl absolute top-0 select-none visible" : "text-white text-xl absolute top-0 select-none invisible"
+        isDebugMode
+        ? "text-white text-xl absolute top-24 sm:top-24 md:top-24 lg:top-0 xl:top-0 select-none visible"
+        : "text-white text-xl absolute top-24 sm:top-24 md:top-24 lg:top-0 xl:top-0 select-none invisible"
       }>
-        <p>
-          <span className="bg-black-opacity-25">2314.tk 1.0.0 (Debug mode) - Work In Progress</span>
-        </p>
-        <p>
-          <span className="bg-black-opacity-25">place: {props.place}</span>
-        </p>
-        <p>
-          <span className="bg-black-opacity-25">memo: {memoName}</span>
-        </p>
-        <p>
-          <span className="bg-black-opacity-25">XYZ: {posX} / {posY} / {posZ}</span>
-        </p>
-        <p>
-          <span className="bg-black-opacity-25">
-            {isHover ? `HoverAt: ${hoverPosX} / ${hoverPosY} / ${hoverPosZ}` : 'HoverAt:'}
-          </span>
-        </p>
+        <p><span className="bg-black-opacity-25">
+          2314.tk 1.0.0 (Debug mode)
+        </span></p>
+        <p><span className="bg-black-opacity-25">
+          Browser: {clientBrowser}
+        </span></p>
+        <p className="mb-3"><span className="bg-black-opacity-25">
+          Device: {clientDevice}
+        </span></p>
+
+        <p><span className="bg-black-opacity-25">
+          Place: {props.place}
+        </span></p>
+        <p><span className="bg-black-opacity-25">
+          Memo: {memoName}
+        </span></p>
+        <p><span className="bg-black-opacity-25">
+          XYZ: {posX} / {posY} / {posZ}
+        </span></p>
+        <p><span className="bg-black-opacity-25">
+          {isHover ? `HoverAt: ${hoverPosX} / ${hoverPosY} / ${hoverPosZ}` : 'HoverAt:'}
+        </span></p>
       </section>
 
       <section
