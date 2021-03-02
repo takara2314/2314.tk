@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Base from './Base';
 import WorldProps from '../../models/WorldProps';
 
-const Favorites: React.FC<WorldProps> = (props: WorldProps) => {
+const Favorites = (props: WorldProps) => {
   useEffect(() => {
     props.changeMemoName('favorites');
   }, []);

@@ -4,7 +4,7 @@ import MonitorProps from '../models/MonitorProps';
 import loadMemo from '../services/loadMemo';
 import { Canvas } from 'react-three-fiber';
 
-const Monitor: React.FC<MonitorProps> = (props: MonitorProps) => {
+const Monitor = (props: MonitorProps) => {
   const [viewWidth, setViewWidth] = useState<number>(0);
   const [viewHeight, setViewHeight] = useState<number>(0);
   const [isDebugMode, setIsDebugMode] = useState<boolean>(false);

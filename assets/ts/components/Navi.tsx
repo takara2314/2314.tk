@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import NaviProps from '../models/NaviProps';
 import SocialLinksProps from '../models/SocialLinksProps';
 
-const Navi: React.FC<NaviProps> = (props: NaviProps) => {
+const Navi = (props: NaviProps) => {
   const [takaranImg] = useState<string>('../public/takaran.png');
 
   const [links] = useState<string[][]>([
@@ -178,7 +178,7 @@ const Navi: React.FC<NaviProps> = (props: NaviProps) => {
   );
 }
 
-const SocialLinks: React.FC<SocialLinksProps> = (props: SocialLinksProps) => {
+const SocialLinks = (props: SocialLinksProps) => {
   const elements: any = Array();
 
   props.links.map((item: string[], index: number) => {

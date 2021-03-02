@@ -4,7 +4,7 @@ import WorldProps from '../../models/WorldProps';
 import { Mesh, Vector3 } from 'three';
 import { useGLTF } from "@react-three/drei";
 
-const Works: React.FC<WorldProps> = (props: WorldProps) => {
+const Works = (props: WorldProps) => {
   useEffect(() => {
     props.changeMemoName('works');
   }, []);
@@ -96,7 +96,7 @@ const Works: React.FC<WorldProps> = (props: WorldProps) => {
   );
 }
 
-const WorksPole: React.FC<WorldProps> = (props: WorldProps) => {
+const WorksPole = (props: WorldProps) => {
   const { nodes, materials } = useGLTF('../public/models/works_pole.glb');
 
   const [debugX, setX] = useState<number>(0);

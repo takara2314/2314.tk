@@ -19,7 +19,7 @@ declare global {
   }
 }
 
-const World: React.FC<WorldProps> = (props: WorldProps) => {
+const World = (props: WorldProps) => {
   const controlsRef = useRef<OrbitControls>();
   const { camera, gl } = useThree();
 
@@ -145,7 +145,7 @@ const World: React.FC<WorldProps> = (props: WorldProps) => {
   );
 }
 
-const LoadPlace: React.FC<WorldProps> = (props: WorldProps) => {
+const LoadPlace = (props: WorldProps) => {
   switch (props.place) {
     case 'about':
       return <About {...props} />

@@ -4,7 +4,7 @@ import loadBlocksByJSON from '../../services/loadBlocksByJSON';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { useFrame } from 'react-three-fiber';
 
-const Base: React.FC<WorldProps> = (props: WorldProps) => {
+const Base = (props: WorldProps) => {
   const [blocks, setBlocks] = useState<any[]>(Array());
   const [loadState, setLoadState] = useState<string>('Loading');
 

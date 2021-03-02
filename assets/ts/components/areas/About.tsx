@@ -9,7 +9,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { useFrame } from 'react-three-fiber';
 import { useGLTF } from "@react-three/drei";
 
-const About: React.FC<WorldProps> = (props: WorldProps) => {
+const About = (props: WorldProps) => {
   const [blocks, setBlocks] = useState<any[]>(Array());
   const [loadState, setLoadState] = useState<string>('Loading');
 
@@ -284,7 +284,7 @@ const About: React.FC<WorldProps> = (props: WorldProps) => {
   );
 }
 
-const Dream: React.FC<WorldProps> = (props: WorldProps) => {
+const Dream = (props: WorldProps) => {
   const { nodes, materials } = useGLTF('../public/models/dream.glb');
 
   return (
@@ -311,7 +311,7 @@ const Dream: React.FC<WorldProps> = (props: WorldProps) => {
 }
 useGLTF.preload('../public/models/dream.glb');
 
-const Strawberrys: React.FC<WorldProps & StrawberrysProps> = (props: WorldProps & StrawberrysProps) => {
+const Strawberrys = (props: WorldProps & StrawberrysProps) => {
   const plots: any[] = Array(props.amount);
 
   const [basePosX, basePosY, basePosZ] = props.position;
