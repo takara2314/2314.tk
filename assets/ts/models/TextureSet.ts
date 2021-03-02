@@ -1,6 +1,6 @@
 import Textures from './Textures';
 
-type TextureSet = {
+interface TextureSet {
   [key: string]: Textures;
 }
 

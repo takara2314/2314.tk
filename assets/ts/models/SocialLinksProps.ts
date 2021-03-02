@@ -1,4 +1,4 @@
-type SocialLinksProps = {
+interface SocialLinksProps {
   links:               string[][];
   changeIsDiscordShow: (isShow: boolean) => void;
 }

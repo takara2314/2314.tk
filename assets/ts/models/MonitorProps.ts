@@ -1,4 +1,4 @@
-type MonitorProps = {
+interface MonitorProps {
   place:            string;
   changePlace:      (name: string) => void;
 }

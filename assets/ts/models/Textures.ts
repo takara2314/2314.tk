@@ -1,6 +1,6 @@
 import { Texture } from 'three';
 
-type Textures = {
+interface Textures {
   [key: string]: Texture;
 }
 

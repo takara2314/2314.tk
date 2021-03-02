@@ -1,4 +1,4 @@
-type StrawberrysProps = {
+interface StrawberrysProps {
   position: number[];
   ratio:    number;
   radius:   number;

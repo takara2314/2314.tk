@@ -1,4 +1,4 @@
-type WorldProps = {
+interface WorldProps {
   place:       string;
   changePlace: (name: string) => void;
 
