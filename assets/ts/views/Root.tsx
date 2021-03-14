@@ -27,6 +27,10 @@ const Root = () => {
 
   const [innerHeight, setInnerHeight] = useState<number>(0);
 
+  const [secretTimes, setSecretTimes] = useState<number>(0);
+
+  const [isDebugMode, setIsDebugMode] = useState<boolean>(false);
+
   useEffect(() => {
     setTitle(place);
 
@@ -110,10 +114,16 @@ const Root = () => {
         isMenuShowMobile={isMenuShowMobile}
         changeIsMenuShowMobile={changeIsMenuShowMobile}
         innerHeight={innerHeight}
+        secretTimes={secretTimes}
+        setSecretTimes={setSecretTimes}
       />
       <Monitor
         place={place}
         changePlace={changePlace}
+        secretTimes={secretTimes}
+        setSecretTimes={setSecretTimes}
+        isDebugMode={isDebugMode}
+        setIsDebugMode={setIsDebugMode}
       />
 
       <div

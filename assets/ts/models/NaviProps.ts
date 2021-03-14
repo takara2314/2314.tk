@@ -7,6 +7,8 @@ interface NaviProps {
   isMenuShowMobile:       boolean;
   changeIsMenuShowMobile: (isShow: boolean) => void;
   innerHeight:            number;
+  secretTimes:            number;
+  setSecretTimes:         (secretTimes: number) => void;
 }
 
 export default NaviProps;

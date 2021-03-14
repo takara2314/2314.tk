@@ -8,7 +8,6 @@ import { Canvas } from 'react-three-fiber';
 const Monitor = (props: MonitorProps) => {
   const [viewWidth, setViewWidth] = useState<number>(0);
   const [viewHeight, setViewHeight] = useState<number>(0);
-  const [isDebugMode, setIsDebugMode] = useState<boolean>(false);
 
   const [memo, setMemo] = useState<string>('Loading...');
   const [memoName, setMemoName] = useState<string>('');
@@ -23,6 +22,8 @@ const Monitor = (props: MonitorProps) => {
 
   const [clientBrowser, setClientBrowser] = useState<string>('Loading...');
   const [clientDevice, setClientDevice] = useState<string>('Loading...');
+
+  const [isF2Debug, setIsF2Debug] = useState<boolean>(false);
 
   const monitorObject: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
 
@@ -64,13 +65,22 @@ const Monitor = (props: MonitorProps) => {
     window.addEventListener('keydown', debugMonitorSwitch);
 
     return () => window.removeEventListener('keydown', debugMonitorSwitch);
-  }, [isDebugMode]);
+  }, [props.isDebugMode]);
+
+  useEffect(() => {
+    if (props.secretTimes > 0 && props.secretTimes % 5 === 0) {
+      props.setIsDebugMode(true);
+    } else if (!isF2Debug) {
+      props.setIsDebugMode(false);
+    }
+  }, [props.secretTimes]);
 
   const debugMonitorSwitch = useCallback((e: KeyboardEvent) => {
     if (e.key == 'F2') {
-      setIsDebugMode(!isDebugMode);
+      setIsF2Debug(!isF2Debug);
+      props.setIsDebugMode(!props.isDebugMode);
     }
-  }, [isDebugMode]);
+  }, [isF2Debug, props.isDebugMode]);
 
   const setViewSize = () => {
     setViewWidth(monitorObject.current?.clientWidth!);
@@ -111,7 +121,7 @@ const Monitor = (props: MonitorProps) => {
       </section>
 
       <section className={
-        isDebugMode
+        props.isDebugMode
         ? "text-white text-xl absolute top-24 sm:top-24 md:top-24 lg:top-0 xl:top-0 select-none visible"
         : "text-white text-xl absolute top-24 sm:top-24 md:top-24 lg:top-0 xl:top-0 select-none invisible"
       }>
@@ -136,6 +146,9 @@ const Monitor = (props: MonitorProps) => {
         </span></p>
         <p><span className="bg-black-opacity-25">
           {isHover ? `HoverAt: ${hoverPosX} / ${hoverPosY} / ${hoverPosZ}` : 'HoverAt:'}
+        </span></p>
+        <p><span className="bg-black-opacity-25">
+          SecretTimes: {props.secretTimes}
         </span></p>
       </section>
 

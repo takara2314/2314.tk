@@ -180,7 +180,7 @@ const Navi = (props: NaviProps) => {
         </div>
         <div>
           <small onClick={() => {
-            console.log('(debug) now place: ' + props.place)
+            props.setSecretTimes(props.secretTimes + 1);
           }}>
             <span className="text-lg text-gray-700">
               &copy; 2021 Takara Hamaguchi
