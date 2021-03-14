@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors');
+
 module.exports = {
   purge: {
     enabled: false,
@@ -11,6 +13,28 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'bluegray': colors.blueGray,
+        'coolgray': colors.coolGray,
+        'gray': colors.gray,
+        'truegray': colors.trueGray,
+        'warmgray': colors.warmGray,
+        'red': colors.red,
+        'orange': colors.orange,
+        'amber': colors.amber,
+        'yellow': colors.yellow,
+        'lime': colors.lime,
+        'green': colors.green,
+        'emerald': colors.emerald,
+        'teal': colors.teal,
+        'cyan': colors.cyan,
+        'lightblue': colors.lightBlue,
+        'blue': colors.blue,
+        'indigo': colors.indigo,
+        'violet': colors.violet,
+        'purple': colors.purple,
+        'fuchsia': colors.fuchsia,
+        'pink': colors.pink,
+        'rose': colors.rose,
         'black-opacity-75': 'rgba(0, 0, 0, 0.75)',
         'black-opacity-50': 'rgba(0, 0, 0, 0.5)',
         'black-opacity-25': 'rgba(0, 0, 0, 0.25)'
@@ -22,6 +46,10 @@ module.exports = {
         '2.5xl': '1.65rem'
       },
       spacing: {
+        '1/5': '20%',
+        '2/5': '40%',
+        '3/5': '60%',
+        '4/5': '80%',
         '1/12': '8.333333%',
         '2/12': '16.666667%',
         '3/12': '25%',
