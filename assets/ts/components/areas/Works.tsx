@@ -10,34 +10,18 @@ const Works = (props: WorldProps) => {
 
   const memos: {[azimuth: string]: string[]} = {
     north: [
-      'html-geter', 'html-geter', 'html-geter', 'html-geter'
+      'foxseed', 'html-geter', 'school-bytrain', 'kadai-alarm'
     ],
     east: [
-      'nenga2021', 'kadaistore-api', 'html-geter', '2314tk'
+      'happynewyear2020', 'ut2', 'awareshe', 'nlns'
     ],
     south:[
       'kadaistore', 'kadaistore-api', '2314tk', 'nenga2021'
     ],
     west: [
-      'nenga2021', 'kadaistore-api', 'html-geter', '2314tk'
+      'codemple', 'hackday2021', 'not-secretmemo', 'mcstarpark'
     ]
   };
-
-  // ↓ 予定
-  // const memos: {[azimuth: string]: string[]} = {
-  //   north: [
-  //     'foxseed', 'html-geter', 'school-bytrain', 'kadai-alarm'
-  //   ],
-  //   east: [
-  //     'happynewyear2020', 'ut2', 'mittc-hackathon2021', 'nlns'
-  //   ],
-  //   south:[
-  //     'kadaistore', 'kadaistore-api', '2314tk', 'nenga2021'
-  //   ],
-  //   west: [
-  //     'codemple', 'hackday2021', 'not-secretmemo', 'mcstarpark'
-  //   ]
-  // };
 
   useEffect(() => {
     props.changeMemoName('works');
