@@ -23,7 +23,7 @@ func main() {
 	router.GET("/works", server.WorksGET)
 	router.GET("/favorites", server.FavoritesGET)
 	router.GET("/lab", server.LabGET)
-	router.GET("/contact", server.ContactGET)
+	router.GET("/contact", server.AboutGET)
 
 	api := router.Group("/api")
 	api.GET("/client", serverApi.ClientGET)

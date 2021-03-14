@@ -16,7 +16,7 @@ const Navi = (props: NaviProps) => {
 
   const menuClass = (): string => {
     let className: string = '';
-    const baseClass: string = 'flex flex-col w-3/4 sm:w-3/4 md:w-3/4 lg:w-1/4 xl:w-1/4 h-full bg-white items-center text-2xl text-center z-10 absolute';
+    const baseClass: string = 'flex flex-col w-3/4 sm:w-3/4 md:w-3/4 lg:w-1/4 xl:w-1/4 h-full bg-white items-center text-2xl text-center z-40 absolute';
 
     if (props.isMenuShowMobile) {
       className = `${baseClass} left-0`;
@@ -88,9 +88,16 @@ const Navi = (props: NaviProps) => {
   }
 
   const menuClick = (e: React.MouseEvent, item: string[]) => {
-    e.preventDefault()
+    e.preventDefault();
     history.pushState(null, item[0], `/${item[1]}`);
     props.changePlace(item[1]);
+  }
+
+  const contactClick = (e: React.MouseEvent, item: string[]) => {
+    e.preventDefault();
+    console.log('called!');
+    history.pushState(null, item[0], `/${item[1]}`);
+    props.setIsContact(true);
   }
 
   const menuFocus = (): string => {
@@ -146,9 +153,14 @@ const Navi = (props: NaviProps) => {
         <ul className="relative">
           {props.menu.map((item: string[], index: number) =>
             <li className="pt-2 pb-2" key={index}>
-              <a href={item[1]} className="focus:outline-none" onClick={(e: React.MouseEvent) => menuClick(e, item)}>
-                <span className={props.place === item[1] ? 'text-blue-600' : ''}>{item[0]}</span>
-              </a>
+              {item[1] !== 'contact'
+                ? <a href={item[1]} className="focus:outline-none" onClick={(e: React.MouseEvent) => menuClick(e, item)}>
+                    <span className={props.place === item[1] ? 'text-blue-600' : ''}>{item[0]}</span>
+                  </a>
+                : <a href={item[1]} className="focus:outline-none" onClick={(e: React.MouseEvent) => contactClick(e, item)}>
+                    <span className={props.place === item[1] ? 'text-blue-600' : ''}>{item[0]}</span>
+                  </a>
+              }
             </li>
           )}
         </ul>

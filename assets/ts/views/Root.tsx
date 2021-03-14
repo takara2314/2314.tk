@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navi from '../components/Navi';
 import Monitor from '../components/Monitor';
+import Contact from '../components/Contact';
 
 const Root = () => {
   const [menu] = useState<string[][]>([
@@ -13,9 +14,14 @@ const Root = () => {
   ]);
 
   const [place, setPlace] = useState<string>(location.pathname.slice(1) !== ''
-    ? location.pathname.slice(1)
+    ? (location.pathname.slice(1) !== 'contact'
+        ? location.pathname.slice(1)
+        : menu[0][1]
+      )
     : menu[0][1]
   );
+
+  const [isContact, setIsContact] = useState<boolean>(false);
 
   const [isMenuShowMobile, changeIsMenuShowMobile] = useState<boolean>(false);
 
@@ -23,6 +29,10 @@ const Root = () => {
 
   useEffect(() => {
     setTitle(place);
+
+    if (location.pathname.slice(1) === 'contact') {
+      setIsContact(true);
+    }
 
     window.addEventListener('load', () => {
       setInnerHeight(window.innerHeight);
@@ -47,10 +57,23 @@ const Root = () => {
 
   const hideMenuClass = () => {
     let className: string = '';
-    const baseClass: string = 'w-full h-full bg-black opacity-50 absolute top-0';
+    const baseClass: string = 'w-full h-full bg-black opacity-50 absolute top-0 z-30';
 
     if (isMenuShowMobile) {
       className = `${baseClass} visible sm:visible md:visible lg:invisible xl:invisible`;
+    } else {
+      className = `${baseClass} invisible`;
+    }
+
+    return className;
+  }
+
+  const hideContactClass = () => {
+    let className: string = '';
+    const baseClass: string = 'w-full h-full bg-black opacity-50 absolute top-0 z-40';
+
+    if (isContact) {
+      className = `${baseClass} visible`;
     } else {
       className = `${baseClass} invisible`;
     }
@@ -73,7 +96,7 @@ const Root = () => {
       className = `${baseClass} visible`;
     }
 
-    return className
+    return className;
   }
 
   return (
@@ -82,6 +105,8 @@ const Root = () => {
         menu={menu}
         place={place}
         changePlace={changePlace}
+        isContact={isContact}
+        setIsContact={setIsContact}
         isMenuShowMobile={isMenuShowMobile}
         changeIsMenuShowMobile={changeIsMenuShowMobile}
         innerHeight={innerHeight}
@@ -92,8 +117,18 @@ const Root = () => {
       />
 
       <div
+        className={hideContactClass()}
+        onClick={() => {setIsContact(false)}}
+      />
+
+      {isContact
+        ? <Contact />
+        : <></>
+      }
+
+      <div
         className={hideMenuClass()}
-        onClick={() => changeIsMenuShowMobile(false)}
+        onClick={() => {changeIsMenuShowMobile(false)}}
       />
 
       <div
