@@ -17,6 +17,6 @@ func AboutGET(c *gin.Context) {
 		"image":           "https://2314.tk/public/takaran.png",
 		"twitterCard":     "summary",
 		"twitterUsername": "takara2314",
-		"description":     "気まぐれで生きている高専2年生です！幼少期にPCに興味を持ち、情報系の学校に進学しました。",
+		"description":     "気まぐれで生きている高専新3年生です！幼少期にPCに興味を持ち、情報系の学校に進学しました。",
 	})
 }

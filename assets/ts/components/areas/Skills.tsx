@@ -5,18 +5,18 @@ import SkillSignProps from '../../models/SkillSignProps';
 
 const Skills = (props: WorldProps) => {
   const skillList: string[] = [
-    'golang',
-    'python',
-    'javascript',
-    'csharp',
-    'dart',
-    'swift',
     'html',
-    'css',
-    'sql',
-    'os',
+    'swift',
+    'dart',
+    'csharp',
+    'javascript',
+    'python',
+    'golang',
+    'tools',
     'infrastructures',
-    'tools'
+    'os',
+    'sql',
+    'css'
   ]
 
   useEffect(() => {
