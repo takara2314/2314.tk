@@ -33,6 +33,8 @@ const About = (props: WorldProps) => {
   });
 
   useEffect(() => {
+    props.changeMemoName('intro');
+
     fetch('../public/areas/about.json')
     .then(res => res.json())
     .then(
