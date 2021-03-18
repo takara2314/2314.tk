@@ -16,50 +16,26 @@ func mailSend(data ContactInfo, IP string, userAgent string, device string, brow
 	)
 
 	// メール本文
-	var mailBody string
-	if data.IsWantedReply {
-		var mailBodyFormat string = ("" +
-			"<html><body>" +
-			"%s<br>" +
-			"<br>" +
-			"<span style=\"color: rgb(185, 28, 28); font-weight: bold\">これは返信を求めています。</span><br>" +
-			"メールアドレス: <b>%s</b><br>" +
-			"IPアドレス: <b>%s</b><br>" +
-			"ユーザーエージェント: <b>%s</b><br>" +
-			"デバイス: <b>%s</b><br>" +
-			"ブラウザ: <b>%s</b><br>" +
-			"</body></html>")
+	var mailBodyFormat string = ("" +
+		"<html><body>" +
+		"%s<br>" +
+		"<br>" +
+		"メールアドレス: <span style=\"color: rgb(4, 120, 87); font-weight: bold\">%s</span><br>" +
+		"IPアドレス: <span style=\"font-weight: bold\">%s</span><br>" +
+		"ユーザーエージェント: <span style=\"font-weight: bold\">%s</span><br>" +
+		"デバイス: <span style=\"font-weight: bold\">%s</span><br>" +
+		"ブラウザ: <span style=\"font-weight: bold\">%s</span><br>" +
+		"</body></html>")
 
-		mailBody = fmt.Sprintf(
-			mailBodyFormat,
-			data.Content,
-			data.Email,
-			IP,
-			userAgent,
-			device,
-			browser,
-		)
-	} else {
-		var mailBodyFormat string = ("" +
-			"<html><body>" +
-			"%s<br>" +
-			"<br>" +
-			"<span style=\"color: rgb(4, 120, 87); font-weight: bold\">これは返信不要です。</span><br>" +
-			"IPアドレス: <b>%s</b><br>" +
-			"ユーザーエージェント: <b>%s</b><br>" +
-			"デバイス: <b>%s</b><br>" +
-			"ブラウザ: <b>%s</b><br>" +
-			"</body></html>")
-
-		mailBody = fmt.Sprintf(
-			mailBodyFormat,
-			data.Content,
-			IP,
-			userAgent,
-			device,
-			browser,
-		)
-	}
+	var mailBody string = fmt.Sprintf(
+		mailBodyFormat,
+		data.Content,
+		data.Email,
+		IP,
+		userAgent,
+		device,
+		browser,
+	)
 
 	// メールデータ
 	var mailContentsFormat string = ("" +

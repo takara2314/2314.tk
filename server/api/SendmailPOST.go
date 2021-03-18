@@ -9,10 +9,9 @@ import (
 
 // お問い合わせ情報
 type ContactInfo struct {
-	Name          string `json:"name"`
-	IsWantedReply bool   `json:"is_wanted_reply"`
-	Email         string `json:"email"`
-	Content       string `json:"content"`
+	Name    string `json:"name"`
+	Email   string `json:"email"`
+	Content string `json:"content"`
 }
 
 // SendmailPOST <- [POST] /api/sendmail
