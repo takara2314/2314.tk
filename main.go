@@ -29,6 +29,7 @@ func main() {
 	api.GET("/client", serverApi.ClientGET)
 	api.GET("/memo", serverApi.MemoGET)
 	api.GET("/memo/:name", serverApi.MemoGET)
+	api.POST("/sendmail", serverApi.SendmailPOST)
 
 	router.Run(":" + os.Getenv("PORT"))
 }
