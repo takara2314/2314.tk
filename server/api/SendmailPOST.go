@@ -31,6 +31,7 @@ func SendmailPOST(c *gin.Context) {
 			})
 			return
 		}
+
 		// メールを送信
 		mailSend(
 			json,
