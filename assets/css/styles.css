@@ -3,73 +3,73 @@
 
 @font-face {
     font-family: "Inter";
-    src: url("../../public/fonts/Inter/Inter-Regular.ttf") format('truetype');
+    src: url("../../public/fonts/Inter/Inter-Regular.woff2") format('woff2');
     font-style: normal;
     font-weight: normal;
 }
 @font-face {
     font-family: "Inter";
-    src: url("../../public/fonts/Inter/Inter-SemiBold.ttf") format('truetype');
+    src: url("../../public/fonts/Inter/Inter-SemiBold.woff2") format('woff2');
     font-style: normal;
     font-weight: 600;
 }
 @font-face {
     font-family: "Inter";
-    src: url("../../public/fonts/Inter/Inter-Bold.ttf") format('truetype');
+    src: url("../../public/fonts/Inter/Inter-Bold.woff2") format('woff2');
     font-style: normal;
     font-weight: bold;
 }
 @font-face {
     font-family: "Inter";
-    src: url("../../public/fonts/Inter/Inter-ExtraBold.ttf") format('truetype');
+    src: url("../../public/fonts/Inter/Inter-ExtraBold.woff2") format('woff2');
     font-style: normal;
     font-weight: 800;
 }
 @font-face {
     font-family: "Inter";
-    src: url("../../public/fonts/Inter/Inter-Light.ttf") format('truetype');
+    src: url("../../public/fonts/Inter/Inter-Light.woff2") format('woff2');
     font-style: normal;
     font-weight: 300;
 }
 @font-face {
     font-family: "Inter";
-    src: url("../../public/fonts/Inter/Inter-Thin.ttf") format('truetype');
+    src: url("../../public/fonts/Inter/Inter-Thin.woff2") format('woff2');
     font-style: normal;
     font-weight: 100;
 }
 @font-face {
     font-family: "M PLUS";
-    src: url("../../public/fonts/MPLUS/MPLUS1p-Regular.ttf") format('truetype');
+    src: url("../../public/fonts/MPLUS/MPLUS1p-Regular.woff2") format('woff2');
     font-style: normal;
     font-weight: normal;
 }
 @font-face {
     font-family: "M PLUS";
-    src: url("../../public/fonts/MPLUS/MPLUS1p-Medium.ttf") format('truetype');
+    src: url("../../public/fonts/MPLUS/MPLUS1p-Medium.woff2") format('woff2');
     font-style: normal;
     font-weight: 500;
 }
 @font-face {
     font-family: "M PLUS";
-    src: url("../../public/fonts/MPLUS/MPLUS1p-Bold.ttf") format('truetype');
+    src: url("../../public/fonts/MPLUS/MPLUS1p-Bold.woff2") format('woff2');
     font-style: normal;
     font-weight: bold;
 }
 @font-face {
     font-family: "M PLUS";
-    src: url("../../public/fonts/MPLUS/MPLUS1p-ExtraBold.ttf") format('truetype');
+    src: url("../../public/fonts/MPLUS/MPLUS1p-ExtraBold.woff2") format('woff2');
     font-style: normal;
     font-weight: 800;
 }
 @font-face {
   font-family: "M PLUS";
-  src: url("../../public/fonts/MPLUS/MPLUS1p-Light.ttf") format('truetype');
+  src: url("../../public/fonts/MPLUS/MPLUS1p-Light.woff2") format('woff2');
   font-style: normal;
   font-weight: 300;
 }
 @font-face {
   font-family: "M PLUS";
-  src: url("../../public/fonts/MPLUS/MPLUS1p-Thin.ttf") format('truetype');
+  src: url("../../public/fonts/MPLUS/MPLUS1p-Thin.woff2") format('woff2');
   font-style: normal;
   font-weight: 100;
 }

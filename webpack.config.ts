@@ -33,7 +33,7 @@ const config: Configuration = {
         ]
       },
       {
-        test: /\.ttf?$/,
+        test: /\.woff2?$/,
         loader: 'file-loader',
         options: {
           name: 'fonts/[name].[ext]'
