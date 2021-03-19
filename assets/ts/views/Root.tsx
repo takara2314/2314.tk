@@ -31,6 +31,15 @@ const Root = () => {
 
   const [isDebugMode, setIsDebugMode] = useState<boolean>(false);
 
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [message, setMessage] = useState<string>('');
+
+  const [isNameError, setIsNameError] = useState<boolean>(false);
+  const [isEmailError, setIsEmailError] = useState<boolean>(false);
+  const [isTextAreaError, setIsTextAreaError] = useState<boolean>(false);
+  const [isComplete, setIsComplete] = useState<boolean>(false);
+
   useEffect(() => {
     setTitle(place);
 
@@ -128,11 +137,35 @@ const Root = () => {
 
       <div
         className={hideContactClass()}
-        onClick={() => {setIsContact(false)}}
+        onClick={() => {
+          menu.map((item: string[], index: number) => {
+            if (place === item[1]) {
+              history.pushState(null, menu[index][0], `/${place}`);
+            }
+          });
+          setIsContact(false);
+          setTitle(place);
+        }}
       />
 
       {isContact
-        ? <Contact />
+        ? <Contact
+            name={name}
+            setName={setName}
+            email={email}
+            setEmail={setEmail}
+            message={message}
+            setMessage={setMessage}
+
+            isNameError={isNameError}
+            setIsNameError={setIsNameError}
+            isEmailError={isEmailError}
+            setIsEmailError={setIsEmailError}
+            isTextAreaError={isTextAreaError}
+            setIsTextAreaError={setIsTextAreaError}
+            isComplete={isComplete}
+            setIsComplete={setIsComplete}
+          />
         : <></>
       }
 

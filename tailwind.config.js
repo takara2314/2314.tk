@@ -66,6 +66,9 @@ module.exports = {
         '5.5': '1.375rem',
         '128': '32rem',
         '144': '36rem'
+      },
+      lineHeight: {
+        '12': '3rem'
       }
     }
   },
