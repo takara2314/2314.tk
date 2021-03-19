@@ -40,6 +40,9 @@ const Root = () => {
   const [isTextAreaError, setIsTextAreaError] = useState<boolean>(false);
   const [isComplete, setIsComplete] = useState<boolean>(false);
 
+  const [alart, setAlart] = useState<string>('');
+  const [isAlart, setIsAlart] = useState<boolean>(false);
+
   useEffect(() => {
     setTitle(place);
 
@@ -54,6 +57,15 @@ const Root = () => {
       setInnerHeight(window.innerHeight);
     });
   }, []);
+
+  // 警告を3秒間表示したら非表示にする
+  useEffect(() => {
+    if (isAlart) {
+      setTimeout(() => {
+        setIsAlart(false);
+      }, 3000);
+    }
+  }, [isAlart]);
 
   const changePlace = (place: string) => {
     setPlace(place);
@@ -135,6 +147,13 @@ const Root = () => {
         setIsDebugMode={setIsDebugMode}
       />
 
+      {isAlart
+        ? <div className="w-80 py-2 pl-3 text-xl bg-white shadow-2xl rounded-l-xl absolute top-6 right-0">
+            {alart}
+          </div>
+        : <></>
+      }
+
       <div
         className={hideContactClass()}
         onClick={() => {
@@ -143,8 +162,8 @@ const Root = () => {
               history.pushState(null, menu[index][0], `/${place}`);
             }
           });
-          setIsContact(false);
           setTitle(place);
+          setIsContact(false);
         }}
       />
 
@@ -165,6 +184,13 @@ const Root = () => {
             setIsTextAreaError={setIsTextAreaError}
             isComplete={isComplete}
             setIsComplete={setIsComplete}
+
+            place={place}
+            menu={menu}
+            setTitle={setTitle}
+            setIsContact={setIsContact}
+            setAlart={setAlart}
+            setIsAlart={setIsAlart}
           />
         : <></>
       }

@@ -32,7 +32,7 @@ func SendmailPOST(c *gin.Context) {
 		}
 
 		// メールを送信
-		mailSend(
+		sendMail(
 			json,
 			c.ClientIP(),
 			c.Request.Header.Get("user-agent"),

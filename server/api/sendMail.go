@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func mailSend(data ContactInfo, IP string, userAgent string, device string, browser string) {
+func sendMail(data ContactInfo, IP string, userAgent string, device string, browser string) {
 	// 認証情報
 	var auth smtp.Auth = smtp.PlainAuth(
 		"",

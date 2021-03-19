@@ -14,6 +14,13 @@ interface ContactProps {
   setIsTextAreaError: (isTextAreaError: boolean) => void;
   isComplete:         boolean;
   setIsComplete:      (isComplete: boolean) => void;
+
+  place:        string;
+  menu:         string[][];
+  setTitle:     (title: string) => void;
+  setIsContact: (isContact: boolean) => void;
+  setAlart:     (alart: string) => void;
+  setIsAlart:   (isAlart: boolean) => void;
 }
 
 export default ContactProps;

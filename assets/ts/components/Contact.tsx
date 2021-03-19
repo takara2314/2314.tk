@@ -1,17 +1,42 @@
 import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
+import sendMail from '../services/sendMail';
 import ContactProps from '../models/ContactProps';
+import SendMailPost from '../models/SendMailPost';
 
 const Contact = (props: ContactProps) => {
+  const [nowSection, setNowSection] = useState<string>('form');
+
+  useEffect(() => {
+    document.title = 'お問い合わせ - タカラーン';
+  }, []);
+
+  return (
+    <>
+      {nowSection === 'form'
+        ? <FormSection
+            {...props}
+            setNowSection={setNowSection}
+          />
+        : <></>
+      }
+      {nowSection === 'confirm'
+        ? <ConfirmSection
+            {...props}
+            setNowSection={setNowSection}
+          />
+        : <></>
+      }
+    </>
+  );
+}
+
+const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) => void}) => {
   const nameObject: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
   const emailObject: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
   const messageObject: React.RefObject<HTMLTextAreaElement> = useRef<HTMLTextAreaElement>(null);
 
   // 電子メールアドレスの正規表現
   const emailRegExp: RegExp = new RegExp(/^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/);
-
-  useEffect(() => {
-    document.title = 'お問い合わせ - タカラーン';
-  }, []);
 
   // コンポーネットを呼び出したときに、フォームに何か入力されている状態なら値チェック
   useEffect(() => {
@@ -38,6 +63,10 @@ const Contact = (props: ContactProps) => {
   }
   const messageChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
     messageCheck(e.target.value);
+  }
+
+  const toConfirmButtonHandler = () => {
+    props.setNowSection('confirm');
   }
 
   const nameCheck = (value: string): void => {
@@ -71,7 +100,17 @@ const Contact = (props: ContactProps) => {
   }
 
   useEffect(() => {
-    if (props.name !== '' && props.email.match(emailRegExp) && props.message !== '') {
+    // 送信ボタンを表示する条件
+    // ・名前が空白ではない
+    // ・メアドが正規表現通り
+    // ・メッセージが空白ではない
+    // ・XSSを試みていない
+    if (
+      props.name !== ''
+      && props.email.match(emailRegExp)
+      && props.message !== ''
+      && (props.message.indexOf('<script') === -1 && props.message.indexOf('<link') === -1)
+    ) {
       props.setIsComplete(true);
     } else {
       props.setIsComplete(false);
@@ -144,16 +183,17 @@ const Contact = (props: ContactProps) => {
             onChange={messageChangeHandler}
             ref={messageObject}
             className={props.isTextAreaError
-              ? "w-full h-72 px-3 pt-4 rounded-xl bg-white border-2 border-red-700 outline-none"
-              : "w-full h-72 px-3 pt-4 rounded-xl bg-white border-2 border-green-700 outline-none"
+              ? "w-full h-72 px-3 pt-4 pb-2 rounded-xl bg-white border-2 border-red-700 outline-none"
+              : "w-full h-72 px-3 pt-4 pb-2 rounded-xl bg-white border-2 border-green-700 outline-none"
             }
           />
         </div>
-        <div className="w-full h-10 mt-5 relative">
+        <div className="w-full h-12 mt-5 relative">
           {props.isComplete
             ? <input
                 type="submit"
                 value="確認して送信する"
+                onClick={toConfirmButtonHandler}
                 className="w-72 h-12 text-white font-bold bg-green-700 hover:bg-green-900 rounded-full outline-none mx-auto absolute inset-x-0"
               />
             : <div
@@ -165,7 +205,86 @@ const Contact = (props: ContactProps) => {
         </div>
       </form>
     </div>
-  )
+  );
+}
+
+const ConfirmSection = (props: ContactProps & {setNowSection: (nowSection: string) => void}) => {
+  const correctionHandler = () => {
+    props.setNowSection('form');
+  }
+
+  const sendHandler = () => {
+    const json: SendMailPost = {
+      name:    props.name,
+      email:   props.email,
+      content: props.message.replace(/\n/g, '<br>')
+    }
+
+    sendMail(json)
+    .then(() => {
+      props.menu.map((item: string[], index: number) => {
+        if (props.place === item[1]) {
+          history.pushState(null, props.menu[index][0], `/${props.place}`);
+        }
+      });
+      props.setTitle(props.place);
+
+      props.setName('');
+      props.setEmail('');
+      props.setMessage('');
+
+      props.setAlart('お問い合わせを送信しました。');
+      props.setIsAlart(true);
+
+      props.setIsContact(false);
+    });
+  }
+
+  return (
+    <div className="w-11/12 h-3/4 bg-white text-lg rounded-xl p-6 sm:p-6 md:p-6 lg:p-10 xl:p-10 m-auto absolute inset-0 z-40 overflow-scroll scrollbar-hidden">
+      <h1 className="font-bold text-3xl mb-2">
+        お問い合わせ
+      </h1>
+      <p className="py-1">
+        送信内容に誤りがなければ、以下の送信ボタンを押してください。
+      </p>
+      <section className="mt-2 p-3 text-xl bg-gray-100 rounded-xl">
+        <h1 className="pb-2 text-lg text-green-700 font-bold">
+          お名前
+        </h1>
+        {props.name}
+
+        <h1 className="pt-4 pb-2 text-lg text-green-700 font-bold">
+          メールアドレス
+        </h1>
+        {props.email}
+
+        <h1 className="pt-4 pb-2 text-lg text-green-700 font-bold">
+          お問い合わせ内容
+        </h1>
+        <div
+          // 改行コードを <br> に変換して表示
+          dangerouslySetInnerHTML={{__html: props.message.replace(/\n/g, '<br>')}}
+        />
+      </section>
+
+      <div className="w-full h-12 mt-6 flex flex-row justify-center">
+        <button
+          onClick={correctionHandler}
+          className="w-72 h-12 text-green-700 hover:text-green-900 font-bold bg-white mx-auto rounded-full focus:outline-none"
+        >
+          修正する
+        </button>
+
+        <button
+          onClick={sendHandler}
+          className="w-72 h-12 text-white font-bold bg-green-700 hover:bg-green-900 mx-auto rounded-full focus:outline-none"
+        >
+          送信する
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export default Contact;
