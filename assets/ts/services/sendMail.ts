@@ -1,4 +1,5 @@
 import GetMoviePost from '../models/SendMailPost';
+import sendMailToken from './sendMailToken';
 
 const sendMail = (data: GetMoviePost): Promise<Response> => {
   return fetch('/api/sendmail', {
@@ -7,7 +8,7 @@ const sendMail = (data: GetMoviePost): Promise<Response> => {
     cache:  'no-cache',
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${process.env.SENDMAIL_TOKEN}`
+      "Authorization": `Bearer ${sendMailToken}`
     },
     body:   JSON.stringify(data),
   });

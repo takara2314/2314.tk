@@ -237,6 +237,19 @@ const ConfirmSection = (props: ContactProps & {setNowSection: (nowSection: strin
       props.setIsAlart(true);
 
       props.setIsContact(false);
+    })
+    .catch(() => {
+      props.menu.map((item: string[], index: number) => {
+        if (props.place === item[1]) {
+          history.pushState(null, props.menu[index][0], `/${props.place}`);
+        }
+      });
+      props.setTitle(props.place);
+
+      props.setAlart('エラーが発生しました。');
+      props.setIsAlart(true);
+
+      props.setIsContact(false);
     });
   }
 
