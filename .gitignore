@@ -1,4 +1,5 @@
 /.vscode/
 /dist/
 /node_modules/
+environ.yaml
 package-lock.json

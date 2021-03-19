@@ -7,7 +7,7 @@ const sendMail = (data: GetMoviePost): Promise<Response> => {
     cache:  'no-cache',
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Bearer 0318gogo::Ma1L-maN"
+      "Authorization": `Bearer ${process.env.SENDMAIL_TOKEN}`
     },
     body:   JSON.stringify(data),
   });
