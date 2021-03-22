@@ -66,6 +66,8 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
   }
 
   const toConfirmButtonHandler = () => {
+    // メッセージの文末に改行コードが含まれていたら、取り除いて格納
+    props.setMessage(props.message.replace(/\n+$/g, ''))
     props.setNowSection('confirm');
   }
 
@@ -90,7 +92,7 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
   }
 
   const messageCheck = (value: string): void => {
-    if (value === '') {
+    if (value.replace(/\n+$/g, '') === '') {
       props.setMessage('');
       props.setIsTextAreaError(true);
     } else {
@@ -103,12 +105,12 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
     // 送信ボタンを表示する条件
     // ・名前が空白ではない
     // ・メアドが正規表現通り
-    // ・メッセージが空白ではない
+    // ・メッセージは文末の改行コードを除いたとき、空白ではない
     // ・XSSを試みていない
     if (
       props.name !== ''
       && props.email.match(emailRegExp)
-      && props.message !== ''
+      && props.message.replace(/\n+$/g, '') !== ''
       && (props.message.indexOf('<script') === -1 && props.message.indexOf('<link') === -1)
     ) {
       props.setIsComplete(true);

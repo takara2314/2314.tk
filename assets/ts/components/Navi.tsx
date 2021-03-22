@@ -95,7 +95,6 @@ const Navi = (props: NaviProps) => {
 
   const contactClick = (e: React.MouseEvent, item: string[]) => {
     e.preventDefault();
-    console.log('called!');
     history.pushState(null, item[0], `/${item[1]}`);
     props.setIsContact(true);
   }
