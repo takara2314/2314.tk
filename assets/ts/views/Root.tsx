@@ -145,6 +145,7 @@ const Root = () => {
         setSecretTimes={setSecretTimes}
         isDebugMode={isDebugMode}
         setIsDebugMode={setIsDebugMode}
+        isContact={isContact}
       />
 
       {isAlart
@@ -212,29 +213,32 @@ const Root = () => {
         <div className="w-10 h-1 bg-green-900 rounded-full" />
       </div>
 
-      <div className={landscapeClass()}>
-        <section className="p-8 pr-4">
-          <img
-            src="../public/sorry.webp"
-            className="w-72"
-          />
-        </section>
-        <section className="p-8 pl-4">
-          <div>
-            <h1 className="text-3xl font-bold mb-3">
-              横画面にしないでください！
-            </h1>
+      {isContact
+        ? <></>
+        : <div className={landscapeClass()}>
+            <section className="p-8 pr-4">
+              <img
+                src="../public/sorry.webp"
+                className="w-72"
+              />
+            </section>
+            <section className="p-8 pl-4">
+              <div>
+                <h1 className="text-3xl font-bold mb-3">
+                  横画面にしないでください！
+                </h1>
+              </div>
+              <div className="text-lg">
+                <p className="mb-2">
+                  すみませんが、スマートフォンの横向き表示には、まだ対応しておりません。m(_ _)m
+                </p>
+                <p>
+                  今後のアップデートで対応いたしますので、今しばらくお待ちください。
+                </p>
+              </div>
+            </section>
           </div>
-          <div className="text-lg">
-            <p className="mb-2">
-              すみませんが、スマートフォンの横向き表示には、まだ対応しておりません。m(_ _)m
-            </p>
-            <p>
-              今後のアップデートで対応いたしますので、今しばらくお待ちください。
-            </p>
-          </div>
-        </section>
-      </div>
+      }
     </>
   );
 }

@@ -38,31 +38,31 @@ const World = (props: WorldProps) => {
     props.changePosZ(camera.position.z);
 
     window.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key == 'f') {
+      if (e.key == 'f' && !props.isContact) {
         controlsRef.current?.target.set(100, 0, 0);
         camera.position.x = 100;
       }
-      if (e.key == 'w') {
+      if (e.key == 'w' && !props.isContact) {
         controlsRef.current?.target.setX(controlsRef.current?.target.x+0.001);
         camera.position.x += 0.001;
       }
-      if (e.key == 's') {
+      if (e.key == 's' && !props.isContact) {
         controlsRef.current?.target.setX(controlsRef.current?.target.x-0.001);
         camera.position.x -= 0.001;
       }
-      if (e.key == 'a') {
+      if (e.key == 'a' && !props.isContact) {
         controlsRef.current?.target.setZ(controlsRef.current?.target.z-0.001);
         camera.position.z -= 0.001;
       }
-      if (e.key == 'd') {
+      if (e.key == 'd' && !props.isContact) {
         controlsRef.current?.target.setZ(controlsRef.current?.target.z+0.001);
         camera.position.z += 0.001;
       }
-      if (e.key == ' ') {
+      if (e.key == ' ' && !props.isContact) {
         controlsRef.current?.target.setY(controlsRef.current?.target.y+0.001);
         camera.position.y += 0.001;
       }
-      if (e.key == 'Shift') {
+      if (e.key == 'Shift' && !props.isContact) {
         controlsRef.current?.target.setY(controlsRef.current?.target.y-0.001);
         camera.position.y -= 0.001;
       }

@@ -19,7 +19,7 @@ const Works = (props: WorldProps) => {
       'kadaistore', 'kadaistore-api', '2314tk', 'nenga2021'
     ],
     west: [
-      'codemple', 'awareshe', 'not-secretmemo', 'mcstarpark'
+      'codemple', 'emoface', 'not-secretmemo', 'mcstarpark'
     ]
   };
 

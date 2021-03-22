@@ -20,6 +20,8 @@ interface WorldProps {
   changeHoverPosX: (x: number) => void;
   changeHoverPosY: (y: number) => void;
   changeHoverPosZ: (z: number) => void;
+
+  isContact: boolean;
 }
 
 export default WorldProps;
