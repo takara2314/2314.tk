@@ -1,8 +1,27 @@
+<style>
+  @keyframes gage_aviutl {
+    from {
+      width: 0%
+    }
+    to {
+      width: 60%
+    }
+  }
+  @keyframes gage_others {
+    from {
+      width: 0%
+    }
+    to {
+      width: 40%
+    }
+  }
+</style>
+
 <div class="w-full h-full flex flex-col justify-between">
   <div>
     <h1 class="text-2.5xl font-bold h-9">Git</h1>
     <div class="mb-3 w-full h-5 bg-gray-200 rounded-full overflow-hidden relative">
-      <div class="w-2/5 h-5 bg-gray-500 absolute"></div>
+      <div class="w-0 h-5 bg-gray-500 absolute" style="animation: gage_others 1s ease forwards"></div>
       <div class="w-1 h-5 bg-white absolute left-1/5"></div>
       <div class="w-1 h-5 bg-white absolute left-2/5"></div>
       <div class="w-1 h-5 bg-white absolute left-3/5"></div>
@@ -28,7 +47,7 @@
   <div>
     <h1 class="text-2.5xl font-bold h-9">AviUtl</h1>
     <div class="mb-3 w-full h-5 bg-gray-200 rounded-full overflow-hidden relative">
-      <div class="w-3/5 h-5 bg-gray-500 absolute"></div>
+      <div class="w-0 h-5 bg-gray-500 absolute" style="animation: gage_aviutl 1s ease forwards"></div>
       <div class="w-1 h-5 bg-white absolute left-1/5"></div>
       <div class="w-1 h-5 bg-white absolute left-2/5"></div>
       <div class="w-1 h-5 bg-white absolute left-3/5"></div>
@@ -52,23 +71,23 @@
   </div>
 
   <div>
-    <h1 class="text-2.5xl font-bold h-9">GIMP</h1>
+    <h1 class="text-2.5xl font-bold h-9">Blender</h1>
     <div class="mb-3 w-full h-5 bg-gray-200 rounded-full overflow-hidden relative">
-      <div class="w-4/5 h-5 bg-gray-500 absolute"></div>
+      <div class="w-0 h-5 bg-orange-500 absolute" style="animation: gage_others 1s ease forwards"></div>
       <div class="w-1 h-5 bg-white absolute left-1/5"></div>
       <div class="w-1 h-5 bg-white absolute left-2/5"></div>
       <div class="w-1 h-5 bg-white absolute left-3/5"></div>
       <div class="w-1 h-5 bg-white absolute left-4/5"></div>
-      <div class="w-1/5 h-5 text-sm text-gray-700 text-center absolute select-none">
+      <div class="w-1/5 h-5 text-sm text-orange-700 text-center absolute select-none">
         入門
       </div>
-      <div class="w-1/5 h-5 text-sm text-gray-700 text-center absolute left-1/5 select-none">
+      <div class="w-1/5 h-5 text-sm text-white font-bold text-center absolute left-1/5 select-none">
         初級
       </div>
-      <div class="w-1/5 h-5 text-sm text-gray-700 text-center absolute left-2/5 select-none">
+      <div class="w-1/5 h-5 text-sm text-gray-400 text-center absolute left-2/5 select-none">
         中級
       </div>
-      <div class="w-1/5 h-5 text-sm text-white font-bold text-center absolute left-3/5 select-none">
+      <div class="w-1/5 h-5 text-sm text-gray-400 text-center absolute left-3/5 select-none">
         上級
       </div>
       <div class="w-1/5 h-5 text-sm text-gray-400 text-center absolute left-4/5 select-none">

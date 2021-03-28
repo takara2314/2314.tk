@@ -1,7 +1,18 @@
+<style>
+  @keyframes gage {
+    from {
+      width: 0%
+    }
+    to {
+      width: 20%
+    }
+  }
+</style>
+
 <div class="w-full h-full relative">
   <h1 class="text-2.5xl font-bold h-9">SQL</h1>
   <div class="mb-3 w-full h-5 bg-gray-200 rounded-full overflow-hidden relative">
-    <div class="w-1/5 h-5 bg-emerald-500 absolute"></div>
+    <div class="w-0 h-5 bg-emerald-500 absolute" style="animation: gage 1s ease forwards"></div>
     <div class="w-1 h-5 bg-white absolute left-1/5"></div>
     <div class="w-1 h-5 bg-white absolute left-2/5"></div>
     <div class="w-1 h-5 bg-white absolute left-3/5"></div>
