@@ -26,6 +26,27 @@ const Contact = (props: ContactProps) => {
           />
         : <></>
       }
+      {nowSection === 'wait'
+        ? <WaitSection
+            {...props}
+            setNowSection={setNowSection}
+          />
+        : <></>
+      }
+      {nowSection === 'success'
+        ? <SuccessSection
+            {...props}
+            setNowSection={setNowSection}
+          />
+        : <></>
+      }
+      {nowSection === 'error'
+        ? <ErrorSection
+            {...props}
+            setNowSection={setNowSection}
+          />
+        : <></>
+      }
     </>
   );
 }
@@ -216,43 +237,7 @@ const ConfirmSection = (props: ContactProps & {setNowSection: (nowSection: strin
   }
 
   const sendHandler = () => {
-    const json: SendMailPost = {
-      name:    props.name,
-      email:   props.email,
-      content: props.message.replace(/\n/g, '<br>')
-    }
-
-    sendMail(json)
-    .then(() => {
-      props.menu.map((item: string[], index: number) => {
-        if (props.place === item[1]) {
-          history.pushState(null, props.menu[index][0], `/${props.place}`);
-        }
-      });
-      props.setTitle(props.place);
-
-      props.setName('');
-      props.setEmail('');
-      props.setMessage('');
-
-      props.setAlart('お問い合わせを送信しました。');
-      props.setIsAlart(true);
-
-      props.setIsContact(false);
-    })
-    .catch(() => {
-      props.menu.map((item: string[], index: number) => {
-        if (props.place === item[1]) {
-          history.pushState(null, props.menu[index][0], `/${props.place}`);
-        }
-      });
-      props.setTitle(props.place);
-
-      props.setAlart('エラーが発生しました。');
-      props.setIsAlart(true);
-
-      props.setIsContact(false);
-    });
+    props.setNowSection('wait');
   }
 
   return (
@@ -296,6 +281,106 @@ const ConfirmSection = (props: ContactProps & {setNowSection: (nowSection: strin
           className="w-72 h-12 text-white font-bold bg-green-700 hover:bg-green-900 mx-auto rounded-full focus:outline-none"
         >
           送信する
+        </button>
+      </div>
+    </div>
+  );
+}
+
+const WaitSection = (props: ContactProps & {setNowSection: (nowSection: string) => void}) => {
+  useEffect(() => {
+    const json: SendMailPost = {
+      name:    props.name,
+      email:   props.email,
+      content: props.message.replace(/\n/g, '<br>')
+    }
+
+    sendMail(json)
+    .then(() => {
+      props.setNowSection('success');
+    })
+    .catch(() => {
+      props.setNowSection('error');
+    });
+  }, []);
+
+  return (
+    <div className="w-11/12 h-3/4 bg-white text-lg rounded-xl p-6 sm:p-6 md:p-6 lg:p-10 xl:p-10 m-auto absolute inset-0 z-40 overflow-scroll scrollbar-hidden">
+      <h1 className="font-bold text-3xl mb-2">
+        お問い合わせ
+      </h1>
+      <p className="py-1">
+        メールを送信しています… 少々お待ちください…
+      </p>
+      <div className="w-full text-center">
+        <img
+          src="../public/sending.webp"
+          alt="送信しています…"
+          className="h-96 m-auto select-none"
+        />
+      </div>
+    </div>
+  );
+}
+
+const SuccessSection = (props: ContactProps & {setNowSection: (nowSection: string) => void}) => {
+  useEffect(() => {
+    setTimeout(() => {
+      props.menu.map((item: string[], index: number) => {
+        if (props.place === item[1]) {
+          history.pushState(null, props.menu[index][0], `/${props.place}`);
+        }
+      });
+      props.setTitle(props.place);
+
+      props.setName('');
+      props.setEmail('');
+      props.setMessage('');
+
+      props.setIsContact(false);
+    }, 5000);
+  }, []);
+
+  return (
+    <div className="w-11/12 h-3/4 bg-white text-lg rounded-xl p-6 sm:p-6 md:p-6 lg:p-10 xl:p-10 m-auto absolute inset-0 z-40 overflow-scroll scrollbar-hidden">
+      <h1 className="font-bold text-3xl mb-2">
+        お問い合わせ
+      </h1>
+      <p className="py-1 text-green-700 font-bold">
+        送信しました。
+      </p>
+      <p className="py-1">
+        できるだけ早く返信することを心がけていますが、返信に1～3日ほどかかる場合がございます。
+      </p>
+      <p className="pt-5">
+        この画面は5秒後に閉じられます。
+      </p>
+    </div>
+  );
+}
+
+const ErrorSection = (props: ContactProps & {setNowSection: (nowSection: string) => void}) => {
+  const resendHandler = () => {
+    props.setNowSection('wait');
+  }
+
+  return (
+    <div className="w-11/12 h-3/4 bg-white text-lg rounded-xl p-6 sm:p-6 md:p-6 lg:p-10 xl:p-10 m-auto absolute inset-0 z-40 overflow-scroll scrollbar-hidden">
+      <h1 className="font-bold text-3xl mb-2">
+        お問い合わせ
+      </h1>
+      <p className="py-1 text-red-700 font-bold">
+        送信に失敗しました。
+      </p>
+      <p className="py-1">
+        お手数ですが、しばらくしてから送信しなおすか、Twitter(@takara2314)もしくは、Discord(拡張的な宝箱#9220)のダイレクトメッセージにてお願いします。
+      </p>
+      <div className="w-full h-12 mt-6 flex flex-row justify-center">
+        <button
+          onClick={resendHandler}
+          className="w-72 h-12 text-white font-bold bg-green-700 hover:bg-green-900 mx-auto rounded-full focus:outline-none"
+        >
+          再送信する
         </button>
       </div>
     </div>
