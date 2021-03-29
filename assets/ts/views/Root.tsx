@@ -70,7 +70,6 @@ const Root = () => {
   }, []);
 
   useEffect(() => {
-    // changeWindowSize();
     window.addEventListener('load', () => {
       changeWindowSize();
     });
@@ -123,19 +122,6 @@ const Root = () => {
 
     return className;
   }
-
-  // const hideContactClass = () => {
-  //   let className: string = '';
-  //   const baseClass: string = 'w-full h-full bg-black opacity-50 absolute top-0 z-40';
-
-  //   if (isContact) {
-  //     className = `${baseClass} visible`;
-  //   } else {
-  //     className = `${baseClass} invisible`;
-  //   }
-
-  //   return className;
-  // }
 
   const landscapeClass = (): string => {
     let className: string = '';
@@ -201,29 +187,26 @@ const Root = () => {
               僕のサイトへようこそ！
             </h1>
             {pcDevices.includes(clientDevice)
-              ? <p>
-                  ドラッグして画面を動かし、気になるところをクリックしてみよう！
-                </p>
-              : <p>
-                  画面をスワイプして、気になるところをタップしてみよう！
-                </p>
+              ? <>
+                  <p>
+                    画面をドラッグして動かし、気になるところをクリックしてみよう！
+                  </p>
+                  <p className="text-gray-300">
+                    見にくかったらズームしてね！
+                  </p>
+                </>
+              : <>
+                  <p>
+                    画面をスワイプして、気になるところをタップしてみよう！
+                  </p>
+                  <p className="text-gray-300">
+                    見にくかったらズームしてね！
+                  </p>
+                </>
             }
           </div>
         }
       </Transition>
-
-      {/* <div
-        className={hideContactClass()}
-        onClick={() => {
-          menu.map((item: string[], index: number) => {
-            if (place === item[1]) {
-              history.pushState(null, menu[index][0], `/${place}`);
-            }
-          });
-          setTitle(place);
-          setIsContact(false);
-        }}
-      /> */}
 
       <Transition
         in={isContact}
@@ -282,31 +265,6 @@ const Root = () => {
           </div>
         }
       </Transition>
-      {/* {isContact
-        ? <Contact
-            name={name}
-            setName={setName}
-            email={email}
-            setEmail={setEmail}
-            message={message}
-            setMessage={setMessage}
-
-            isNameError={isNameError}
-            setIsNameError={setIsNameError}
-            isEmailError={isEmailError}
-            setIsEmailError={setIsEmailError}
-            isTextAreaError={isTextAreaError}
-            setIsTextAreaError={setIsTextAreaError}
-            isComplete={isComplete}
-            setIsComplete={setIsComplete}
-
-            place={place}
-            menu={menu}
-            setTitle={setTitle}
-            setIsContact={setIsContact}
-          />
-        : <></>
-      } */}
 
       <div
         className={hideMenuClass()}
