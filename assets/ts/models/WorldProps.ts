@@ -21,6 +21,8 @@ interface WorldProps {
   changeHoverPosY: (y: number) => void;
   changeHoverPosZ: (z: number) => void;
 
+  setIsCameraMoved: (isCameraMoved: boolean) => void;
+
   isContact: boolean;
 }
 

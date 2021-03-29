@@ -7,6 +7,13 @@ interface MonitorProps {
   setIsDebugMode:   (isDebugMode: boolean) => void;
 
   isContact: boolean;
+
+  clientBrowser: string
+  setClientBrowser: (clientBrowser: string) => void;
+  clientDevice: string
+  setClientDevice: (clientDevice: string) => void;
+
+  setIsCameraMoved: (isCameraMoved: boolean) => void;
 }
 
 export default MonitorProps;

@@ -13,15 +13,12 @@ const Monitor = (props: MonitorProps) => {
   const [memoName, setMemoName] = useState<string>('');
 
   const [posX, setPosX] = useState<number>(0);
-  const [posY, setPosY] = useState<number>(0);
-  const [posZ, setPosZ] = useState<number>(0);
+  const [posY, setPosY] = useState<number>(35);
+  const [posZ, setPosZ] = useState<number>(-30);
   const [isHover, setIsHover] = useState<boolean>(false);
   const [hoverPosX, setHoverPosX] = useState<number>(0);
   const [hoverPosY, setHoverPosY] = useState<number>(0);
   const [hoverPosZ, setHoverPosZ] = useState<number>(0);
-
-  const [clientBrowser, setClientBrowser] = useState<string>('Loading...');
-  const [clientDevice, setClientDevice] = useState<string>('Loading...');
 
   const [isF2Debug, setIsF2Debug] = useState<boolean>(false);
 
@@ -32,12 +29,12 @@ const Monitor = (props: MonitorProps) => {
     .then(res => res.json())
     .then(
       (result: any) => {
-        setClientBrowser(result.browser);
-        setClientDevice(result.device);
+        props.setClientBrowser(result.browser);
+        props.setClientDevice(result.device);
       },
       (error: Error) => {
-        setClientBrowser('Unknown');
-        setClientDevice('Unknown');
+        props.setClientBrowser('Unknown');
+        props.setClientDevice('Unknown');
       }
     );
 
@@ -51,7 +48,7 @@ const Monitor = (props: MonitorProps) => {
         setMemo(error.toString());
       }
     );
-  }, [clientBrowser, clientDevice, memoName]);
+  }, [props.clientBrowser, props.clientDevice, memoName]);
 
   useEffect(() => {
     window.addEventListener('load', () => {
@@ -116,6 +113,9 @@ const Monitor = (props: MonitorProps) => {
             changeHoverPosX={setHoverPosX}
             changeHoverPosY={setHoverPosY}
             changeHoverPosZ={setHoverPosZ}
+
+            setIsCameraMoved={props.setIsCameraMoved}
+
             isContact={props.isContact}
           />
         </Canvas>
@@ -127,13 +127,13 @@ const Monitor = (props: MonitorProps) => {
         : "text-white text-xl absolute top-24 sm:top-24 md:top-24 lg:top-0 xl:top-0 select-none invisible"
       }>
         <p><span className="bg-black-opacity-25">
-          2314.tk 1.0.0 (Debug mode) - beta (28th March, 2021 built)
+          2314.tk 1.0.0 (Debug mode) - beta (30th March, 2021 built)
         </span></p>
         <p><span className="bg-black-opacity-25">
-          Browser: {clientBrowser}
+          Browser: {props.clientBrowser}
         </span></p>
         <p className="mb-3"><span className="bg-black-opacity-25">
-          Device: {clientDevice}
+          Device: {props.clientDevice}
         </span></p>
 
         <p><span className="bg-black-opacity-25">

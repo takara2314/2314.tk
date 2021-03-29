@@ -40,8 +40,16 @@ const Root = () => {
   const [isTextAreaError, setIsTextAreaError] = useState<boolean>(false);
   const [isComplete, setIsComplete] = useState<boolean>(false);
 
-  const [alart, setAlart] = useState<string>('');
   const [isAlart, setIsAlart] = useState<boolean>(false);
+
+  const [clientBrowser, setClientBrowser] = useState<string>('Loading...');
+  const [clientDevice, setClientDevice] = useState<string>('Loading...');
+
+  const [isCameraMoved, setIsCameraMoved] = useState<boolean>(false);
+
+  const pcDevices: string[] = [
+    'Windows', 'Mac', 'Linux', 'Others'
+  ];
 
   useEffect(() => {
     setTitle(place);
@@ -49,6 +57,11 @@ const Root = () => {
     if (location.pathname.slice(1) === 'contact') {
       setIsContact(true);
     }
+
+    // 1秒後にウェルカムボードを表示
+    setTimeout(() => {
+      setIsAlart(true);
+    }, 1000);
 
     window.addEventListener('load', () => {
       setInnerHeight(window.innerHeight);
@@ -58,14 +71,18 @@ const Root = () => {
     });
   }, []);
 
-  // 警告を3秒間表示したら非表示にする
+  // ウェルカムボードを15秒間表示したら非表示にする
   useEffect(() => {
     if (isAlart) {
       setTimeout(() => {
         setIsAlart(false);
-      }, 3000);
+      }, 15000);
     }
-  }, [isAlart]);
+    // カメラが動いたなら即座に削除
+    if (isCameraMoved) {
+      setIsAlart(false);
+    }
+  }, [isAlart, isCameraMoved]);
 
   const changePlace = (place: string) => {
     setPlace(place);
@@ -145,12 +162,30 @@ const Root = () => {
         setSecretTimes={setSecretTimes}
         isDebugMode={isDebugMode}
         setIsDebugMode={setIsDebugMode}
+
         isContact={isContact}
+
+        clientBrowser={clientBrowser}
+        setClientBrowser={setClientBrowser}
+        clientDevice={clientDevice}
+        setClientDevice={setClientDevice}
+
+        setIsCameraMoved={setIsCameraMoved}
       />
 
       {isAlart
-        ? <div className="w-80 py-2 pl-3 text-xl bg-white shadow-2xl rounded-l-xl absolute top-6 right-0">
-            {alart}
+        ? <div className="w-72 sm:w-72 md:w-72 lg:w-80 xl:w-80 px-4 py-3 text-base bg-white shadow-xl rounded-l-xl absolute top-6 right-0">
+            <h1 className="font-bold text-xl text-green-700">
+              僕のサイトへようこそ！
+            </h1>
+            {pcDevices.includes(clientDevice)
+              ? <p>
+                  ドラッグして画面を動かし、気になるところをクリックしてみよう！
+                </p>
+              : <p>
+                  画面をスワイプして、気になるところをタップしてみよう！
+                </p>
+            }
           </div>
         : <></>
       }
@@ -190,8 +225,6 @@ const Root = () => {
             menu={menu}
             setTitle={setTitle}
             setIsContact={setIsContact}
-            setAlart={setAlart}
-            setIsAlart={setIsAlart}
           />
         : <></>
       }

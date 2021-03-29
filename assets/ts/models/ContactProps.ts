@@ -19,8 +19,6 @@ interface ContactProps {
   menu:         string[][];
   setTitle:     (title: string) => void;
   setIsContact: (isContact: boolean) => void;
-  setAlart:     (alart: string) => void;
-  setIsAlart:   (isAlart: boolean) => void;
 }
 
 export default ContactProps;

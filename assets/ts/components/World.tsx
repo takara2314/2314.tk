@@ -8,6 +8,7 @@ import WorldProps from '../models/WorldProps';
 import { Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { extend, ReactThreeFiber, useFrame, useThree } from 'react-three-fiber';
+import isInRange from '../services/isinRange';
 
 extend({ OrbitControls });
 
@@ -36,6 +37,15 @@ const World = (props: WorldProps) => {
     props.changePosX(camera.position.x);
     props.changePosY(camera.position.y);
     props.changePosZ(camera.position.z);
+
+    // XYZのいずれかが1より大きく移動されてるなら
+    if (!(
+      isInRange(camera.position.x, 0, 1)
+      && isInRange(camera.position.y, 35, 1)
+      && isInRange(camera.position.z, -30, 1)
+    )) {
+      props.setIsCameraMoved(true);
+    }
 
     window.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key == 'f' && !props.isContact) {
