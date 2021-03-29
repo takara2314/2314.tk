@@ -32,8 +32,8 @@ const Skills = (props: WorldProps) => {
         ]}
         skillRatioPosX={[
           20/2, 13/2, 27/4, 14/2,
-          25/4, 27/4, 12/2, 25/4,
-          25/4, 25/4, 25/4, 18/2
+          25/4, 27/4, 12/2, 13/2,
+          13/2, 25/4, 27/4, 18/2
         ]}
         selection={selection}
         setSelection={setSelection}
