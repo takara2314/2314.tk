@@ -72,9 +72,15 @@ const Root = () => {
   useEffect(() => {
     window.addEventListener('load', () => {
       changeWindowSize();
+      setTimeout(() => {
+        changeWindowSize();
+      }, 10);
     });
     window.addEventListener('resize', () => {
       changeWindowSize();
+      setTimeout(() => {
+        changeWindowSize();
+      }, 10);
     });
   }, []);
 
@@ -191,7 +197,7 @@ const Root = () => {
                   <p>
                     画面をドラッグして動かし、気になるところをクリックしてみよう！
                   </p>
-                  <p className="text-gray-300">
+                  <p className="text-gray-400">
                     見にくかったらズームしてね！
                   </p>
                 </>
@@ -199,7 +205,7 @@ const Root = () => {
                   <p>
                     画面をスワイプして、気になるところをタップしてみよう！
                   </p>
-                  <p className="text-gray-300">
+                  <p className="text-gray-400">
                     見にくかったらズームしてね！
                   </p>
                 </>
