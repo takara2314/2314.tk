@@ -141,7 +141,7 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
   }, [props.name, props.email, props.message]);
 
   return (
-    <div className="w-11/12 h-3/4 bg-white text-lg rounded-xl p-6 sm:p-6 md:p-6 lg:p-10 xl:p-10 m-auto absolute inset-0 z-40 overflow-scroll scrollbar-hidden">
+    <div className="w-full h-full bg-white text-lg rounded-xl p-6 sm:p-6 md:p-6 lg:p-10 xl:p-10 m-auto absolute inset-0 z-40 overflow-scroll scrollbar-hidden">
       <h1 className="font-bold text-3xl mb-2">
         お問い合わせ
       </h1>
@@ -241,7 +241,7 @@ const ConfirmSection = (props: ContactProps & {setNowSection: (nowSection: strin
   }
 
   return (
-    <div className="w-11/12 h-3/4 bg-white text-lg rounded-xl p-6 sm:p-6 md:p-6 lg:p-10 xl:p-10 m-auto absolute inset-0 z-40 overflow-scroll scrollbar-hidden">
+    <div className="w-full h-full bg-white text-lg rounded-xl p-6 sm:p-6 md:p-6 lg:p-10 xl:p-10 m-auto absolute inset-0 z-40 overflow-scroll scrollbar-hidden">
       <h1 className="font-bold text-3xl mb-2">
         お問い合わせ
       </h1>
@@ -305,7 +305,7 @@ const WaitSection = (props: ContactProps & {setNowSection: (nowSection: string) 
   }, []);
 
   return (
-    <div className="w-11/12 h-3/4 bg-white text-lg rounded-xl p-6 sm:p-6 md:p-6 lg:p-10 xl:p-10 m-auto absolute inset-0 z-40 overflow-scroll scrollbar-hidden">
+    <div className="w-full h-full bg-white text-lg rounded-xl p-6 sm:p-6 md:p-6 lg:p-10 xl:p-10 m-auto absolute inset-0 z-40 overflow-scroll scrollbar-hidden">
       <h1 className="font-bold text-3xl mb-2">
         お問い合わせ
       </h1>
@@ -342,7 +342,7 @@ const SuccessSection = (props: ContactProps & {setNowSection: (nowSection: strin
   }, []);
 
   return (
-    <div className="w-11/12 h-3/4 bg-white text-lg rounded-xl p-6 sm:p-6 md:p-6 lg:p-10 xl:p-10 m-auto absolute inset-0 z-40 overflow-scroll scrollbar-hidden">
+    <div className="w-full h-full bg-white text-lg rounded-xl p-6 sm:p-6 md:p-6 lg:p-10 xl:p-10 m-auto absolute inset-0 z-40 overflow-scroll scrollbar-hidden">
       <h1 className="font-bold text-3xl mb-2">
         お問い合わせ
       </h1>
@@ -365,7 +365,7 @@ const ErrorSection = (props: ContactProps & {setNowSection: (nowSection: string)
   }
 
   return (
-    <div className="w-11/12 h-3/4 bg-white text-lg rounded-xl p-6 sm:p-6 md:p-6 lg:p-10 xl:p-10 m-auto absolute inset-0 z-40 overflow-scroll scrollbar-hidden">
+    <div className="w-full h-full bg-white text-lg rounded-xl p-6 sm:p-6 md:p-6 lg:p-10 xl:p-10 m-auto absolute inset-0 z-40 overflow-scroll scrollbar-hidden">
       <h1 className="font-bold text-3xl mb-2">
         お問い合わせ
       </h1>

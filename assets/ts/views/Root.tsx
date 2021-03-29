@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navi from '../components/Navi';
 import Monitor from '../components/Monitor';
 import Contact from '../components/Contact';
+import { Transition, TransitionStatus } from 'react-transition-group';
+import { contactTransitionStyle, closeContactTransitionStyle } from '../animations/contactTransition';
+import alartTransitionStyle from '../animations/alartTransition';
 
 const Root = () => {
   const [menu] = useState<string[][]>([
@@ -51,6 +54,8 @@ const Root = () => {
     'Windows', 'Mac', 'Linux', 'Others'
   ];
 
+  const rootObj: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     setTitle(place);
 
@@ -62,12 +67,15 @@ const Root = () => {
     setTimeout(() => {
       setIsAlart(true);
     }, 1000);
+  }, []);
 
+  useEffect(() => {
+    // changeWindowSize();
     window.addEventListener('load', () => {
-      setInnerHeight(window.innerHeight);
+      changeWindowSize();
     });
     window.addEventListener('resize', () => {
-      setInnerHeight(window.innerHeight);
+      changeWindowSize();
     });
   }, []);
 
@@ -83,6 +91,12 @@ const Root = () => {
       setIsAlart(false);
     }
   }, [isAlart, isCameraMoved]);
+
+  const changeWindowSize = () => {
+    setInnerHeight(window.innerHeight);
+    rootObj.current!.style.width = `${window.innerWidth}px`;
+    rootObj.current!.style.height = `${window.innerHeight}px`;
+  }
 
   const changePlace = (place: string) => {
     setPlace(place);
@@ -110,18 +124,18 @@ const Root = () => {
     return className;
   }
 
-  const hideContactClass = () => {
-    let className: string = '';
-    const baseClass: string = 'w-full h-full bg-black opacity-50 absolute top-0 z-40';
+  // const hideContactClass = () => {
+  //   let className: string = '';
+  //   const baseClass: string = 'w-full h-full bg-black opacity-50 absolute top-0 z-40';
 
-    if (isContact) {
-      className = `${baseClass} visible`;
-    } else {
-      className = `${baseClass} invisible`;
-    }
+  //   if (isContact) {
+  //     className = `${baseClass} visible`;
+  //   } else {
+  //     className = `${baseClass} invisible`;
+  //   }
 
-    return className;
-  }
+  //   return className;
+  // }
 
   const landscapeClass = (): string => {
     let className: string = '';
@@ -142,7 +156,7 @@ const Root = () => {
   }
 
   return (
-    <>
+    <div className="flex relative overflow-hidden" ref={rootObj}>
       <Navi
         menu={menu}
         place={place}
@@ -173,8 +187,16 @@ const Root = () => {
         setIsCameraMoved={setIsCameraMoved}
       />
 
-      {isAlart
-        ? <div className="w-72 sm:w-72 md:w-72 lg:w-80 xl:w-80 px-4 py-3 text-base bg-white shadow-xl rounded-l-xl absolute top-6 right-0">
+      <Transition
+        in={isAlart}
+        timeout={{enter: 0, exit: 1000}}
+        mountOnEnter unmountOnExit
+      >
+        {(state: TransitionStatus) =>
+          <div
+            style={alartTransitionStyle[state]}
+            className="w-72 sm:w-72 md:w-72 lg:w-80 xl:w-80 px-4 py-3 text-base bg-white shadow-xl rounded-l-xl absolute top-6 right-0"
+          >
             <h1 className="font-bold text-xl text-green-700">
               僕のサイトへようこそ！
             </h1>
@@ -187,10 +209,10 @@ const Root = () => {
                 </p>
             }
           </div>
-        : <></>
-      }
+        }
+      </Transition>
 
-      <div
+      {/* <div
         className={hideContactClass()}
         onClick={() => {
           menu.map((item: string[], index: number) => {
@@ -201,9 +223,66 @@ const Root = () => {
           setTitle(place);
           setIsContact(false);
         }}
-      />
+      /> */}
 
-      {isContact
+      <Transition
+        in={isContact}
+        timeout={{enter: 0, exit: 1000}}
+        mountOnEnter unmountOnExit
+      >
+        {(state: TransitionStatus) =>
+          <div
+            style={closeContactTransitionStyle[state]}
+            className="w-full h-full bg-black opacity-50 absolute top-0 z-40"
+            onClick={() => {
+              menu.map((item: string[], index: number) => {
+                if (place === item[1]) {
+                  history.pushState(null, menu[index][0], `/${place}`);
+                }
+              });
+              setTitle(place);
+              setIsContact(false);
+            }}
+          />
+        }
+      </Transition>
+
+      <Transition
+        in={isContact}
+        timeout={{enter: 0, exit: 1000}}
+        mountOnEnter unmountOnExit
+      >
+        {(state: TransitionStatus) =>
+          <div
+            style={contactTransitionStyle[state]}
+            className="w-11/12 h-3/4 m-auto z-40"
+          >
+            <Contact
+              name={name}
+              setName={setName}
+              email={email}
+              setEmail={setEmail}
+              message={message}
+              setMessage={setMessage}
+
+              isNameError={isNameError}
+              setIsNameError={setIsNameError}
+              isEmailError={isEmailError}
+              setIsEmailError={setIsEmailError}
+              isTextAreaError={isTextAreaError}
+              setIsTextAreaError={setIsTextAreaError}
+              isComplete={isComplete}
+              setIsComplete={setIsComplete}
+
+              place={place}
+              menu={menu}
+              setTitle={setTitle}
+              setIsContact={setIsContact}
+            />
+          </div>
+        }
+      </Transition>
+      {/* {isContact
         ? <Contact
             name={name}
             setName={setName}
@@ -227,7 +306,7 @@ const Root = () => {
             setIsContact={setIsContact}
           />
         : <></>
-      }
+      } */}
 
       <div
         className={hideMenuClass()}
@@ -272,7 +351,7 @@ const Root = () => {
             </section>
           </div>
       }
-    </>
+    </div>
   );
 }
 

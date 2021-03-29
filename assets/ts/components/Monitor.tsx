@@ -53,10 +53,16 @@ const Monitor = (props: MonitorProps) => {
   useEffect(() => {
     window.addEventListener('load', () => {
       setViewSize();
+      setTimeout(() => {
+        setViewSize();
+      }, 10);
     });
 
     window.addEventListener('resize', () => {
       setViewSize();
+      setTimeout(() => {
+        setViewSize();
+      }, 10);
     });
 
     window.addEventListener('keydown', debugMonitorSwitch);
