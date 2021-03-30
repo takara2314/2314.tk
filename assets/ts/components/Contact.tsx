@@ -169,8 +169,8 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
             onChange={nameChangeHandler}
             ref={nameObject}
             className={props.isNameError
-              ? "w-full h-16 px-3 rounded-xl bg-white border-2 border-red-700 outline-none"
-              : "w-full h-16 px-3 rounded-xl bg-white border-2 border-green-700 outline-none"
+              ? "w-full h-16 px-3 rounded-xl bg-white border-2 border-red-700 outline-none appearance-none"
+              : "w-full h-16 px-3 rounded-xl bg-white border-2 border-green-700 outline-none appearance-none"
             }
           />
         </div>
@@ -188,8 +188,8 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
             onChange={emailChangeHandler}
             ref={emailObject}
             className={props.isEmailError
-              ? "w-full h-16 px-3 rounded-xl bg-white border-2 border-red-700 outline-none"
-              : "w-full h-16 px-3 rounded-xl bg-white border-2 border-green-700 outline-none"
+              ? "w-full h-16 px-3 rounded-xl bg-white border-2 border-red-700 outline-none appearance-none"
+              : "w-full h-16 px-3 rounded-xl bg-white border-2 border-green-700 outline-none appearance-none"
             }
           />
         </div>
@@ -206,8 +206,8 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
             onChange={messageChangeHandler}
             ref={messageObject}
             className={props.isTextAreaError
-              ? "w-full h-72 px-3 pt-4 pb-2 rounded-xl bg-white border-2 border-red-700 outline-none"
-              : "w-full h-72 px-3 pt-4 pb-2 rounded-xl bg-white border-2 border-green-700 outline-none"
+              ? "w-full h-72 px-3 pt-4 pb-2 rounded-xl bg-white border-2 border-red-700 outline-none appearance-none"
+              : "w-full h-72 px-3 pt-4 pb-2 rounded-xl bg-white border-2 border-green-700 outline-none appearance-none"
             }
           />
         </div>
@@ -217,7 +217,7 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
                 type="submit"
                 value="確認して送信する"
                 onClick={toConfirmButtonHandler}
-                className="w-72 h-12 text-white font-bold bg-green-700 hover:bg-green-900 rounded-full outline-none mx-auto absolute inset-x-0"
+                className="w-72 h-12 text-white font-bold bg-green-700 hover:bg-green-900 rounded-full outline-none mx-auto absolute inset-x-0 appearance-none"
               />
             : <div
                 className="w-72 h-12 text-white text-center leading-12 font-bold bg-gray-400 rounded-full mx-auto absolute inset-x-0"
@@ -271,14 +271,14 @@ const ConfirmSection = (props: ContactProps & {setNowSection: (nowSection: strin
       <div className="w-full h-12 mt-6 flex flex-row justify-center">
         <button
           onClick={correctionHandler}
-          className="w-72 h-12 text-green-700 hover:text-green-900 font-bold bg-white mx-auto rounded-full focus:outline-none"
+          className="w-72 h-12 text-green-700 hover:text-green-900 font-bold bg-white mx-auto rounded-full focus:outline-none appearance-none"
         >
           修正する
         </button>
 
         <button
           onClick={sendHandler}
-          className="w-72 h-12 text-white font-bold bg-green-700 hover:bg-green-900 mx-auto rounded-full focus:outline-none"
+          className="w-72 h-12 text-white font-bold bg-green-700 hover:bg-green-900 mx-auto rounded-full focus:outline-none appearance-none"
         >
           送信する
         </button>
@@ -347,7 +347,7 @@ const SuccessSection = (props: ContactProps & {setNowSection: (nowSection: strin
       <h1 className="font-bold text-3xl mb-2">
         お問い合わせ
       </h1>
-      <p className="py-1 text-green-700 font-bold">
+      <p className="text-xl py-1 text-green-700 font-bold">
         送信しました。
       </p>
       <p className="py-1">
@@ -370,7 +370,7 @@ const ErrorSection = (props: ContactProps & {setNowSection: (nowSection: string)
       <h1 className="font-bold text-3xl mb-2">
         お問い合わせ
       </h1>
-      <p className="py-1 text-red-700 font-bold">
+      <p className="text-xl py-1 text-red-700 font-bold">
         送信に失敗しました。
       </p>
       <p className="py-1">
@@ -379,7 +379,7 @@ const ErrorSection = (props: ContactProps & {setNowSection: (nowSection: string)
       <div className="w-full h-12 mt-6 flex flex-row justify-center">
         <button
           onClick={resendHandler}
-          className="w-72 h-12 text-white font-bold bg-green-700 hover:bg-green-900 mx-auto rounded-full focus:outline-none"
+          className="w-72 h-12 text-white font-bold bg-green-700 hover:bg-green-900 mx-auto rounded-full focus:outline-none appearance-none"
         >
           再送信する
         </button>

@@ -71,15 +71,6 @@ const Root = () => {
 
   useEffect(() => {
     changeWindowSize();
-    setTimeout(() => {
-      changeWindowSize();
-    }, 10);
-    setTimeout(() => {
-      changeWindowSize();
-    }, 100);
-    setTimeout(() => {
-      changeWindowSize();
-    }, 1000);
 
     window.addEventListener('load', () => {
       changeWindowSize();

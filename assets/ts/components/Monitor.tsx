@@ -49,7 +49,7 @@ const Monitor = (props: MonitorProps) => {
     .then(
       (result: string) => {
         if (result === '401 Unauthorized') {
-          setMemo('<p>申し訳ございません。通信エラーが発生しました。</p>');
+          setMemo('<p>申し訳ございません。一時的な不具合です。</p><p>端末の向きを変えたり、ブラウザを開き直すと直る可能性があります。</p>');
         } else {
           setMemo(result);
         }
@@ -66,15 +66,6 @@ const Monitor = (props: MonitorProps) => {
 
   useEffect(() => {
     setViewSize();
-    setTimeout(() => {
-      setViewSize();
-    }, 10);
-    setTimeout(() => {
-      setViewSize();
-    }, 100);
-    setTimeout(() => {
-      setViewSize();
-    }, 1000);
 
     window.addEventListener('load', () => {
       setViewSize();
@@ -100,6 +91,12 @@ const Monitor = (props: MonitorProps) => {
       setTimeout(() => {
         setViewSize();
       }, 1000);
+      setTimeout(() => {
+        setViewSize();
+      }, 1500);
+      setTimeout(() => {
+        setViewSize();
+      }, 2000);
     });
 
     window.addEventListener('keydown', debugMonitorSwitch);
@@ -170,7 +167,7 @@ const Monitor = (props: MonitorProps) => {
         : "text-white text-xl absolute top-24 sm:top-24 md:top-24 lg:top-0 xl:top-0 select-none invisible"
       }>
         <p><span className="bg-black-opacity-25">
-          2314.tk 1.0.0 (Debug mode) - beta (30th March, 2021 6th-built)
+          2314.tk 1.0.0 (Debug mode) - beta (30th March, 2021 7th-built)
         </span></p>
         <p><span className="bg-black-opacity-25">
           Browser: {props.clientBrowser}
