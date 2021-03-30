@@ -265,44 +265,52 @@ const WorksPole = (props: WorldProps & WorksPoleProps) => {
         anchorX="center"
         anchorY="middle"
         fontSize={0.5}
-        font="./public/fonts/Inter/Inter-ForWorld.ttf"
         position={[0.5, 34, 2]}
         rotation={[0, Math.PI * 0 / 180, 0]}
       >
-        Click!
+        {props.nowAzimuth === 'north'
+          ? ''
+          : 'Click!'
+        }
       </Text>
       <Text
         color="black"
         anchorX="center"
         anchorY="middle"
         fontSize={0.5}
-        font="./public/fonts/Inter/Inter-ForWorld.ttf"
         position={[-2, 34, 0.5]}
         rotation={[0, Math.PI * 270 / 180, 0]}
       >
-        Click!
+        {props.nowAzimuth === 'east'
+          ? ''
+          : 'Click!'
+        }
       </Text>
       <Text
         color="black"
         anchorX="center"
         anchorY="middle"
         fontSize={0.5}
-        font="./public/fonts/Inter/Inter-ForWorld.ttf"
         position={[-0.5, 34, -2]}
         rotation={[0, Math.PI * 180 / 180, 0]}
       >
-        Click!
+        {props.nowAzimuth === 'south'
+          ? ''
+          : 'Click!'
+        }
       </Text>
       <Text
         color="black"
         anchorX="center"
         anchorY="middle"
         fontSize={0.5}
-        font="./public/fonts/Inter/Inter-ForWorld.ttf"
         position={[2, 34, -0.5]}
         rotation={[0, Math.PI * 90 / 180, 0]}
       >
-        Click!
+        {props.nowAzimuth === 'west'
+          ? ''
+          : 'Click!'
+        }
       </Text>
 
       <mesh
