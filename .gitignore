@@ -1,6 +1,6 @@
 /.vscode/
 /dist/
 /node_modules/
-assets/ts/services/sendMailToken.ts
+src/ts/services/sendMailToken.ts
 environ.yaml
 package-lock.json

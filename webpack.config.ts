@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const config: Configuration = {
-  context: path.join(__dirname, 'assets'),
+  context: path.join(__dirname, 'src'),
   entry: './ts/index.tsx',
   output: {
     path: path.join(__dirname, 'dist'),

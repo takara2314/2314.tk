@@ -4,8 +4,8 @@ module.exports = {
   purge: {
     enabled: false,
     content: [
-      './assets/ts/**/*.{ts,tsx}',
-      './assets/html/index.html',
+      './src/ts/**/*.{ts,tsx}',
+      './src/html/index.html',
       './memos/**/*.html'
     ]
   },
