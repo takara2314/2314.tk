@@ -6,12 +6,14 @@ import { Mesh } from 'three';
 import { useGLTF } from "@react-three/drei";
 
 const Skills = (props: WorldProps) => {
+  // 像が選択されているかどうか
   const [selection, setSelection] = useState<boolean[]>([
     false, false, false, false,
     false, false, false, false,
     false, false, false, false
   ]);
 
+  // 最初にメモを読み込み
   useEffect(() => {
     props.changeMemoName('skills');
   }, []);
@@ -42,15 +44,20 @@ const Skills = (props: WorldProps) => {
   );
 }
 
+// 像を円になるように配置する
 const SkillStates = (props: WorldProps & SkillStatesProps) => {
+  // 像の要素
   const plots: any[] = Array(props.amount);
-
+  // 中心の位置
   const [basePosX, basePosY, basePosZ] = props.position;
+  // 角度 (ラジアン角)
   const angle: number = 2 * Math.PI / props.amount;
 
   for (let i = 0; i < props.amount; i++) {
     plots[i] = useMemo(() => {
+      // X座標: 元のX座標 + (半径の比率 × 半径) × sin(角度)
       const posX: number = basePosX + props.ratio * props.radius * Math.sin(angle * i);
+      // Z座標: 元のZ座標 + (半径の比率 × 半経) × cos(角度)
       const posZ: number = basePosZ + props.ratio * props.radius * Math.cos(angle * i);
 
       return (
@@ -96,7 +103,9 @@ const SkillStates = (props: WorldProps & SkillStatesProps) => {
   );
 }
 
+// 像のコンポーネント
 const SkillState = (props: {skill: string, ratioPosX: number, selection: boolean[], thisNum: number}) => {
+  // 指定されたスキルのモデルをロード
   const { nodes, materials } = useGLTF(`../public/models/${props.skill}-state.glb`);
 
   return (
@@ -135,6 +144,7 @@ const SkillState = (props: {skill: string, ratioPosX: number, selection: boolean
     </Suspense>
   );
 }
+// モデルをプリロード
 useGLTF.preload('../public/models/html-state.glb');
 useGLTF.preload('../public/models/swift-state.glb');
 useGLTF.preload('../public/models/dart-state.glb');

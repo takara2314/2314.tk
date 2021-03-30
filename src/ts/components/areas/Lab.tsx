@@ -5,6 +5,7 @@ import { Mesh, Vector3 } from 'three';
 import { useGLTF } from "@react-three/drei";
 
 const Lab = (props: WorldProps) => {
+  // 最初にメモを読み込み
   useEffect(() => {
     props.changeMemoName('lab');
   }, []);
@@ -17,7 +18,9 @@ const Lab = (props: WorldProps) => {
   );
 }
 
+// はてなマークのコンポーネント
 const Hatena = (props: WorldProps) => {
+  // モデルをロード
   const { nodes, materials } = useGLTF('../public/models/hatena.glb');
 
   return (
@@ -38,6 +41,7 @@ const Hatena = (props: WorldProps) => {
     </Suspense>
   );
 }
+// モデルをプリロード
 useGLTF.preload('../public/models/hatena.glb');
 
 export default Lab;

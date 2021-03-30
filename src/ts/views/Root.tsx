@@ -7,6 +7,7 @@ import { contactTransitionStyle, closeContactTransitionStyle } from '../animatio
 import alartTransitionStyle from '../animations/alartTransition';
 
 const Root = () => {
+  // ナビで表示する行き先一覧
   const [menu] = useState<string[][]>([
     [ '僕について', 'about' ],
     [ 'できること', 'skills' ],
@@ -16,6 +17,7 @@ const Root = () => {
     [ 'お問い合わせ', 'contact' ]
   ]);
 
+  // アプリ上での現在地
   const [place, setPlace] = useState<string>(location.pathname.slice(1) !== ''
     ? (location.pathname.slice(1) !== 'contact'
         ? location.pathname.slice(1)
@@ -24,41 +26,45 @@ const Root = () => {
     : menu[0][1]
   );
 
+  // お問い合わせフォームが開いているかどうか
   const [isContact, setIsContact] = useState<boolean>(false);
-
+  // モバイル端末でナビを開いているかどうか
   const [isMenuShowMobile, changeIsMenuShowMobile] = useState<boolean>(false);
-
+  // 表示域の高さ
   const [innerHeight, setInnerHeight] = useState<number>(0);
-
+  // コピーライトをクリックした回数
   const [secretTimes, setSecretTimes] = useState<number>(0);
-
+  // デバッグモード(F2)かどうか
   const [isDebugMode, setIsDebugMode] = useState<boolean>(false);
-
+  // お問い合わせフォームの記入内容
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [message, setMessage] = useState<string>('');
-
+  // お問い合わせフォームの記入内容の評価
   const [isNameError, setIsNameError] = useState<boolean>(false);
   const [isEmailError, setIsEmailError] = useState<boolean>(false);
   const [isTextAreaError, setIsTextAreaError] = useState<boolean>(false);
   const [isComplete, setIsComplete] = useState<boolean>(false);
-
+  // ウェルカムボードを表示するかどうか
   const [isAlart, setIsAlart] = useState<boolean>(false);
-
+  // ユーザーのブラウザ、デバイス
   const [clientBrowser, setClientBrowser] = useState<string>('Loading...');
   const [clientDevice, setClientDevice] = useState<string>('Loading...');
-
+  // アプリ内のカメラが動いたがどうか
   const [isCameraMoved, setIsCameraMoved] = useState<boolean>(false);
-
+  // 定められているPCデバイス一覧
   const pcDevices: string[] = [
     'Windows', 'Mac', 'Linux', 'Others'
   ];
 
   const rootObj: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
+  // ページが読み込まれたときに、最初に行う処理
   useEffect(() => {
+    // 表示されるタイトルを適切なものにする
     setTitle(place);
 
+    // お問い合わせフォームの指定があれば、そのままフォームを開く
     if (location.pathname.slice(1) === 'contact') {
       setIsContact(true);
     }
@@ -69,9 +75,11 @@ const Root = () => {
     }, 1000);
   }, []);
 
+  // 画面表示に関する処理
   useEffect(() => {
+    // ページが表示されたら、表示域のサイズを取得して適切なサイズに設定
     changeWindowSize();
-
+    // ページがロードされたら、処理遅延の問題で、もう何度かリサイズ処理
     window.addEventListener('load', () => {
       changeWindowSize();
       setTimeout(() => {
@@ -84,7 +92,7 @@ const Root = () => {
         changeWindowSize();
       }, 1000);
     });
-
+    // ページがリサイズされたら、処理遅延の問題で、もう何度かリサイズ処理
     window.addEventListener('resize', () => {
       changeWindowSize();
       setTimeout(() => {
@@ -112,17 +120,20 @@ const Root = () => {
     }
   }, [isAlart, isCameraMoved]);
 
+  // 表示域のサイズを取得して、そのサイズに適するサイズにする
   const changeWindowSize = () => {
     setInnerHeight(window.innerHeight);
     rootObj.current!.style.width = `${window.innerWidth}px`;
     rootObj.current!.style.height = `${window.innerHeight}px`;
   }
 
+  // アプリ上での位置を変更する
   const changePlace = (place: string) => {
     setPlace(place);
     setTitle(place);
   }
 
+  // タイトルを設定
   const setTitle = (place: string) => {
     menu.map((item: string[], index: number) => {
       if (place === item[1]) {
@@ -131,6 +142,7 @@ const Root = () => {
     });
   }
 
+  // モバイル端末で見たとき、メニューを非表示にする部分のスタイル
   const hideMenuClass = () => {
     let className: string = '';
     const baseClass: string = 'w-full h-full bg-black opacity-50 absolute top-0 z-30';
@@ -144,6 +156,7 @@ const Root = () => {
     return className;
   }
 
+  // スマホ横画面のときに表示する警告のスタイル
   const landscapeClass = (): string => {
     let className: string = '';
 

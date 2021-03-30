@@ -6,8 +6,9 @@ import { Mesh, Vector3 } from 'three';
 import { useGLTF, Text } from "@react-three/drei";
 
 const Works = (props: WorldProps) => {
+  // Worksエリア内の現在の場所名
   const [nowAzimuth, setNowAzimuth] = useState<string>('south');
-
+  // Worksで呼び出すメモ一覧
   const memos: {[azimuth: string]: string[]} = {
     north: [
       'foxseed', 'html-geter', 'school-bytrain', 'kadai-alarm'
@@ -23,6 +24,7 @@ const Works = (props: WorldProps) => {
     ]
   };
 
+  // 最初にメモを読み込み
   useEffect(() => {
     props.changeMemoName('works');
   }, []);
@@ -172,13 +174,17 @@ const Works = (props: WorldProps) => {
   );
 }
 
+// 中央のボタンの塔
 const WorksPole = (props: WorldProps & WorksPoleProps) => {
+  // モデルをロード
   const { nodes, materials } = useGLTF('../public/models/works_pole.glb');
-
+  // ボタンが押されているかどうか
+  // デフォルトとして、南エリアのボタンは押されていることにする
   const [pressed, setPressed] = useState<boolean[]>([
     false, false, true, false
   ]);
 
+  // // 位置デバッグ用コード
   // const [debugX, setX] = useState<number>(0);
   // const [debugY, setY] = useState<number>(180);
   // const [debugZ, setZ] = useState<number>(0);
@@ -210,33 +216,39 @@ const WorksPole = (props: WorldProps & WorksPoleProps) => {
   //   return () => window.removeEventListener('keydown', moveKeydown);
   // }, [debugX, debugY, debugZ]);
 
+  // 場所一覧
   const azimuthNames: string[] = [
     'north', 'east', 'south', 'west'
   ];
+  // 押されていないときのボタンの位置
   const azimuthButtonPosStaying: number[][] = [
     [0, 34.5, 1.5],
     [-1.5, 34.5, 0],
     [0, 34.5, -1.5],
     [1.5, 34.5, 0]
   ];
+  // 押されたときのボタンの位置
   const azimuthButtonPosPressed: number[][] = [
     [0, 34.5, 1.3],
     [-1.3, 34.5, 0],
     [0, 34.5, -1.3],
     [1.3, 34.5, 0]
   ];
+  // ボタンの角度
   const azimuthButtonRot: number[][] = [
     [-90, 0, 0],
     [0, 0, -90],
     [90, 0, 0],
     [0, 0, 90]
   ];
+  // 塔の3D文字の位置
   const azimuthTextPos: number[][] = [
     [-0.8, 32.8, 1.65],
     [-1.65, 32.8, -0.8],
     [0.8, 32.8, -1.65],
     [1.65, 32.8, 0.8],
   ];
+  // 塔の3D文字の角度
   const azimuthTextRot: number[][] = [
     [90, 270, 0],
     [180, 0, 90],
@@ -244,6 +256,7 @@ const WorksPole = (props: WorldProps & WorksPoleProps) => {
     [180, 180, -270]
   ];
 
+  // ボタンが押されたときの処理
   const pressHandler = (index: number): void => {
     const temp: boolean[] = [false, false, false, false];
     temp[index] = true;
@@ -399,6 +412,7 @@ const WorksPole = (props: WorldProps & WorksPoleProps) => {
     </Suspense>
   );
 }
+// モデルをプリロード
 useGLTF.preload('../public/models/works_pole.glb');
 
 export default Works;

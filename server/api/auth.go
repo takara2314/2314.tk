@@ -1,5 +1,6 @@
 package api
 
+// API認証
 func auth(authHeader string, token string) bool {
 	// 最初が Bearer でなければ
 	if authHeader[:6] != "Bearer" {

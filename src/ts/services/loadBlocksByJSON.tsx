@@ -1,6 +1,7 @@
 import React, { PointerEvent } from 'react';
 import WorldProps from '../models/WorldProps';
 
+// 受け取ったJSONからブロックデータを読み込み
 const loadBlocksByJSON = (props: WorldProps, json: any, intercepts: number[]): any[] => {
   let blocksTemp: any[] = Array();
 
@@ -43,7 +44,9 @@ const loadBlocksByJSON = (props: WorldProps, json: any, intercepts: number[]): a
   return blocksTemp;
 }
 
+// ブロックの色をランダムで返す関数
 const chooseBlock = (props: WorldProps, floorBlock: string): string => {
+  // 地面の色
   const grassColor: {[place: string]: string[]} = {
     // 緑
     'about': [
@@ -69,18 +72,16 @@ const chooseBlock = (props: WorldProps, floorBlock: string): string => {
     'lab': [
       'rgb(230, 230, 230)',
       'rgb(200, 200, 200)'
-    ],
-    'contact': [
-      'rgb(0, 255, 127)',
-      'rgb(0, 191, 95)'
     ]
   };
 
+  // 石の色
   const stoneColor: string[] = [
     'rgb(150, 150, 150)',
     'rgb(140, 140, 140)'
   ];
 
+  // 50%の確立でどちらかに分かれる
   if (floorBlock == 'grass') {
     return Math.random() >= 0.5 ? grassColor[props.place][0] : grassColor[props.place][1];
   }

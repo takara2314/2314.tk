@@ -4,18 +4,22 @@ import loadBlocksByJSON from '../../services/loadBlocksByJSON';
 import WorldProps from '../../models/WorldProps';
 
 const Favorites = (props: WorldProps) => {
+  // このエリアの地面ブロック
   const [blocks, setBlocks] = useState<any[]>(Array());
   const [loadState, setLoadState] = useState<string>('Loading');
 
+  // 最初にメモを読み込み
   useEffect(() => {
     props.changeMemoName('favorites');
   }, []);
 
+  // 次にマップデータを読み込み
   useEffect(() => {
     fetch('../public/areas/favorites.json')
     .then(res => res.json())
     .then(
       (result) => {
+        // 無事読み込めたらエリアに設置
         setBlocks(
           loadBlocksByJSON(
             props,

@@ -1,3 +1,4 @@
+// ウェルカムボードのアニメーション
 const alartTransitionStyle: {entering: any, entered: any, exiting: any, exited: any, unmounted: any} = {
   entering: {
     transition: "all 1s ease",

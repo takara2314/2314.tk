@@ -10,11 +10,13 @@ import { useFrame } from 'react-three-fiber';
 import { useGLTF } from "@react-three/drei";
 
 const About = (props: WorldProps) => {
+  // このエリアの地面ブロック
   const [blocks, setBlocks] = useState<any[]>(Array());
   const [loadState, setLoadState] = useState<string>('Loading');
 
   const controlsRef = useRef<OrbitControls>();
 
+  // 真ん中のタカラーン像のテクスチャ
   const parts = ['head', 'body', 'right_hand', 'left_hand'];
   const angles = ['front', 'right', 'back', 'left', 'top', 'bottom'];
   const textures: TextureSet = {};
@@ -25,20 +27,26 @@ const About = (props: WorldProps) => {
         new TextureLoader().load(
           `../public/textures/takara2314/${part}/${angle}.png`,
           (tex) => {
+            // テクスチャをそのままリサイズ
             tex.magFilter = NearestFilter;
           }
         ), []
       );
-    })
+    });
   });
 
+  // 最初にメモを読み込み
   useEffect(() => {
     props.changeMemoName('intro');
+  }, []);
 
+  // 次にマップデータを読み込み
+  useEffect(() => {
     fetch('../public/areas/about.json')
     .then(res => res.json())
     .then(
       (result) => {
+        // 無事読み込めたらエリアに設置
         setBlocks(
           loadBlocksByJSON(
             props,
@@ -53,14 +61,6 @@ const About = (props: WorldProps) => {
       }
     )
   }, [props.place]);
-
-  useFrame(({camera}) => {
-    controlsRef.current?.update();
-
-    props.changePosX(camera.position.x);
-    props.changePosY(camera.position.y);
-    props.changePosZ(camera.position.z);
-  });
 
   return (
     <>
@@ -286,7 +286,9 @@ const About = (props: WorldProps) => {
   );
 }
 
+// 夢マークのコンポーネント
 const Dream = (props: WorldProps) => {
+  // モデルをロード
   const { nodes, materials } = useGLTF('../public/models/dream.glb');
 
   return (
@@ -311,17 +313,23 @@ const Dream = (props: WorldProps) => {
     </Suspense>
   );
 }
+// モデルをプリロード
 useGLTF.preload('../public/models/dream.glb');
 
+// いちごを円になるように配置する
 const Strawberrys = (props: WorldProps & StrawberrysProps) => {
+  // いちごの要素
   const plots: any[] = Array(props.amount);
-
+  // 中心の位置
   const [basePosX, basePosY, basePosZ] = props.position;
+  // 角度 (ラジアン角)
   const angle: number = 2 * Math.PI / props.amount;
 
   for (let i = 0; i < props.amount; i++) {
     plots[i] = useMemo(() => {
+      // X座標: 元のX座標 + (半径の比率 × 半径) × sin(角度)
       const posX: number = basePosX + props.ratio * props.radius * Math.sin(angle * i);
+      // Z座標: 元のZ座標 + (半径の比率 × 半経) × cos(角度)
       const posZ: number = basePosZ + props.ratio * props.radius * Math.cos(angle * i);
 
       return (

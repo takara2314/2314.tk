@@ -6,12 +6,15 @@ import getMemo from '../services/getMemo';
 import { Canvas } from 'react-three-fiber';
 
 const Monitor = (props: MonitorProps) => {
+  // モニター上の表示域サイズ
   const [viewWidth, setViewWidth] = useState<number>(0);
   const [viewHeight, setViewHeight] = useState<number>(0);
 
+  // 表示されるメモ内容
   const [memo, setMemo] = useState<string>('Loading...');
   const [memoName, setMemoName] = useState<string>('');
 
+  // アプリ上での現在位置
   const [posX, setPosX] = useState<number>(0);
   const [posY, setPosY] = useState<number>(35);
   const [posZ, setPosZ] = useState<number>(-30);
@@ -20,11 +23,14 @@ const Monitor = (props: MonitorProps) => {
   const [hoverPosY, setHoverPosY] = useState<number>(0);
   const [hoverPosZ, setHoverPosZ] = useState<number>(0);
 
+  // F2でデバッグモードを開いているかどうか
   const [isF2Debug, setIsF2Debug] = useState<boolean>(false);
 
   const monitorObject: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
 
+  // 最初にブラウザとデバイス情報を取得するために、サーバーにアクセスする
   useEffect(() => {
+    // ページ全体の表示域(横・縦)、主な操作はタッチかどうか
     getClientData(
       window.innerWidth,
       window.innerHeight,
@@ -33,6 +39,7 @@ const Monitor = (props: MonitorProps) => {
     .then(res => res.json())
     .then(
       (result: any) => {
+        // 正常にサーバーに接続できたとき
         props.setClientBrowser(result.browser);
         props.setClientDevice(result.device);
       },
@@ -43,11 +50,15 @@ const Monitor = (props: MonitorProps) => {
     );
   }, []);
 
+  // メモを取得
   useEffect(() => {
     getMemo(memoName)
     .then(res => res.text())
     .then(
       (result: string) => {
+        // 正常にサーバーに接続できたとき
+
+        // 何かしらの原因で認証ができなかったとき
         if (result === '401 Unauthorized') {
           setMemo('<p>申し訳ございません。一時的な不具合です。</p><p>端末の向きを変えたり、ブラウザを開き直すと直る可能性があります。</p>');
         } else {
@@ -55,6 +66,7 @@ const Monitor = (props: MonitorProps) => {
         }
       },
       (error: Error) => {
+        // サーバーに接続できないとき
         if (error.toString() === 'TypeError: Failed to fetch') {
           setMemo('<p>申し訳ございません。サーバーと通信できませんでした。</p>');
         } else {
@@ -64,9 +76,11 @@ const Monitor = (props: MonitorProps) => {
     );
   }, [memoName]);
 
+  // 画面表示に関する処理
   useEffect(() => {
+    // ページが表示されたら、表示域のサイズを取得して適切なサイズに設定
     setViewSize();
-
+    // ページがロードされたら、処理遅延の問題で、もう何度かリサイズ処理
     window.addEventListener('load', () => {
       setViewSize();
       setTimeout(() => {
@@ -79,7 +93,7 @@ const Monitor = (props: MonitorProps) => {
         setViewSize();
       }, 1000);
     });
-
+    // ページがリサイズされたら、処理遅延の問題で、もう何度かリサイズ処理
     window.addEventListener('resize', () => {
       setViewSize();
       setTimeout(() => {
@@ -98,12 +112,16 @@ const Monitor = (props: MonitorProps) => {
         setViewSize();
       }, 2000);
     });
+  });
 
+  // キー投下時にコールバックする
+  useEffect(() => {
     window.addEventListener('keydown', debugMonitorSwitch);
 
     return () => window.removeEventListener('keydown', debugMonitorSwitch);
   }, [props.isDebugMode]);
 
+  // コピーライトを押した回数が5の倍数回なら、デバッグ画面が表示される
   useEffect(() => {
     if (props.secretTimes > 0 && props.secretTimes % 5 === 0) {
       props.setIsDebugMode(true);
@@ -112,13 +130,16 @@ const Monitor = (props: MonitorProps) => {
     }
   }, [props.secretTimes]);
 
+  // キー投下時のコールバック関数
   const debugMonitorSwitch = useCallback((e: KeyboardEvent) => {
+    // F2が押されたらデバッグ画面を開く
     if (e.key == 'F2') {
       setIsF2Debug(!isF2Debug);
       props.setIsDebugMode(!props.isDebugMode);
     }
   }, [isF2Debug, props.isDebugMode]);
 
+  // 表示域のサイズを取得して、そのサイズに適するサイズにする
   const setViewSize = () => {
     setViewWidth(monitorObject.current?.clientWidth!);
     setViewHeight(window.innerHeight);
@@ -167,7 +188,7 @@ const Monitor = (props: MonitorProps) => {
         : "text-white text-xl absolute top-24 sm:top-24 md:top-24 lg:top-0 xl:top-0 select-none invisible"
       }>
         <p><span className="bg-black-opacity-25">
-          2314.tk 1.0.0 - release (30th March, 2021 built)
+          2314.tk 1.0.0 - release (31th March, 2021 built)
         </span></p>
         <p><span className="bg-black-opacity-25">
           Browser: {props.clientBrowser}

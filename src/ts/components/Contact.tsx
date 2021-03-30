@@ -4,8 +4,10 @@ import ContactProps from '../models/ContactProps';
 import SendMailPost from '../models/SendMailPost';
 
 const Contact = (props: ContactProps) => {
+  // お問い合わせの過程
   const [nowSection, setNowSection] = useState<string>('form');
 
+  // 最初にページタイトルを「お問い合わせ」にする
   useEffect(() => {
     document.title = 'お問い合わせ - タカラーン';
   }, []);
@@ -51,6 +53,7 @@ const Contact = (props: ContactProps) => {
   );
 }
 
+// 内容入力過程
 const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) => void}) => {
   const nameObject: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
   const emailObject: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
@@ -76,6 +79,7 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
     }
   }, []);
 
+  // フォームの内容が変更されたときに、リアルタイムで適切がどうかをチェック
   const nameChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     nameCheck(e.target.value);
   }
@@ -86,12 +90,14 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
     messageCheck(e.target.value);
   }
 
+  // 次に進むボタンの処理
   const toConfirmButtonHandler = () => {
     // メッセージの文末に改行コードが含まれていたら、取り除いて格納
     props.setMessage(props.message.replace(/\n+$/g, ''))
     props.setNowSection('confirm');
   }
 
+  // 入力された名前が空白であれば、エラーを発生
   const nameCheck = (value: string): void => {
     if (value === '') {
       props.setName('');
@@ -102,6 +108,8 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
     }
   }
 
+  // 入力されたメアドが空白もしくは不適切であれば、エラーを発生
+  // 不適切な例: 正しいメアドの形ではない
   const emailCheck = (value: string): void => {
     if (value.match(emailRegExp)) {
       props.setEmail(value);
@@ -112,6 +120,7 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
     }
   }
 
+  // 入力された内容が空白もしくは改行だけであれば、エラーを発生
   const messageCheck = (value: string): void => {
     if (value.replace(/\n+$/g, '') === '') {
       props.setMessage('');
@@ -122,12 +131,13 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
     }
   }
 
+  // エラーに沿って送信ボタンを表示させるかを決める処理
   useEffect(() => {
     // 送信ボタンを表示する条件
     // ・名前が空白ではない
-    // ・メアドが正規表現通り
+    // ・メールアドレスが正規表現通り
     // ・メッセージは文末の改行コードを除いたとき、空白ではない
-    // ・XSSを試みていない
+    // ・クロスサイトスクリプティング(XSS)を試みていない
     if (
       props.name !== ''
       && props.email.match(emailRegExp)
@@ -231,11 +241,13 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
   );
 }
 
+// 確認過程
 const ConfirmSection = (props: ContactProps & {setNowSection: (nowSection: string) => void}) => {
+  // 修正ボタンが押されたときに、前の処理(form)に移動
   const correctionHandler = () => {
     props.setNowSection('form');
   }
-
+  // 送信ボタンが押されたときに、次の処理(wait)に移動
   const sendHandler = () => {
     props.setNowSection('wait');
   }
@@ -287,7 +299,9 @@ const ConfirmSection = (props: ContactProps & {setNowSection: (nowSection: strin
   );
 }
 
+// 待機過程
 const WaitSection = (props: ContactProps & {setNowSection: (nowSection: string) => void}) => {
+  // 最初に入力された情報を問い合わせるために、サーバーにPOST
   useEffect(() => {
     const json: SendMailPost = {
       name:      props.name,
@@ -298,9 +312,11 @@ const WaitSection = (props: ContactProps & {setNowSection: (nowSection: string) 
 
     sendMail(json)
     .then(() => {
+      // 正常にメールを送信できたら、成功過程に移動
       props.setNowSection('success');
     })
     .catch(() => {
+      // 正常にメールを送信できなかったら、失敗過程に移動
       props.setNowSection('error');
     });
   }, []);
@@ -324,7 +340,9 @@ const WaitSection = (props: ContactProps & {setNowSection: (nowSection: string) 
   );
 }
 
+// 成功過程
 const SuccessSection = (props: ContactProps & {setNowSection: (nowSection: string) => void}) => {
+  // 移動して5秒経ってから、アプリで一時保存されている入力内容を破棄し、コンポーネントを閉じる
   useEffect(() => {
     setTimeout(() => {
       props.menu.map((item: string[], index: number) => {
@@ -360,7 +378,9 @@ const SuccessSection = (props: ContactProps & {setNowSection: (nowSection: strin
   );
 }
 
+// 失敗過程
 const ErrorSection = (props: ContactProps & {setNowSection: (nowSection: string) => void}) => {
+  // 再送信ボタンを押したときに、待機過程に戻ってメールをサーバーに再送信する
   const resendHandler = () => {
     props.setNowSection('wait');
   }

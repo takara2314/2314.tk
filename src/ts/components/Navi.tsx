@@ -3,8 +3,10 @@ import NaviProps from '../models/NaviProps';
 import SocialLinksProps from '../models/SocialLinksProps';
 
 const Navi = (props: NaviProps) => {
+  // 僕のプロフィール画像(ネット以上リアル未満)
   const [takaranImg] = useState<string>('../public/takaran.png');
 
+  // ソーシャルリンクとそのアイコンのスタイルなど
   const [links] = useState<string[][]>([
     [ 'Twitter', 'https://twitter.com/takara2314', '../public/Twitter.svg', 'mr-1 ml-2 w-11' ],
     [ 'Facebook', 'https://www.facebook.com/HamaguchiTakara/', '../public/Facebook.svg', 'mr-2 ml-2 w-7' ],
@@ -12,21 +14,26 @@ const Navi = (props: NaviProps) => {
     [ 'Discord', '拡張的な宝箱#9220', '../public/Discord.svg', 'mr-2 ml-2 mt-1 w-9' ]
   ]);
 
+  // Discord のユーザー名を表示させているかどうか
   const [isDiscordShow, setIsDiscordShow] = useState<boolean>(false);
 
+  // ナビのスタイル
   const menuClass = (): string => {
     let className: string = '';
     const baseClass: string = 'flex flex-col w-3/4 sm:w-3/4 md:w-3/4 lg:w-1/4 xl:w-1/4 h-full bg-white items-center text-2xl text-center z-40 absolute';
 
+    // モバイルでメニュー表示が有効になっていれば、普通に表示
     if (props.isMenuShowMobile) {
       className = `${baseClass} left-0`;
     } else {
+      // モバイルで無効になっていても、PCでは普通に表示
       className = `${baseClass} -left-3/4 sm:-left-3/4 md:-left-3/4 lg:left-0 xl:left-0`;
     }
 
     return className;
   }
 
+  // 表示域の高さによる、ナビの細かいスタイル設定
   const heightQuery = (part:
       'imageSection'
     | 'takaraImage'
@@ -87,18 +94,22 @@ const Navi = (props: NaviProps) => {
     return className;
   }
 
+  // 行き先をクリックしたなら、そのまま遷移せず、URLを書き換えて形だけ遷移する
+  // (再読み込みによるブラウザバック対策)
   const menuClick = (e: React.MouseEvent, item: string[]) => {
     e.preventDefault();
     history.pushState(null, item[0], `/${item[1]}`);
     props.changePlace(item[1]);
   }
 
+  // 「お問い合わせ」をクリックしたなら、URLを書き換えてフォームを表示
   const contactClick = (e: React.MouseEvent, item: string[]) => {
     e.preventDefault();
     history.pushState(null, item[0], `/${item[1]}`);
     props.setIsContact(true);
   }
 
+  // アプリ上での場所に沿って、ナビの場所名にフォーカス
   const menuFocus = (): string => {
     let className: string = '';
     const baseClass: string =
@@ -107,6 +118,7 @@ const Navi = (props: NaviProps) => {
 
     props.menu.map((item: string[], index: number) => {
       if (props.place === item[1]) {
+        // 想定されるクラス名 (Tailwind CSS パージ対策)
         // top-0 | top-12 | top-24 | top-36 | top-48 | top-60
         className = `${baseClass} top-${12 * index}`;
       }
@@ -115,6 +127,7 @@ const Navi = (props: NaviProps) => {
     return className;
   }
 
+  // Discord のユーザー名を表示する枠組みのスタイル
   const discordClass = (): string => {
     let className: string = '';
     const baseClass: string = 'text-base pt-1 pr-2 pl-2 w-44 h-9 rounded-lg bg-gray-100 border-2 border-gray-300 absolute -top-3 left-10';
@@ -191,10 +204,12 @@ const Navi = (props: NaviProps) => {
   );
 }
 
+// ソーシャルリンクのコンポーネント
 const SocialLinks = (props: SocialLinksProps) => {
   const elements: any = Array();
 
   props.links.map((item: string[], index: number) => {
+    // Discord 以外はアイコンを押したときに、SNSプロフィールに移動
     if (item[0] === 'Discord') {
       elements.push(
         <li className={item[3]} key={index}>
