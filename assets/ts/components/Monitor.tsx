@@ -25,7 +25,11 @@ const Monitor = (props: MonitorProps) => {
   const monitorObject: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    getClientData()
+    getClientData(
+      window.innerWidth,
+      window.innerHeight,
+      'ontouchend' in document ? true : false
+    )
     .then(res => res.json())
     .then(
       (result: any) => {
@@ -37,24 +41,28 @@ const Monitor = (props: MonitorProps) => {
         props.setClientDevice('Unknown');
       }
     );
+  }, []);
 
+  useEffect(() => {
     getMemo(memoName)
     .then(res => res.text())
     .then(
       (result: string) => {
-        setMemo(result);
+        if (result === '401 Unauthorized') {
+          setMemo('<p>申し訳ございません。通信エラーが発生しました。</p>');
+        } else {
+          setMemo(result);
+        }
       },
       (error: Error) => {
-        if (error.toString() === '401 Unauthorized') {
-          setMemo('<p>申し訳ございません。通信エラーが発生しました。</p>');
-        } else if (error.toString() === 'TypeError: Failed to fetch') {
+        if (error.toString() === 'TypeError: Failed to fetch') {
           setMemo('<p>申し訳ございません。サーバーと通信できませんでした。</p>');
         } else {
           setMemo(`<p>申し訳ございません。不明なエラーが発生しました。</p><p class="text-gray-400">${error.toString()}</p>`);
         }
       }
     );
-  }, [props.clientBrowser, props.clientDevice, memoName]);
+  }, [memoName]);
 
   useEffect(() => {
     window.addEventListener('load', () => {
@@ -139,13 +147,16 @@ const Monitor = (props: MonitorProps) => {
         : "text-white text-xl absolute top-24 sm:top-24 md:top-24 lg:top-0 xl:top-0 select-none invisible"
       }>
         <p><span className="bg-black-opacity-25">
-          2314.tk 1.0.0 (Debug mode) - beta (30th March, 2021 2nd-built)
+          2314.tk 1.0.0 (Debug mode) - beta (30th March, 2021 3rd-built)
         </span></p>
         <p><span className="bg-black-opacity-25">
           Browser: {props.clientBrowser}
         </span></p>
-        <p className="mb-3"><span className="bg-black-opacity-25">
+        <p><span className="bg-black-opacity-25">
           Device: {props.clientDevice}
+        </span></p>
+        <p className="mb-3"><span className="bg-black-opacity-25">
+          Touchable: {'ontouchend' in document ? 'true' : 'false'}
         </span></p>
 
         <p><span className="bg-black-opacity-25">

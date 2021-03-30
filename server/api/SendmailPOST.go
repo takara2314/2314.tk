@@ -9,9 +9,10 @@ import (
 
 // お問い合わせ情報
 type ContactInfo struct {
-	Name    string `json:"name"`
-	Email   string `json:"email"`
-	Content string `json:"content"`
+	Name      string `json:"name"`
+	Email     string `json:"email"`
+	Content   string `json:"content"`
+	Touchable bool   `json:"touchable"`
 }
 
 // SendmailPOST <- [POST] /api/sendmail
@@ -36,7 +37,7 @@ func SendmailPOST(c *gin.Context) {
 			json,
 			c.ClientIP(),
 			c.Request.Header.Get("user-agent"),
-			getDevice(c.Request.Header.Get("user-agent")),
+			getDevice(c.Request.Header.Get("user-agent"), json.Touchable),
 			getBrowser(c.Request.Header.Get("user-agent")),
 		)
 

@@ -1,7 +1,7 @@
-import GetMoviePost from '../models/SendMailPost';
+import SendMailPost from '../models/SendMailPost';
 import sendMailToken from './sendMailToken';
 
-const sendMail = (data: GetMoviePost): Promise<Response> => {
+const sendMail = (data: SendMailPost): Promise<Response> => {
   return fetch('/api/sendmail', {
     method: 'POST',
     mode:   'cors',

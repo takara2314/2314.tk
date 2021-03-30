@@ -3,13 +3,15 @@ package api
 import "strings"
 
 // ユーザーエージェントからデバイス名を取得
-func getDevice(agent string) string {
+func getDevice(agent string, touchable bool) string {
 	if strings.Contains(agent, "Windows NT") {
 		return "Windows"
 	} else if strings.Contains(agent, "Windows Phone OS") {
 		return "Windows Phone"
-	} else if strings.Contains(agent, "Macintosh") {
+	} else if strings.Contains(agent, "Macintosh") && !touchable {
 		return "Mac"
+	} else if strings.Contains(agent, "Macintosh") && touchable {
+		return "iPad"
 	} else if strings.Contains(agent, "iPhone") {
 		return "iPhone"
 	} else if strings.Contains(agent, "iPad") {

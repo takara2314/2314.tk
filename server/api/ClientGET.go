@@ -17,10 +17,20 @@ type userActivity struct {
 
 // ClientGET <- [GET] /api/client
 func ClientGET(c *gin.Context) {
+	// width, _ := strconv.Atoi(c.Query("width"))
+	// height, _ := strconv.Atoi(c.Query("height"))
+
+	var touchable bool
+	if c.Query("touchable") == "yes" {
+		touchable = true
+	} else {
+		touchable = false
+	}
+
 	userInfo := userActivity{
 		DateTime: timeDiffConv(time.Now()),
 		IP:       c.ClientIP(),
-		Device:   getDevice(c.Request.Header.Get("user-agent")),
+		Device:   getDevice(c.Request.Header.Get("user-agent"), touchable),
 		Browser:  getBrowser(c.Request.Header.Get("user-agent")),
 	}
 

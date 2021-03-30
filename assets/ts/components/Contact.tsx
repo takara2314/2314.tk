@@ -290,9 +290,10 @@ const ConfirmSection = (props: ContactProps & {setNowSection: (nowSection: strin
 const WaitSection = (props: ContactProps & {setNowSection: (nowSection: string) => void}) => {
   useEffect(() => {
     const json: SendMailPost = {
-      name:    props.name,
-      email:   props.email,
-      content: props.message.replace(/\n/g, '<br>')
+      name:      props.name,
+      email:     props.email,
+      content:   props.message.replace(/\n/g, '<br>'),
+      touchable: 'ontouchend' in document ? true : false
     }
 
     sendMail(json)
