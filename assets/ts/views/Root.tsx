@@ -113,9 +113,6 @@ const Root = () => {
   }, [isAlart, isCameraMoved]);
 
   const changeWindowSize = () => {
-    console.log(window.innerWidth);
-    console.log(window.innerHeight);
-
     setInnerHeight(window.innerHeight);
     rootObj.current!.style.width = `${window.innerWidth}px`;
     rootObj.current!.style.height = `${window.innerHeight}px`;

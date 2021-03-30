@@ -3,7 +3,7 @@ import Base from './Base';
 import WorldProps from '../../models/WorldProps';
 import WorksPoleProps from '../../models/WorksPoleProps';
 import { Mesh, Vector3 } from 'three';
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, Text } from "@react-three/drei";
 
 const Works = (props: WorldProps) => {
   const [nowAzimuth, setNowAzimuth] = useState<string>('south');
@@ -47,7 +47,21 @@ const Works = (props: WorldProps) => {
       >
         <mesh>
           <boxBufferGeometry args={[3.5, 3.5, 3.5]} />
-          <meshStandardMaterial color={"white"} />
+          <meshStandardMaterial color={(
+            () => {
+              switch (nowAzimuth) {
+                case 'north':
+                  return 'rgb(255, 204, 204)'
+                case 'east':
+                  return 'rgb(204, 255, 204)'
+                case 'south':
+                  return 'rgb(191, 191, 255)'
+                case 'west':
+                  return 'rgb(255, 255, 191)'
+              }
+            }
+            )()}
+          />
         </mesh>
       </group>
 
@@ -67,7 +81,21 @@ const Works = (props: WorldProps) => {
       >
         <mesh>
           <boxBufferGeometry args={[3.5, 3.5, 3.5]} />
-          <meshStandardMaterial color={"white"} />
+          <meshStandardMaterial color={(
+            () => {
+              switch (nowAzimuth) {
+                case 'north':
+                  return 'rgb(255, 204, 204)'
+                case 'east':
+                  return 'rgb(204, 255, 204)'
+                case 'south':
+                  return 'rgb(191, 191, 255)'
+                case 'west':
+                  return 'rgb(255, 255, 191)'
+              }
+            }
+            )()}
+          />
         </mesh>
       </group>
 
@@ -87,7 +115,21 @@ const Works = (props: WorldProps) => {
       >
         <mesh>
           <boxBufferGeometry args={[3.5, 3.5, 3.5]} />
-          <meshStandardMaterial color={"white"} />
+          <meshStandardMaterial color={(
+            () => {
+              switch (nowAzimuth) {
+                case 'north':
+                  return 'rgb(255, 204, 204)'
+                case 'east':
+                  return 'rgb(204, 255, 204)'
+                case 'south':
+                  return 'rgb(191, 191, 255)'
+                case 'west':
+                  return 'rgb(255, 255, 191)'
+              }
+            }
+            )()}
+          />
         </mesh>
       </group>
 
@@ -107,7 +149,21 @@ const Works = (props: WorldProps) => {
       >
         <mesh>
           <boxBufferGeometry args={[3.5, 3.5, 3.5]} />
-          <meshStandardMaterial color={"white"} />
+          <meshStandardMaterial color={(
+            () => {
+              switch (nowAzimuth) {
+                case 'north':
+                  return 'rgb(255, 204, 204)'
+                case 'east':
+                  return 'rgb(204, 255, 204)'
+                case 'south':
+                  return 'rgb(191, 191, 255)'
+                case 'west':
+                  return 'rgb(255, 255, 191)'
+              }
+            }
+            )()}
+          />
         </mesh>
       </group>
 
@@ -119,40 +175,40 @@ const Works = (props: WorldProps) => {
 const WorksPole = (props: WorldProps & WorksPoleProps) => {
   const { nodes, materials } = useGLTF('../public/models/works_pole.glb');
 
-  const [debugX, setX] = useState<number>(0);
-  const [debugY, setY] = useState<number>(0);
-  const [debugZ, setZ] = useState<number>(0);
-
   const [pressed, setPressed] = useState<boolean[]>([
     false, false, true, false
   ]);
 
-  const moveKeydown = useCallback((e: KeyboardEvent) => {
-    console.log(`${debugX} / ${debugY} / ${debugZ}`);
-    if (e.key == 'x') {
-      setX(debugX+1);
-    }
-    if (e.key == '1') {
-      setX(debugX-1);
-    }
-    if (e.key == 'y') {
-      setY(debugY+1);
-    }
-    if (e.key == '2') {
-      setY(debugY-1);
-    }
-    if (e.key == 'z') {
-      setZ(debugZ+1);
-    }
-    if (e.key == '3') {
-      setZ(debugZ-1);
-    }
-  }, [debugX, debugY, debugZ]);
+  // const [debugX, setX] = useState<number>(0);
+  // const [debugY, setY] = useState<number>(180);
+  // const [debugZ, setZ] = useState<number>(0);
 
-  useEffect(() => {
-    window.addEventListener('keydown', moveKeydown);
-    return () => window.removeEventListener('keydown', moveKeydown);
-  }, [debugX, debugY, debugZ]);
+  // const moveKeydown = useCallback((e: KeyboardEvent) => {
+  //   console.log(`${debugX} / ${debugY} / ${debugZ}`);
+  //   if (e.key == 'x') {
+  //     setX(debugX+45);
+  //   }
+  //   if (e.key == '1') {
+  //     setX(debugX-45);
+  //   }
+  //   if (e.key == 'y') {
+  //     setY(debugY+45);
+  //   }
+  //   if (e.key == '2') {
+  //     setY(debugY-45);
+  //   }
+  //   if (e.key == 'z') {
+  //     setZ(debugZ+45);
+  //   }
+  //   if (e.key == '3') {
+  //     setZ(debugZ-45);
+  //   }
+  // }, [debugX, debugY, debugZ]);
+
+  // useEffect(() => {
+  //   window.addEventListener('keydown', moveKeydown);
+  //   return () => window.removeEventListener('keydown', moveKeydown);
+  // }, [debugX, debugY, debugZ]);
 
   const azimuthNames: string[] = [
     'north', 'east', 'south', 'west'
@@ -204,6 +260,51 @@ const WorksPole = (props: WorldProps & WorksPoleProps) => {
 
   return (
     <Suspense fallback={null}>
+      <Text
+        color="black"
+        anchorX="center"
+        anchorY="middle"
+        fontSize={0.5}
+        font="./public/fonts/Inter/Inter-ForWorld.ttf"
+        position={[0.5, 34, 2]}
+        rotation={[0, Math.PI * 0 / 180, 0]}
+      >
+        Click!
+      </Text>
+      <Text
+        color="black"
+        anchorX="center"
+        anchorY="middle"
+        fontSize={0.5}
+        font="./public/fonts/Inter/Inter-ForWorld.ttf"
+        position={[-2, 34, 0.5]}
+        rotation={[0, Math.PI * 270 / 180, 0]}
+      >
+        Click!
+      </Text>
+      <Text
+        color="black"
+        anchorX="center"
+        anchorY="middle"
+        fontSize={0.5}
+        font="./public/fonts/Inter/Inter-ForWorld.ttf"
+        position={[-0.5, 34, -2]}
+        rotation={[0, Math.PI * 180 / 180, 0]}
+      >
+        Click!
+      </Text>
+      <Text
+        color="black"
+        anchorX="center"
+        anchorY="middle"
+        fontSize={0.5}
+        font="./public/fonts/Inter/Inter-ForWorld.ttf"
+        position={[2, 34, -0.5]}
+        rotation={[0, Math.PI * 90 / 180, 0]}
+      >
+        Click!
+      </Text>
+
       <mesh
         onPointerDown={(e: PointerEvent<Element>) => {
           e.stopPropagation();
