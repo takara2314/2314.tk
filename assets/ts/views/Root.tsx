@@ -70,17 +70,41 @@ const Root = () => {
   }, []);
 
   useEffect(() => {
+    changeWindowSize();
+    setTimeout(() => {
+      changeWindowSize();
+    }, 10);
+    setTimeout(() => {
+      changeWindowSize();
+    }, 100);
+    setTimeout(() => {
+      changeWindowSize();
+    }, 1000);
+
     window.addEventListener('load', () => {
       changeWindowSize();
       setTimeout(() => {
         changeWindowSize();
       }, 10);
+      setTimeout(() => {
+        changeWindowSize();
+      }, 100);
+      setTimeout(() => {
+        changeWindowSize();
+      }, 1000);
     });
+
     window.addEventListener('resize', () => {
       changeWindowSize();
       setTimeout(() => {
         changeWindowSize();
       }, 10);
+      setTimeout(() => {
+        changeWindowSize();
+      }, 100);
+      setTimeout(() => {
+        changeWindowSize();
+      }, 1000);
     });
   }, []);
 
@@ -98,6 +122,9 @@ const Root = () => {
   }, [isAlart, isCameraMoved]);
 
   const changeWindowSize = () => {
+    console.log(window.innerWidth);
+    console.log(window.innerHeight);
+
     setInnerHeight(window.innerHeight);
     rootObj.current!.style.width = `${window.innerWidth}px`;
     rootObj.current!.style.height = `${window.innerHeight}px`;

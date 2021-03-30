@@ -65,11 +65,28 @@ const Monitor = (props: MonitorProps) => {
   }, [memoName]);
 
   useEffect(() => {
+    setViewSize();
+    setTimeout(() => {
+      setViewSize();
+    }, 10);
+    setTimeout(() => {
+      setViewSize();
+    }, 100);
+    setTimeout(() => {
+      setViewSize();
+    }, 1000);
+
     window.addEventListener('load', () => {
       setViewSize();
       setTimeout(() => {
         setViewSize();
       }, 10);
+      setTimeout(() => {
+        setViewSize();
+      }, 100);
+      setTimeout(() => {
+        setViewSize();
+      }, 1000);
     });
 
     window.addEventListener('resize', () => {
@@ -77,6 +94,12 @@ const Monitor = (props: MonitorProps) => {
       setTimeout(() => {
         setViewSize();
       }, 10);
+      setTimeout(() => {
+        setViewSize();
+      }, 100);
+      setTimeout(() => {
+        setViewSize();
+      }, 1000);
     });
 
     window.addEventListener('keydown', debugMonitorSwitch);
@@ -147,7 +170,7 @@ const Monitor = (props: MonitorProps) => {
         : "text-white text-xl absolute top-24 sm:top-24 md:top-24 lg:top-0 xl:top-0 select-none invisible"
       }>
         <p><span className="bg-black-opacity-25">
-          2314.tk 1.0.0 (Debug mode) - beta (30th March, 2021 3rd-built)
+          2314.tk 1.0.0 (Debug mode) - beta (30th March, 2021 6th-built)
         </span></p>
         <p><span className="bg-black-opacity-25">
           Browser: {props.clientBrowser}
