@@ -45,7 +45,13 @@ const Monitor = (props: MonitorProps) => {
         setMemo(result);
       },
       (error: Error) => {
-        setMemo(error.toString());
+        if (error.toString() === '401 Unauthorized') {
+          setMemo('<p>申し訳ございません。通信エラーが発生しました。</p>');
+        } else if (error.toString() === 'TypeError: Failed to fetch') {
+          setMemo('<p>申し訳ございません。サーバーと通信できませんでした。</p>');
+        } else {
+          setMemo(`<p>申し訳ございません。不明なエラーが発生しました。</p><p class="text-gray-400">${error.toString()}</p>`);
+        }
       }
     );
   }, [props.clientBrowser, props.clientDevice, memoName]);
@@ -133,7 +139,7 @@ const Monitor = (props: MonitorProps) => {
         : "text-white text-xl absolute top-24 sm:top-24 md:top-24 lg:top-0 xl:top-0 select-none invisible"
       }>
         <p><span className="bg-black-opacity-25">
-          2314.tk 1.0.0 (Debug mode) - beta (30th March, 2021 built)
+          2314.tk 1.0.0 (Debug mode) - beta (30th March, 2021 2nd-built)
         </span></p>
         <p><span className="bg-black-opacity-25">
           Browser: {props.clientBrowser}
