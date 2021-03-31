@@ -6,7 +6,7 @@
 https://2314.tk/
 
 ## 🕸 システム構成図
-![SystemConfig](https://github.com/takara2314/tcj2-kadai-store/blob/master/SystemConfig.svg)
+![SystemConfig](https://github.com/takara2314/tcj2-kadai-store/blob/main/SystemConfig.svg)
 
 ## 📚 使用技術
 |               | 言語                  | ライブラリ (フレームワーク)                        |
