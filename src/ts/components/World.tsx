@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, Suspense } from 'react';
 import About from './areas/About';
 import Skills from './areas/Skills';
 import Works from './areas/Works';
@@ -154,7 +154,9 @@ const World = (props: WorldProps) => {
         distance={30}
       />
 
-      <LoadPlace {...props} />
+      <Suspense fallback={null}>
+        <LoadPlace {...props} />
+      </Suspense>
     </>
   );
 }
