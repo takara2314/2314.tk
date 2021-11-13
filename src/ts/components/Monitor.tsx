@@ -188,7 +188,7 @@ const Monitor = (props: MonitorProps) => {
         : "text-white text-xl absolute top-24 sm:top-24 md:top-24 lg:top-0 xl:top-0 select-none invisible"
       }>
         <p><span className="bg-black-opacity-25">
-          2314.tk 1.0.1 - release (4th May, 2021 built)
+          2314.tk 1.0.2 - release (14th Nov, 2021 built)
         </span></p>
         <p><span className="bg-black-opacity-25">
           Browser: {props.clientBrowser}
