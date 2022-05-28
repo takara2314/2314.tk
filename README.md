@@ -1,4 +1,4 @@
-# 🧑🏻 2314.tk
+# 🦊 2314.tk
 僕の人生初のポートフォリオサイトです。
 何かのワールドに入ったかのようなデザインにしてみました。
 3Dゲームを作っているみたいで、楽しかったです！
@@ -11,7 +11,7 @@ https://2314.tk/
 ## 📚 使用技術
 |               | 言語                  | ライブラリ (フレームワーク)                        |
 | ------------- | --------------------- | -----------------------------------------------  |
-| フロントエンド | TypeScript, CSS, HTML | React, Three.js(react-three-fiber), Tailwind CSS |
+| フロントエンド | TypeScript, CSS, HTML | React, Three.js(@react-three/fiber), Tailwind CSS |
 | バックエンド   | Go                    | Gin                                              |
 
 ## 💻 インフラ

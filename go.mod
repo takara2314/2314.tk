@@ -1,5 +1,5 @@
-module takara2314
+module 2314.tk
 
-go 1.14
+go 1.16
 
-require github.com/gin-gonic/gin v1.6.3
+require github.com/gin-gonic/gin v1.7.7
