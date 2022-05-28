@@ -1,9 +1,11 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { RecoilRoot } from 'recoil';
 import { DefaultSeo } from 'next-seo';
 import '../styles/globals.css';
+import Menu from '../components/menu';
 
 const MyApp = ({ Component, pageProps, router }: AppProps) => {
   const url = `https://2314.tk${router.route}`;
@@ -19,6 +21,19 @@ const MyApp = ({ Component, pageProps, router }: AppProps) => {
     return () => {
       window.removeEventListener('resize', handleResized);
     };
+  }, []);
+
+  // Apply user color theme
+  useEffect(() => {
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }, []);
 
   return (
@@ -38,7 +53,12 @@ const MyApp = ({ Component, pageProps, router }: AppProps) => {
         }}
       />
 
-      <Component {...pageProps} />
+      <div className="w-screen h-screen text-lg flex flex-row">
+        <Menu now={router.route} />
+        <div className="w-3/4 h-full bg-gray-100">
+          <Component {...pageProps} />
+        </div>
+      </div>
     </RecoilRoot>
   );
 };
