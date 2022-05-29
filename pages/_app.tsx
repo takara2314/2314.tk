@@ -1,6 +1,5 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { RecoilRoot } from 'recoil';
 import { DefaultSeo } from 'next-seo';
@@ -53,7 +52,7 @@ const MyApp = ({ Component, pageProps, router }: AppProps) => {
         }}
       />
 
-      <div className="w-screen h-screen text-lg flex flex-row">
+      <div className="w-screen h-screen text-black text-lg flex flex-row">
         <Menu now={router.route} />
         <div className="w-3/4 h-full bg-gray-100">
           <Component {...pageProps} />

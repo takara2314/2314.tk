@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect } from 'react';
 
 interface Props {
   now: string
@@ -14,10 +13,6 @@ interface NaviItemProps {
 }
 
 const Menu = ({ now }: Props) => {
-  useEffect(() => {
-    console.log(now);
-  }, [now]);
-
   const pages = [
     { label: "僕について", href: "/" },
     { label: "できること", href: "/skills" },
