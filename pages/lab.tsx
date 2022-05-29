@@ -3,7 +3,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { PointerLockControls } from '@react-three/drei';
 import Main from '../components/main';
-import calcDirection from '../utils/calcDirection';
 import normalizeDirection from '../utils/normalizeDirection';
 
 const title = 'ラボ';
@@ -40,16 +39,19 @@ const Lab: NextPage = () => {
         />
       </Canvas>
 
-      <div className="w-64 h-64 bg-white fixed bottom-0 right-0">
+      <div className="w-72 h-64 bg-white fixed bottom-0 right-0">
         <div className="mb-5">
           <p>x: {position.x}</p>
           <p>y: {position.y}</p>
           <p>z: {position.z}</p>
         </div>
-        <div>
+        <div className="mb-5">
           <p>x: {rotation._x}</p>
           <p>y: {rotation._y}</p>
           <p>z: {rotation._z}</p>
+        </div>
+        <div>
+          <p>direction: {normalizeDirection(rotation._z)}</p>
         </div>
       </div>
     </Main>
@@ -76,12 +78,23 @@ const World = ({ changePosition, changeRotation }: WorldProps) => {
 
     const direction = normalizeDirection(camera.rotation.z);
     console.log(direction);
-    if (e.key === 'w') {
-      camera.position.x += 0.1 * Math.cos(direction);
-      camera.position.z += 0.1 * Math.sin(direction);
-    } else if (e.key === 's') {
-      camera.position.x -= 0.1 * Math.cos(direction);
-      camera.position.z -= 0.1 * Math.sin(direction);
+    switch (e.key) {
+      case 'w':
+        camera.position.x -= 0.1 * Math.cos(direction);
+        camera.position.z -= 0.1 * Math.sin(direction);
+        break;
+      case 'd':
+        camera.position.x += 0.1 * Math.sin(direction);
+        camera.position.z -= 0.1 * Math.cos(direction);
+        break;
+      case 's':
+        camera.position.x += 0.1 * Math.cos(direction);
+        camera.position.z += 0.1 * Math.sin(direction);
+        break;
+      case 'a':
+        camera.position.x -= 0.1 * Math.sin(direction);
+        camera.position.z += 0.1 * Math.cos(direction);
+        break;
     }
   };
 
