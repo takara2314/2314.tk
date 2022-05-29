@@ -18,12 +18,10 @@ const Lab: NextPage = () => {
   const [rotation, setRotation] = useState<any>({ _x: -1, _y: -1, _z: -1 });
 
   const changePosition = useCallback((pos: any) => {
-    // console.log(pos);
     setPosition({ ...pos });
   }, []);
 
   const changeRotation = useCallback((rot: any) => {
-    // console.log(rot);
     setRotation({ ...rot });
   }, []);
 
@@ -51,7 +49,7 @@ const Lab: NextPage = () => {
           <p>z: {rotation._z}</p>
         </div>
         <div>
-          <p>direction: {normalizeDirection(rotation._z)}</p>
+          <p>direction: {normalizeDirection(rotation._x)}</p>
         </div>
       </div>
     </Main>
@@ -61,42 +59,75 @@ const Lab: NextPage = () => {
 const World = ({ changePosition, changeRotation }: WorldProps) => {
   const { camera } = useThree();
 
+  const keyMap = {
+    'w': false,
+    'd': false,
+    's': false,
+    'a': false
+  };
+
+  const [isPointerLocking, setIsPointerLocking] = useState<boolean>(false);
+
+  const handleLock = () => {
+    setIsPointerLocking(true);
+  };
+
+  const handleUnlock = () => {
+    setIsPointerLocking(false);
+  };
+
+  const handleKeyDown = (e: globalThis.KeyboardEvent) => {
+    if (e.key in keyMap) {
+      // @ts-ignore
+      keyMap[e.key] = true;
+    }
+
+    changePosition(camera.position);
+
+    const direction = normalizeDirection(camera.rotation.x);
+
+    console.log('>', e.key);
+
+    if (keyMap.w) {
+      camera.position.x -= 0.1 * Math.cos(direction);
+      camera.position.z -= 0.1 * Math.sin(direction);
+    }
+    if (keyMap.d) {
+      camera.position.x += 0.1 * Math.sin(direction);
+      camera.position.z -= 0.1 * Math.cos(direction);
+    }
+    if (keyMap.s) {
+      camera.position.x += 0.1 * Math.cos(direction);
+      camera.position.z += 0.1 * Math.sin(direction);
+    }
+    if (keyMap.a) {
+      camera.position.x -= 0.1 * Math.sin(direction);
+      camera.position.z += 0.1 * Math.cos(direction);
+    }
+  };
+
+  const handleKeyUp = (e: globalThis.KeyboardEvent) => {
+    console.log(e.key);
+    if (e.key in keyMap) {
+      // @ts-ignore
+      keyMap[e.key] = false;
+    }
+  };
+
   const handleChange = () => {
     changeRotation(camera.rotation);
   };
 
-  const handleLock = () => {
-    window.addEventListener('keydown', handleKeyDown);
-  };
-
-  const handleUnlock = () => {
-    window.removeEventListener('keydown', handleKeyDown);
-  };
-
-  const handleKeyDown = (e: globalThis.KeyboardEvent) => {
-    changePosition(camera.position);
-
-    const direction = normalizeDirection(camera.rotation.z);
-    console.log(direction);
-    switch (e.key) {
-      case 'w':
-        camera.position.x -= 0.1 * Math.cos(direction);
-        camera.position.z -= 0.1 * Math.sin(direction);
-        break;
-      case 'd':
-        camera.position.x += 0.1 * Math.sin(direction);
-        camera.position.z -= 0.1 * Math.cos(direction);
-        break;
-      case 's':
-        camera.position.x += 0.1 * Math.cos(direction);
-        camera.position.z += 0.1 * Math.sin(direction);
-        break;
-      case 'a':
-        camera.position.x -= 0.1 * Math.sin(direction);
-        camera.position.z += 0.1 * Math.cos(direction);
-        break;
+  useEffect(() => {
+    if (isPointerLocking === true) {
+      window.addEventListener('keydown', handleKeyDown);
+      window.addEventListener('keyup', handleKeyUp);
     }
-  };
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, [isPointerLocking]);
 
   return (
     <>
