@@ -159,7 +159,7 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
         ご要望やご質問、お仕事のご依頼などは、こちらのフォームからお問い合わせください。
       </p>
       <p className="py-1">
-        X(@takara2314)もしくはDiscord(takara2314)のダイレクトメッセージにてご連絡ください。
+        早急な返信が必要な場合は、このフォームではなく、X(@takara2314)もしくはDiscord(takara2314)のダイレクトメッセージにてご連絡ください。
       </p>
       <form
         onSubmit={(e: FormEvent) => {e.preventDefault()}}
