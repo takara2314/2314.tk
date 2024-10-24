@@ -3,6 +3,7 @@ import { Configuration } from 'webpack';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const config: Configuration = {
   context: path.join(__dirname, 'src'),
@@ -46,13 +47,14 @@ const config: Configuration = {
     }),
     new MiniCssExtractPlugin({
       filename: 'styles.css'
-    })
+    }),
+    new BundleAnalyzerPlugin()
   ],
-  mode: 'production',
+  mode: 'development',
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
-  devtool: 'hidden-source-map',
+  devtool: 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'static'),
     open: true,
