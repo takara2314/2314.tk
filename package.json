@@ -1,6 +1,6 @@
 {
   "name": "takara2314",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "僕のポートフォリオサイトと、短縮URL生成器です。",
   "main": "index.js",
   "scripts": {
