@@ -16,7 +16,7 @@ const About = (props: WorldProps) => {
 
   const controlsRef = useRef<OrbitControls>();
 
-  // 真ん中のタカラーン像のテクスチャ
+  // 真ん中のたからーん像のテクスチャ
   const parts = ['head', 'body', 'right_hand', 'left_hand'];
   const angles = ['front', 'right', 'back', 'left', 'top', 'bottom'];
   const textures: TextureSet = {};

@@ -9,7 +9,7 @@ const Contact = (props: ContactProps) => {
 
   // 最初にページタイトルを「お問い合わせ」にする
   useEffect(() => {
-    document.title = 'お問い合わせ - タカラーン';
+    document.title = 'お問い合わせ - たからーん';
   }, []);
 
   return (

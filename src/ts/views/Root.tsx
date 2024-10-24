@@ -137,7 +137,7 @@ const Root = () => {
   const setTitle = (place: string) => {
     menu.map((item: string[], index: number) => {
       if (place === item[1]) {
-        document.title = `${item[0]} - タカラーン`
+        document.title = `${item[0]} - たからーん`
       }
     });
   }

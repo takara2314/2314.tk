@@ -146,14 +146,14 @@ const Navi = (props: NaviProps) => {
       <section className={heightQuery('imageSection')}>
         <div className={heightQuery('takaraImage')}>
           <a href={props.menu[0][1]} className="focus:outline-none" onClick={(e: React.MouseEvent) => menuClick(e, props.menu[0])}>
-            <img src={takaranImg} alt="タカラーン" className={heightQuery('takaraImage')} />
+            <img src={takaranImg} alt="たからーん" className={heightQuery('takaraImage')} />
           </a>
         </div>
       </section>
       <section className={heightQuery('nameSection')}>
         <div className={heightQuery('name')}>
           <h1>
-            タカラーン
+            たからーん
           </h1>
         </div>
         <div className={heightQuery('id')}>

@@ -52,7 +52,7 @@ func sendMail(data ContactInfo, IP string, userAgent string, device string, brow
 		fmt.Sprintf(mailContentsFormat,
 			"2314.tk Contact",
 			os.Getenv("FROM_EMAIL"),
-			"タカラーン",
+			"たからーん",
 			os.Getenv("TO_EMAIL"),
 			data.Name+"さんからお問い合わせが届きました！",
 			mailBody,
