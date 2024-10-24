@@ -156,10 +156,10 @@ const FormSection = (props: ContactProps & {setNowSection: (nowSection: string) 
         お問い合わせ
       </h1>
       <p className="py-1">
-        要望や質問、お仕事のお依頼などはこちらのフォームからお問い合わせください。
+        ご要望やご質問、お仕事のご依頼などは、こちらのフォームからお問い合わせください。
       </p>
       <p className="py-1">
-        早速の返信が必要な場合は、このフォームではなく、Twitter(@takara2314)もしくは、Discord(拡張的な宝箱#9220)のダイレクトメッセージにてお願いします。
+        X(@takara2314)もしくはDiscord(takara2314)のダイレクトメッセージにてご連絡ください。
       </p>
       <form
         onSubmit={(e: FormEvent) => {e.preventDefault()}}
