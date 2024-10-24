@@ -3,7 +3,9 @@
 何かのワールドに入ったかのようなデザインにしてみました。
 3Dゲームを作っているみたいで、楽しかったです！
 
-https://2314.tk/
+https://2314.world/
+
+(2314.tk ドメインが使えなくなったため、 2314.world に変更)
 
 ## 🕸 システム構成図
 ![SystemConfig](https://github.com/takara2314/2314.tk/blob/main/SystemConfig.svg)
@@ -18,7 +20,7 @@ https://2314.tk/
 Google App Engine
 
 ## ✏ 補足
-https://2314.tk/skills
+https://2314.world/skills
 
 の像の3Dモデルは、真ん中上のアイコン以外すべてBlenderでモデリングしました。
 
