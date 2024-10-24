@@ -8,7 +8,7 @@ import WorldProps from '../models/WorldProps';
 import { Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { extend, ReactThreeFiber, useFrame, useThree } from 'react-three-fiber';
-import isInRange from '../services/isinRange';
+import isInRange from '../services/isInRange';
 
 // カメラ(OrbitControls)を使う上での初期設定
 extend({ OrbitControls });
