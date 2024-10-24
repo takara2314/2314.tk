@@ -3,4 +3,3 @@
 /node_modules/
 src/ts/services/sendMailToken.ts
 environ.yaml
-package-lock.json
