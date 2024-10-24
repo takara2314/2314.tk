@@ -394,7 +394,7 @@ const ErrorSection = (props: ContactProps & {setNowSection: (nowSection: string)
         送信に失敗しました。
       </p>
       <p className="py-1">
-        お手数ですが、しばらくしてから送信しなおすか、Twitter(@takara2314)もしくは、Discord(拡張的な宝箱#9220)のダイレクトメッセージにてお願いします。
+        お手数ですが、しばらくしてから再度送信していただくか、X(@takara2314)もしくはDiscord(takara2314)のダイレクトメッセージにてご連絡ください。
       </p>
       <div className="w-full h-12 mt-6 flex flex-row justify-center">
         <button
