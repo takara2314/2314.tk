@@ -8,10 +8,10 @@ const Navi = (props: NaviProps) => {
 
   // ソーシャルリンクとそのアイコンのスタイルなど
   const [links] = useState<string[][]>([
-    [ 'Twitter', 'https://twitter.com/takara2314', '../public/Twitter.svg', 'mr-1 ml-2 w-11' ],
+    [ 'Twitter', 'https://x.com/takara2314', '../public/Twitter.svg', 'mr-1 ml-2 w-11' ],
     [ 'Facebook', 'https://www.facebook.com/HamaguchiTakara/', '../public/Facebook.svg', 'mr-2 ml-2 w-7' ],
     [ 'GitHub', 'https://github.com/takara2314', '../public/GitHub.svg', 'mr-2 ml-2 w-7' ],
-    [ 'Discord', '拡張的な宝箱#9220', '../public/Discord.svg', 'mr-2 ml-2 mt-1 w-9' ]
+    [ 'Discord', 'takara2314', '../public/Discord.svg', 'mr-2 ml-2 mt-1 w-9' ]
   ]);
 
   // Discord のユーザー名を表示させているかどうか
@@ -130,7 +130,7 @@ const Navi = (props: NaviProps) => {
   // Discord のユーザー名を表示する枠組みのスタイル
   const discordClass = (): string => {
     let className: string = '';
-    const baseClass: string = 'text-base pt-1 pr-2 pl-2 w-44 h-9 rounded-lg bg-gray-100 border-2 border-gray-300 absolute -top-3 left-10';
+    const baseClass: string = 'text-base pt-1 pr-2 pl-2 w-28 h-9 rounded-lg bg-gray-100 border-2 border-gray-300 absolute -top-3 left-28';
 
     if (isDiscordShow) {
       className = `${baseClass} visible`;
