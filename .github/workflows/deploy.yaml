@@ -1,0 +1,59 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  bundle:
+    name: Bundle frontend JavaScript
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16.20.2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create environment variables files
+        run: >
+          node .github/createEnviron.mjs \
+            --SENDMAIL_TOKEN ${{ secrets.SENDMAIL_TOKEN }} \
+            --FROM_EMAIL ${{ secrets.FROM_EMAIL }} \
+            --FROM_SMTP ${{ secrets.FROM_SMTP }} \
+            --FROM_SMTP_PORT ${{ secrets.FROM_SMTP_PORT }} \
+            --FROM_PASSWORD ${{ secrets.FROM_PASSWORD }} \
+            --TO_EMAIL ${{ secrets.TO_EMAIL }} \
+            --PUBLIC_SENDMAIL_TOKEN ${{ secrets.SENDMAIL_TOKEN }} \
+
+      - name: Bundle
+        run: npm run build
+
+  deploy:
+    name: Deploy to Google App Engine
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@v2'
+
+      - name: Install app-engine-go component
+        run: gcloud components install app-engine-go
+
+      - name: Deploy to App Engine
+        uses: google-github-actions/deploy-appengine@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          deliverables: app.yaml

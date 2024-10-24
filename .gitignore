@@ -1,5 +1,5 @@
 /.vscode/
 /dist/
 /node_modules/
-src/ts/services/sendMailToken.ts
+src/ts/environ.ts
 environ.yaml

@@ -1,5 +1,5 @@
 import SendMailPost from '../models/SendMailPost';
-import sendMailToken from './sendMailToken';
+import { sendmailToken } from '../environ';
 
 // メールを送る関数
 const sendMail = (data: SendMailPost): Promise<Response> => {
@@ -11,7 +11,7 @@ const sendMail = (data: SendMailPost): Promise<Response> => {
     headers: {
       "Content-Type": "application/json",
       // ここのトークンは公開できないんだ！ごめんね！
-      "Authorization": `Bearer ${sendMailToken}`
+      "Authorization": `Bearer ${sendmailToken}`
     },
     body:   JSON.stringify(data),
   });

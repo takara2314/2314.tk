@@ -19,6 +19,29 @@ https://2314.world/
 ## 💻 インフラ
 Google App Engine
 
+## 📦 フロントエンドのビルド手順
+### 1. 依存関係をインストール
+```sh
+npm install
+```
+
+### 2. 環境変数ファイルを作成
+```sh
+node .github/createEnviron.mjs
+  --SENDMAIL_TOKEN ***
+  --FROM_EMAIL ***
+  --FROM_SMTP ***
+  --FROM_SMTP_PORT ***
+  --FROM_PASSWORD ***
+  --TO_EMAIL ***
+  --PUBLIC_SENDMAIL_TOKEN ***
+```
+
+### 3. ビルド
+```sh
+npm run build
+```
+
 ## ✏ 補足
 https://2314.world/skills
 
