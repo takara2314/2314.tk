@@ -4,6 +4,7 @@ import MonitorProps from '../models/MonitorProps';
 import getClientData from '../services/getClientData';
 import getMemo from '../services/getMemo';
 import { Canvas } from 'react-three-fiber';
+import { builtAtFormatted } from '../environ';
 
 const Monitor = (props: MonitorProps) => {
   // モニター上の表示域サイズ
@@ -188,7 +189,7 @@ const Monitor = (props: MonitorProps) => {
         : "text-white text-xl absolute top-24 sm:top-24 md:top-24 lg:top-0 xl:top-0 select-none invisible"
       }>
         <p><span className="bg-black-opacity-25">
-          2314.tk 1.0.2 - release (14th Nov, 2021 built)
+          2314.tk 1.0.2 - release ({builtAtFormatted} built)
         </span></p>
         <p><span className="bg-black-opacity-25">
           Browser: {props.clientBrowser}
